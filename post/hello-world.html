@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            博客首记
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>从新疆又一次来到了北京。</p>
+<p>回望失去的一年，真是人生无常，大肠包小肠……</p>
+<p>加上最近找工作面试被各种打击，心态略微崩溃。好在昨天下午（写文章时已在深夜）收到了一个口头 offer，勉强对我有点激励，深夜突然想有一个自己的博客，就动手用 GitHub Pages 搭建了一个。</p>
+<p>记录记录，写点什么。</p>
+<h1 id="Hexo-安装"><a href="#Hexo-安装" class="headerlink" title="Hexo 安装"></a>Hexo 安装</h1><p>Hexo 依赖 node.js 的运行环境。</p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.cn/download/">Node.js 下载地址</a></p>
+<p>犯懒了，B 站有视频把 Hexo 安装部署讲的很清楚：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mU4y1j72n?from=search&seid=18296109494439019330&spm_id_from=333.337.0.0">保姆级 Hexo+github 搭建个人博客</a></p>
+<p>我们重点来说说 Hexo 的配置吧（其实 Hexo 的文档已经很详细了）。</p>
+<p>写到这里我又想起了大三时在小米 3 上跑 Linux 部署了 Hexo 的奇怪经历，那时候哪里懂前端啊，照着教程一顿怼，解决了运行环境，解决内网穿透，但是不会发博客出来，也是相当遗憾，今天终于能补上了，可惜缺个小米 3。</p>
+<h1 id="Hexo-配置"><a href="#Hexo-配置" class="headerlink" title="Hexo 配置"></a>Hexo 配置</h1><p>照着之前的教程完成后，就要面对 Hexo 的配置了</p>
+<p>这里简单记录一下我改动的配置：</p>
+<h2 id="Site-配置"><a href="#Site-配置" class="headerlink" title="Site 配置"></a>Site 配置</h2><pre><code class="ymal"># Site
+title: ByteAKA8Bit # 博客标签的标题
+subtitle: 主不在乎 # 博客标签的副标题
+description: 开发日记 # 博客的描述
+keywords: # 博客的关键字
+author: ByteAKA8Bit # 博客作者
+language: zh-CN # 博客主要使用的语言
+timezone: Asia/Shanghai # 时区设置
+</code></pre>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><pre><code class="ymal"># URL
+## Set your site url here. For example, if you use GitHub Page, set url as &#39;https://username.github.io/project&#39;
+url: https://byteaka8bit.github.io #很直观
+permalink: /post/:title.html # 这里去看Hexo文档的永久链接
+permalink_defaults: #不用管
+# 下面这两个是去掉页面文件后缀的
+pretty_urls:
+  trailing_index: false # Set to false to remove trailing &#39;index.html&#39; from permalinks
+  trailing_html: false # Set to false to remove trailing &#39;.html&#39; from permalinks
+</code></pre>
+<h2 id="Deployment-配置"><a href="#Deployment-配置" class="headerlink" title="Deployment 配置"></a>Deployment 配置</h2><pre><code class="ymal">## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repository: https://github.com/ByteAKA8bit/ByteAKA8Bit.github.io.git
+  branch: main
+</code></pre>
+<p>结束，可能主题还需要一些配置，看主题文档咯…</p>
+<h1 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h1><p>我大概率没有什么有价值的输出给别人提供帮助，所以就选定了这款最简洁的“皮肤”。</p>
+<p>作者也说它不像主题，更像皮肤，其实我认为除了归档，再写一个分类页面也是好的…</p>
+<p>有点完美主义，所以接受不了其他的那些复杂的主题，这款主题拿来记日记和总结来用是很不错的。</p>
+<p>嗯，就这样。</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

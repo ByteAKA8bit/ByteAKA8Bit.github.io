@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS 快速入门篇
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <h1 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h1><p>没想到我 🥑 也有今天，还要从 JS 基础开始看起。</p>
+<p><img src="/post/MDN-JS-001/xwzj.jpg" alt="学无止境"></p>
+<h1 id="JavaScript-到底是什么"><a href="#JavaScript-到底是什么" class="headerlink" title="JavaScript 到底是什么"></a>JavaScript 到底是什么</h1><p>是一门完备的 动态编程语言。当应用于 HTML 文档时，可为网站提供动态交互特性。由布兰登·艾克（ Brendan Eich，Mozilla 项目、Mozilla 基金会和 Mozilla 公司的联合创始人）发明。</p>
+<p>开发者们基于 JavaScript 核心编写了大量实用工具，可以使 开发工作事半功倍。其中包括：</p>
+<ul>
+<li>浏览器应用程序接口（API）—— 浏览器内置的 API 提供了丰富的功能，比如：动态创建 HTML 和设置 CSS 样式、从用户的摄像头采集处理视频流、生成 3D 图像与音频样本等等。</li>
+<li>第三方 API —— 让开发者可以在自己的站点中整合其它内容提供者（Twitter、Facebook 等）提供的功能。</li>
+<li>第三方框架和库 —— 用来快速构建网站和应用。</li>
+</ul>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><pre><code class="js">// 用DOM API querySelector()选中了h1标签并存储在了myHeading变量中
+let myHeading = document.querySelector(&quot;h1&quot;);
+// 修改h1标签中的textContent属性
+myHeading.textContent = &quot;Hello world!&quot;;
+</code></pre>
+<h1 id="JavaScript-快速入门"><a href="#JavaScript-快速入门" class="headerlink" title="JavaScript 快速入门"></a>JavaScript 快速入门</h1><p>变量</p>
+<p>变量是存储值的容器。要声明一个变量，需要使用 let 或 var 关键字，然后输入合适的变量名。</p>
+<pre><code class="js">let myVariable;
+var myVariable2;
+</code></pre>
+<p>变量名大小写敏感…</p>
+<p>变量赋值、变量值的获取、变量赋值后可更改、变量可以有不同的数据类型</p>
+<ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Array</li>
+<li>Object</li>
+</ul>
+<p>行注释、块注释</p>
+<p>运算符</p>
+<ul>
+<li><p>一元运算符<br> 取非：！</p>
+</li>
+<li><p>二元运算符<br> 加：+<br>减、乘、除：-、*、&#x2F;<br>赋值：&#x3D;<br>等于：&#x3D;&#x3D;&#x3D;<br>不等于：!&#x3D;&#x3D;</p>
+</li>
+<li><p>三元运算符<br>? :</p>
+</li>
+</ul>
+<p>条件语句</p>
+<p>if … else</p>
+<p>函数</p>
+<p>事件</p>
+<p>事件能为网页添加真实的交互能力。它可以捕捉浏览器操作并运行一些代码做为响应。</p>
+<h1 id="完善实例网页"><a href="#完善实例网页" class="headerlink" title="完善实例网页"></a>完善实例网页</h1><h2 id="图像切换器"><a href="#图像切换器" class="headerlink" title="图像切换器"></a>图像切换器</h2><h2 id="个性化欢迎信息"><a href="#个性化欢迎信息" class="headerlink" title="个性化欢迎信息"></a>个性化欢迎信息</h2><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>上代码</p>
+<pre><code class="js">// let myHeading = document.querySelector(&quot;h1&quot;);
+// myHeading.textContent = &quot;Hello world!&quot;;
+
+document.querySelector(&quot;html&quot;).onclick = function () &#123;
+  alert(&quot;别戳我，我怕疼。&quot;);
+&#125;;
+
+let myImage = document.querySelector(&quot;img&quot;);
+
+myImage.onclick = function () &#123;
+  let mySrc = myImage.getAttribute(&quot;src&quot;);
+  if (mySrc === &quot;images/firefox-icon.png&quot;) &#123;
+    myImage.setAttribute(&quot;src&quot;, &quot;images/firefox2.png&quot;);
+  &#125; else &#123;
+    myImage.setAttribute(&quot;src&quot;, &quot;images/firefox-icon.png&quot;);
+  &#125;
+&#125;;
+
+let myButton = document.querySelector(&quot;button&quot;);
+let myHeading = document.querySelector(&quot;h1&quot;);
+
+function setUserName() &#123;
+  let myName = prompt(&quot;请输入你的名字。&quot;);
+  if (!myName || myName === null) &#123;
+    setUserName();
+  &#125; else &#123;
+    localStorage.setItem(&quot;name&quot;, myName);
+    myHeading.innerHTML = &quot;Mozilla 酷毙了，&quot; + myName;
+  &#125;
+&#125;
+
+if (!localStorage.getItem(&quot;name&quot;)) &#123;
+  setUserName();
+&#125; else &#123;
+  let storedName = localStorage.getItem(&quot;name&quot;);
+  myHeading.textContent = &quot;Mozilla 酷毙了，&quot; + storedName;
+&#125;
+
+myButton.onclick = function () &#123;
+  setUserName();
+&#125;;
+</code></pre>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

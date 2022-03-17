@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            面试记录
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <h1 id="面试小记"><a href="#面试小记" class="headerlink" title="面试小记"></a>面试小记</h1><h2 id="10-00-开始面试"><a href="#10-00-开始面试" class="headerlink" title="10:00 开始面试"></a>10:00 开始面试</h2><p>面试官还没进入会议，不知道是不是要放我鸽子。</p>
+<p>面一家外包公司，看看了他们的官网，就什么都没有。</p>
+<h2 id="面试中"><a href="#面试中" class="headerlink" title="面试中"></a>面试中</h2><h3 id="Vuex-是什么，对-Vuex-的理解"><a href="#Vuex-是什么，对-Vuex-的理解" class="headerlink" title="Vuex 是什么，对 Vuex 的理解"></a>Vuex 是什么，对 Vuex 的理解</h3><p>这个回答的还行，毕竟用过，没什么好说的</p>
+<h3 id="前端页面存储有哪些方式，各有什么区别"><a href="#前端页面存储有哪些方式，各有什么区别" class="headerlink" title="前端页面存储有哪些方式，各有什么区别"></a>前端页面存储有哪些方式，各有什么区别</h3><h4 id="有哪些"><a href="#有哪些" class="headerlink" title="有哪些"></a>有哪些</h4><h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>cookie，类型为小型文本文件，指某某网站为了辨别用户而存储在用户终端上的数据。是为了解决 HTTP 无状态导致的问题。</p>
+<p>作为一段不超过 4KB 的小型文本数据，它由一个名称（name），一个值（value）和其他几个用于控制 cookie 有效期，安全性、可使用范围的可选属性组成。</p>
+<p>但是 cookie 在每次请求中都会被发送，如果不使用 https 并对其进行加密，其保存的信息很容易被窃取，导致安全风险。</p>
+<p>关于 cookie 常用的属性如下：</p>
+<ul>
+<li>Expires 用于设置 cookie 的过期时间</li>
+</ul>
+<pre><code class="js">Expires=Wed, 21 Oct 2015 07:28:00 GMT
+</code></pre>
+<ul>
+<li>Max-Age 用于设置在 cookie 失效之前需要经过的秒数（优先级高于 Expires）</li>
+</ul>
+<pre><code class="js">Max-Age=604800
+</code></pre>
+<ul>
+<li><p>domain 指定 cookie 可送达的主机名</p>
+</li>
+<li><p>path 指定一个 URL 路径，这个路径必须出现在要请求的资源的路径中才可以发送 cookie 首部</p>
+</li>
+</ul>
+<pre><code class="js">Path=/docs   # /docs/Web/ 下的资源会带 Cookie 首部
+</code></pre>
+<ul>
+<li>标记为 Secure 的 cookie 只应通过 https 协议加密过的请求发送给服务端</li>
+</ul>
+<p>cookie 并不是为了缓存而设计的，只是可以借用 cookie 实现缓存。</p>
+<p>使用如下：</p>
+<pre><code class="js">document.cookie = &quot;名字=值&quot;;
+</code></pre>
+<p>关于 cookie 的修改，首先要确定 domain 和 path 属性都是相同的才可以，其中有一个不同时都会创建出一个新的 cookie</p>
+<pre><code class="js">Set-Cookie:name=aa; domain=aa.net; path=/  # 服务端设置
+document.cookie =name=bb; domain=aa.net; path=/  # 客户端设置
+</code></pre>
+<p>cookie 的删除常用方法为给 cookie 设置一个过期的时间，这样 cookie 就会被浏览器删除。</p>
+<h5 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h5><p>sessionStorage 和 localStorage 用法基本一致，唯一不同的是生命周期，一旦页面被关闭，sessionStorage 将会删除数据。详见<a href="#localstorage">localStorage</a></p>
+<p><a id="localStorage"></a></p>
+<h5 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h5><p>HTML5 的新方法，具有以下特点：</p>
+<ul>
+<li>生命周期：持久化的本地存储，除非主动删除数据，否则数据永不过期</li>
+<li>存储的信息在同一域中是共享的</li>
+<li>当本页操作（增、删、改）了 localStorage 的时候，- 本页不会触发 storage 事件，但别的页会触发 storage 事件。</li>
+<li>大一一般为 5M，根据浏览器略有差异</li>
+<li>localStorage 本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡</li>
+<li>受同源策略影响</li>
+</ul>
+<p>localStorage 使用</p>
+<p>增</p>
+<pre><code class="js">localStorage.setItem(&quot;username&quot;, &quot;cfangxu&quot;);
+</code></pre>
+<p>删</p>
+<p>第一种是通过键名删除指定的内容</p>
+<pre><code class="js">localStorage.removeItem(&quot;username&quot;);
+</code></pre>
+<p>第二种是全部删除</p>
+<pre><code class="js">localStorage.clear();
+</code></pre>
+<p>查</p>
+<p>获取键值</p>
+<pre><code class="js">localStorage.getItem(&quot;username&quot;);
+</code></pre>
+<p>获取键名</p>
+<pre><code class="js">localStorage.key(0); //获取第一个键名
+</code></pre>
+<p>localStorage 有两个缺点</p>
+<ul>
+<li>无法设置过期时间</li>
+<li>只能存储字符串，无法存入对象</li>
+</ul>
+<pre><code class="js">localStorage.setItem(&quot;key&quot;, &#123; name: &quot;value&quot; &#125;);
+console.log(localStorage.getItem(&quot;key&quot;)); // &#39;[object, Object]&#39;
+</code></pre>
+<h5 id="indexedDB"><a href="#indexedDB" class="headerlink" title="indexedDB"></a>indexedDB</h5><p>indexedDB 是一种低级 API，用于客户端存储大量结构化数据(包括, 文件&#x2F; blobs)。该 API 使用索引来实现对该数据的高性能搜索。</p>
+<p>虽然 Web Storage 对于存储较少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法不太有用。IndexedDB 提供了一个解决方案。</p>
+<ul>
+<li>存储理论上没有上限</li>
+<li>所有操作都是异步的，相比 localStorage 的同步，性能更高</li>
+<li>支持存储对象</li>
+<li>是一个事务型数据库</li>
+</ul>
+<p>就是用起来比较繁琐</p>
+<p>关于 indexedDB 的使用基本使用步骤如下：</p>
+<ul>
+<li><p>打开数据库并且开始一个事务</p>
+</li>
+<li><p>创建一个 object store</p>
+</li>
+<li><p>构建一个请求来执行一些数据库操作，像增加或提取数据等。</p>
+</li>
+<li><p>通过监听正确类型的 DOM 事件以等待操作完成。</p>
+</li>
+<li><p>在操作结果上进行一些操作（可以在 request 对象中找到）</p>
+</li>
+<li><p>关于使用 indexdb 的使用会比较繁琐，大家可以通过使用 Godb.js 库进行缓存，最大化的降低操作难度</p>
+</li>
+</ul>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>关于 cookie、sessionStorage、localStorage 三者的区别主要如下：</p>
+<ul>
+<li><p>存储大小： cookie 数据大小不能超过 4k，sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大</p>
+</li>
+<li><p>有效时间：localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据； sessionStorage 数据在当前浏览器窗口关闭后自动删除；cookie 设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭</p>
+</li>
+<li><p>数据与服务器之间的交互方式， cookie 的数据会自动的传递到服务器，服务器端也可以写 cookie 到客户端； sessionStorage 和 localStorage 不会自动把数据发给服务器，仅在本地保存</p>
+</li>
+</ul>
+<h3 id="Vue-项目中是怎么解决跨域问题的"><a href="#Vue-项目中是怎么解决跨域问题的" class="headerlink" title="Vue 项目中是怎么解决跨域问题的"></a>Vue 项目中是怎么解决跨域问题的</h3><p>这个就回答的比较惨了，面试官都给整无语甚至笑出了声。</p>
+<h4 id="啥是跨域"><a href="#啥是跨域" class="headerlink" title="啥是跨域"></a>啥是跨域</h4><p>跨域本质是浏览器基于同源策略的一种安全手段</p>
+<p>同源策略（Sameoriginpolicy），是一种约定，它是浏览器最核心也最基本的安全功能</p>
+<p>所谓同源（即指在同一个域）具有以下三个相同点</p>
+<ul>
+<li>协议相同（protocol）</li>
+<li>主机相同（host）</li>
+<li>端口相同（port）</li>
+</ul>
+<p>反之非同源请求，也就是协议、端口、主机其中一项不相同的时候，这时候就会产生跨域</p>
+<blockquote>
+<p>一定要注意跨域是浏览器的限制，你用抓包工具抓取接口数据，是可以看到接口已经把数据返回回来了，只是浏览器的限制，你获取不到数据。用 postman 请求接口能够请求到数据。这些再次印证了跨域是浏览器的限制。</p>
+</blockquote>
+<h4 id="咋个解决"><a href="#咋个解决" class="headerlink" title="咋个解决"></a>咋个解决</h4><p>解决跨域的方法是很多的</p>
+<ul>
+<li>JSONP</li>
+<li>CORS</li>
+<li>Proxy</li>
+<li>…</li>
+</ul>
+<p>在 Vue 项目中，这里主要了解 CORS 或 Proxy 这两种方案进行展开</p>
+<h5 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h5><p>CORS （Cross-Origin Resource Sharing，跨域资源共享）是一个系统，它由一系列传输的 HTTP 头组成，这些 HTTP 头决定浏览器是否阻止前端 JavaScript 代码获取跨域请求的响应</p>
+<p>CORS 实现起来非常方便，只需要增加一些 HTTP 头，让服务器能声明允许的访问来源</p>
+<p>只要后端实现了 CORS，就实现了跨域</p>
+<p>以 koa 框架举例</p>
+<p>添加中间件，直接设置 Access-Control-Allow-Origin 响应头</p>
+<pre><code class="js">app.use(async (ctx, next) =&gt; &#123;
+  ctx.set(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+  ctx.set(
+    &quot;Access-Control-Allow-Headers&quot;,
+    &quot;Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild&quot;
+  );
+  ctx.set(&quot;Access-Control-Allow-Methods&quot;, &quot;PUT, POST, GET, DELETE, OPTIONS&quot;);
+  if (ctx.method == &quot;OPTIONS&quot;) &#123;
+    ctx.body = 200;
+  &#125; else &#123;
+    await next();
+  &#125;
+&#125;);
+
+//Access-Control-Allow-Origin 设置为*其实意义不大，可以说是形同虚设，实际应用中，上线前我们会将Access-Control-Allow-Origin 值设为我们目标host
+</code></pre>
+<h5 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h5><p>代理（Proxy）也称网络代理，是一种特殊的网络服务，允许一个（一般为客户端）通过这个服务与另一个网络终端（一般为服务器）进行非直接的连接。一些网关、路由器等网络设备具备网络代理功能。一般认为代理服务有利于保障网络终端的隐私或安全，防止攻击</p>
+<h6 id="方案-1"><a href="#方案-1" class="headerlink" title="方案 1"></a>方案 1</h6><p>如果是通过 vue-cli 脚手架工具搭建项目，我们可以通过 webpack 为我们起一个本地服务器作为请求的代理对象</p>
+<p>通过该服务器转发请求至目标服务器，得到结果再转发给前端，但是最终发布上线时如果 web 应用和接口服务器不在一起仍会跨域</p>
+<p>在 vue.config.js 文件，新增以下代码</p>
+<pre><code class="js">amodule.exports = &#123;
+  devServer: &#123;
+    host: &quot;127.0.0.1&quot;,
+    port: 8084,
+    open: true, // vue项目启动时自动打开浏览器
+    proxy: &#123;
+      &quot;/api&quot;: &#123;
+        // &#39;/api&#39;是代理标识，用于告诉node，url前面是/api的就是使用代理的
+        target: &quot;http://xxx.xxx.xx.xx:8080&quot;, //目标地址，一般是指后台服务器地址
+        changeOrigin: true, //是否跨域
+        pathRewrite: &#123;
+          // pathRewrite 的作用是把实际Request Url中的&#39;/api&#39;用&quot;&quot;代替
+          &quot;^/api&quot;: &quot;&quot;,
+        &#125;,
+      &#125;,
+    &#125;,
+  &#125;,
+&#125;;
+</code></pre>
+<p>通过 axios 发送请求中，配置请求的根路径</p>
+<pre><code class="js">axios.defaults.baseURL = &quot;/api&quot;;
+</code></pre>
+<h6 id="方案-2"><a href="#方案-2" class="headerlink" title="方案 2"></a>方案 2</h6><p>此外，还可通过服务端实现代理请求转发</p>
+<p>以 express 框架为例</p>
+<pre><code class="js">var express = require(&quot;express&quot;);
+const proxy = require(&quot;http-proxy-middleware&quot;);
+const app = express();
+app.use(express.static(__dirname + &quot;/&quot;));
+app.use(
+  &quot;/api&quot;,
+  proxy(&#123; target: &quot;http://localhost:4000&quot;, changeOrigin: false &#125;)
+);
+module.exports = app;
+</code></pre>
+<h6 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h6><p>通过配置 nginx 实现代理</p>
+<pre><code class="nginx">server &#123;
+    listen    80;
+    # server_name www.josephxia.com;
+    location / &#123;
+        root  /var/www/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    &#125;
+    location /api &#123;
+        proxy_pass  http://127.0.0.1:3000;
+        proxy_redirect   off;
+        proxy_set_header  Host       $host;
+        proxy_set_header  X-Real-IP     $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="三层组件传值问题"><a href="#三层组件传值问题" class="headerlink" title="三层组件传值问题"></a>三层组件传值问题</h3><p>回答：就统统传到父组件去转发，不晓得对不对，查一查记录一下。</p>
+<p>哎呀妈，不查不知道，这也回答的稀烂，组件传值方式这么花哨…</p>
+<h4 id="props-x2F-emit"><a href="#props-x2F-emit" class="headerlink" title="props&#x2F;emit"></a>props&#x2F;emit</h4><p>父组件传入属性，子组件通过 props 接收，就可以在内部 this.XXX 的方式使用 子组件$emit(事件名，传递的参数)向外弹出一个自定义事件, 在父组件中的属性监听事件，同时也能获取子组件传出来的参数</p>
+<pre><code class="js">//    父组件
+&lt;hello-world msg=&quot;hello world!&quot; @confirm=&quot;handleConfirm&quot;&gt;&lt;hello-world&gt;
+//    子组件
+ props: &#123;
+    msg: &#123;
+      type: String,
+      default: &#39;&#39;
+    &#125;
+  &#125;，
+  methods：&#123;
+      handleEmitParent()&#123;
+          this.$emit(&#39;confirm&#39;, list)
+      &#125;
+  &#125;
+</code></pre>
+<h4 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h4><p>常用任意两个组件之间通讯</p>
+<p>原理：注册的事件存起来，等触发事件时再调用。定义一个类去处理事件，并挂载到 Vue 实例的 this 上即可注册和触发事件，也可拓展一些事件管理。</p>
+<pre><code class="js">class Bus &#123;
+  constructor() &#123;
+    this.callbackList = &#123;&#125;;
+  &#125;
+
+  $on(name, callback) &#123;
+    // 注册事件
+    this.callbackList[name]
+      ? this.callbackList[name].push(callback)
+      : (this.callbackList[name] = [callback]);
+  &#125;
+
+  $emit(name, args) &#123;
+    // 触发事件
+    if (this.callbackList[name]) &#123;
+      this.callbackList[name].forEach((cb) =&gt; cb(args));
+    &#125;
+  &#125;
+&#125;
+
+Vue.prototype.$bus = new Bus();
+
+// 任意两个组件中
+// 组件一：在组件的 mounted() 去注册事件
+this.$bus.$on(&quot;confirm&quot;, handleConfirm);
+
+// 组件二：触发事件(如：点击事件后执行触发事件即可)
+this.$bus.$emit(&quot;confirm&quot;, list);
+</code></pre>
+<h4 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h4><p>略</p>
+<h4 id="parent-x2F-root-x2F-children"><a href="#parent-x2F-root-x2F-children" class="headerlink" title="parent&#x2F;root&#x2F;children"></a>parent&#x2F;root&#x2F;children</h4><p>不推荐使用，不易于后期维护，一旦页面层次发生变化，就需要重新考虑层级关系</p>
+<p>以父组件为桥梁去注册事件和触发事件来实现的兄弟组件通讯</p>
+<pre><code class="js">// 子组件一：
+this.$patent.$on(&quot;confirm&quot;, handleConfirm);
+// 子组件二：
+this.$patent.$emit(&quot;confirm&quot;, list);
+</code></pre>
+<p>获取第一个子组件的数据和调用根组件的方法</p>
+<pre><code class="js">// 获取第一个子组件的数据
+console.log(this.$children[0].msg);
+
+// 调用根组件的方法
+this.$root.handleRoot();
+</code></pre>
+<h4 id="ref"><a href="#ref" class="headerlink" title="$ref"></a>$ref</h4><p>常用于父组件调用子组件的方法（如：列表数据变化通知子组件重新渲染列表等）</p>
+<p>Vue 提供了 refs 来存储当前所有设置了 ref 属性的组件.</p>
+<blockquote>
+<p>PS：因为需要渲染完才能获取到 ref 属性，所以建议在 mounted 后去调用，否则有可能会获取不到</p>
+<p>PS: 注意重复定义</p>
+</blockquote>
+<pre><code class="js">// 在template中
+// ...
+&lt;hello-world ref=&quot;hello&quot;&gt;&lt;/hello-world&gt;;
+// ...
+export default &#123;
+  mounted() &#123;
+    // 调用引用的子组件的方法
+    this.$refs.hello.handleRef();
+  &#125;,
+&#125;;
+</code></pre>
+<h4 id="attrs-x2F-listeners"><a href="#attrs-x2F-listeners" class="headerlink" title="attrs&#x2F;listeners"></a>attrs&#x2F;listeners</h4><p>$attrs 可以获取父组件传进来但没有通过 props 接收的属性</p>
+<pre><code class="js">// 父组件
+&lt;Child :title=&quot;title&quot; :desc=&quot;desc&quot; &gt;/&gt;
+
+//  子组件内
+&lt;template&gt;
+&lt;div&gt;
+  &lt;h2&gt;&#123;&#123;title&#125;&#125;&lt;/h2&gt;
+  &lt;p&gt;&#123;&#123;$attrs.desc&#125;&#125;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default &#123;
+  props: [&#39;title&#39;]
+  // ...
+&#125;
+&lt;script&gt;
+</code></pre>
+<p>$listeners 会展开父组件的所有监听的事件（click 事件等）常用于更高层级的封装 举个例子（需求）：一个页面中有两个组件的点击事件触发方法是一样的”</p>
+<pre><code class="js">//  父组件
+&lt;div&gt;
+  &lt;child-first @click=&quot;handleClick&quot;&gt;&lt;/child-first&gt;
+  &lt;child-second @click=&quot;handleClick&quot;&gt;&lt;/child-second&gt;
+&lt;/div&gt;
+export default &#123;
+  methods: &#123;
+    handleClick: ()&#123;
+      alert(&#39;hello&#39;)
+    &#125;
+  &#125;
+&#125;
+
+// child-first
+&lt;div v-on=&quot;$listeners&quot;&gt;&lt;/div&gt;
+
+// child-second
+&lt;div v-on=&quot;$listeners&quot;&gt;&lt;/div&gt;
+</code></pre>
+<h4 id="provide-x2F-inject"><a href="#provide-x2F-inject" class="headerlink" title="provide&#x2F;inject"></a>provide&#x2F;inject</h4><p>常用一些多个组件嵌套封装，一个顶层组件内部的后代组件需要用到顶层组件的数据就使用这种方式</p>
+<pre><code class="js">//  顶层组件
+export default &#123;
+  provide()&#123;
+    return &#123;
+      msg: &#39;hello world!&#39;
+    &#125;
+  &#125;
+&#125;
+
+//  后代组件
+export default &#123;
+  inject: [&#39;msg&#39;]
+&#125;
+</code></pre>
+<h3 id="VUE-Router-的三种传参方式和区别"><a href="#VUE-Router-的三种传参方式和区别" class="headerlink" title="VUE-Router 的三种传参方式和区别"></a>VUE-Router 的三种传参方式和区别</h3><p>如下场景 点击当前页的某个按钮跳转到另外一个页面去，并将某个值带过去</p>
+<pre><code class="html">&lt;el-button type=&quot;primary&quot; @click=&quot;handleClick(2)&quot;&gt;查看详情&lt;/el-button&gt;
+</code></pre>
+<p>有三种方法：</p>
+<h4 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h4><pre><code class="js">methods：&#123;
+  handleClick(id) &#123;
+       //直接调用$router.push 实现携带参数的跳转
+        this.$router.push(&#123;
+          path: `/detail/$&#123;id&#125;`,
+     &#125;)
+&#125;
+</code></pre>
+<p>对应路由配置：</p>
+<pre><code class="js">&#123;
+   path: &#39;/detail/:id&#39;,
+   name: &#39;detail&#39;,
+   component: detail
+&#125;
+</code></pre>
+<p>获取参数方式</p>
+<pre><code class="js">this.$route.params.id;
+</code></pre>
+<p>这种方式传参，页面刷新数据不会丢失。</p>
+<h4 id="params"><a href="#params" class="headerlink" title="params"></a>params</h4><p>通过路由属性中的 name 来确定匹配的路由，通过 params 来传递参数。</p>
+<pre><code class="js">methods：&#123;
+  handleClick(id) &#123;
+    this.$router.push(&#123;
+      name: &#39;detail&#39;,  // 根据name确定匹配路由
+      params: &#123;
+        id: id
+     &#125;
+  &#125;)
+&#125;
+//或者采用router-link
+&lt;router-link :to=&quot;&#123;name: &#39;detail&#39;, params: &#123; id: 1 &#125;&#125;&quot;&gt;前往Detail页面&lt;/router-link&gt;
+</code></pre>
+<p>对应路由配置</p>
+<pre><code class="js">&#123;
+   path: &#39;/detail/:id&#39;,
+   name: &#39;detail&#39;,
+   component: detail
+&#125;
+</code></pre>
+<p>获取参数方式</p>
+<pre><code class="js">this.$route.params.id;
+</code></pre>
+<p>需要注意的是，params 动态路由传参，一定要在路由中定义参数，然后在路由跳转的时候必须要加上参数，否则就是空白页面。例如</p>
+<pre><code class="js">// 定义的路由中，只定义一个id参数
+&#123;
+    path: &#39;detail/:id&#39;,
+    name: &#39;detail&#39;,
+    components: detail
+&#125;
+
+// template中的路由传参，
+// 传了一个id参数和一个token参数
+// id是在路由中已经定义的参数，而token没有定义
+&lt;router-link :to=&quot;&#123;name: &#39;Detail&#39;, params: &#123; id: 1, token: &#39;123456&#39; &#125;&#125;&quot;&gt;前往Detail页面&lt;/router-link&gt;
+
+// 在详情页接收
+created () &#123;
+    // 以下都可以正常获取到
+    // 但是页面刷新后，id依然可以获取，而token此时就不存在了
+    const id = this.$route.params.id;
+    const token = this.$route.params.token;
+&#125;
+</code></pre>
+<h4 id="query"><a href="#query" class="headerlink" title="query"></a>query</h4><p>使用 path 来匹配路由，然后通过 query 来传递参数，这种情况下 query 传递的参数会显示在 url 后面?id&#x3D;？</p>
+<pre><code class="js">methods：&#123;
+  handleClick(id) &#123;
+        this.$router.push(&#123;
+          path: &#39;/detail&#39;,
+          query: &#123;
+            id: id
+          &#125;
+     &#125;)
+ &#125;
+</code></pre>
+<p>对应路由配置</p>
+<pre><code class="js">&#123;
+     path: &#39;/detail&#39;,
+     name: &#39;detail&#39;,
+     component: detail
+&#125;
+</code></pre>
+<p>获取参数方式</p>
+<pre><code class="js">this.$route.query.id;
+</code></pre>
+<h4 id="区别-1"><a href="#区别-1" class="headerlink" title="区别"></a>区别</h4><p>1、 接收方式</p>
+<p>query 传参：this.$route.query.id</p>
+<p>params 传参：this.$route.params.id</p>
+<p>2、 路由展现方式</p>
+<p>query 传参：&#x2F;detail?id&#x3D;1&amp;user&#x3D;123&amp;identity&#x3D;1&amp;更多参数</p>
+<p>params 传参：&#x2F;detail&#x2F;123</p>
+<h3 id="Vuex-的数据页面刷新会不会有变化，数据存在哪里"><a href="#Vuex-的数据页面刷新会不会有变化，数据存在哪里" class="headerlink" title="Vuex 的数据页面刷新会不会有变化，数据存在哪里"></a>Vuex 的数据页面刷新会不会有变化，数据存在哪里</h3><h4 id="是不是？"><a href="#是不是？" class="headerlink" title="是不是？"></a>是不是？</h4><p>我生猛的回答存内存里了，是对的吧… 你总不能存硬盘里吧，稀烂。</p>
+<p>Vue 路由刷新不影响 Vuex 的数据。</p>
+<p>但是如果是页面刷新，页面销毁之前的资源，重新请求，因此写在生命周期里的 vuex 数据是重新初始化，无法获取的。</p>
+<h4 id="咋个办？"><a href="#咋个办？" class="headerlink" title="咋个办？"></a>咋个办？</h4><h5 id="localStorage-1"><a href="#localStorage-1" class="headerlink" title="localStorage"></a>localStorage</h5><pre><code class="js">const myPlugin = (store) =&gt; &#123;
+  // 当 store 初始化后调用
+  store.subscribe((mutation, state) =&gt; &#123;
+    // 每次 mutation 之后调用
+    // mutation 的格式为 &#123; type, payload &#125;
+    localStorage.setItem(&quot;store&quot;, JSON.stringify(state)); //因为vuex都是通过mutation来修改数据的，所以在每次修改的时候都把state存到本地内存中
+  &#125;);
+&#125;;
+
+// 使用
+const store = new Vuex.Store(&#123;
+  // ...
+  plugins: [myPlugin],
+&#125;);
+</code></pre>
+<h5 id="第三方插件"><a href="#第三方插件" class="headerlink" title="第三方插件"></a>第三方插件</h5><p>vuex-persistedstate</p>
+<pre><code class="js">import Vuex from &quot;vuex&quot;;
+// 引入插件
+import createPersistedState from &quot;vuex-persistedstate&quot;;
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store(&#123;
+  /* vuex数据持久化配置 */
+  plugins: [
+    createPersistedState(&#123;
+      // 存储方式：localStorage、sessionStorage、cookies
+      storage: window.sessionStorage,
+      // 存储的 key 的key值
+      key: &quot;store&quot;,
+      render(state) &#123;
+        // 要存储的数据：本项目采用es6扩展运算符的方式存储了state中所有的数据
+        return &#123; ...state &#125;;
+      &#125;,
+    &#125;),
+  ],
+&#125;);
+
+export default store;
+</code></pre>
+<p>vuex-persist</p>
+<pre><code class="js">import Vuex from &quot;vuex&quot;;
+// 引入插件
+import VuexPersistence from &quot;vuex-persist&quot;;
+
+Vue.use(Vuex);
+// 创建实例
+const vuexPersisted = new VuexPersistence(&#123;
+    storage: window.sessionStorage,
+  render:state=&gt;(&#123;
+      userName:state.userName
+    // 或
+    ...state
+  &#125;)
+&#125;);
+
+const store = new Vuex.Store(&#123;
+  // 数据持久化设置
+  plugins:[vuexPersisted]
+&#125;);
+
+export default store;
+</code></pre>
+<h3 id="ES6-新增了哪些内容"><a href="#ES6-新增了哪些内容" class="headerlink" title="ES6 新增了哪些内容"></a>ES6 新增了哪些内容</h3><p>回答的还行，略</p>
+<h3 id="浏览器加载-HTML-的过程"><a href="#浏览器加载-HTML-的过程" class="headerlink" title="浏览器加载 HTML 的过程"></a>浏览器加载 HTML 的过程</h3><h4 id="我的回答"><a href="#我的回答" class="headerlink" title="我的回答"></a>我的回答</h4><p>回答的是从服务器获取到资源后，先根据 HTML 文件创建 DOM 树，根据 CSS 文件创建 CSSOM 树，然后读取 JS 对 DOM 和 CSSOM 进行处理，最后回流，重绘完成页面加载。</p>
+<p>这回答吧，它有瑕疵…</p>
+<h4 id="正经答案"><a href="#正经答案" class="headerlink" title="正经答案"></a>正经答案</h4><ol>
+<li><p>解析 HTML 创建 DOM 树。<br>浏览器解析 html 源码，然后创建一个 DOM 树。并行请求 css&#x2F;image&#x2F;js 在 DOM 树中，每一个 HTML 标签都有一个对应的节点，并且每一个文本也都会有一个对应的文本节点。DOM 树的根节点就是 documentElement，对应的是 html 标签。</p>
+</li>
+<li><p>解析 CSS,形成 CSS 对象模型。</p>
+<p>浏览器解析 CSS 代码，计算出最终的样式数据。构建 CSSOM 树。对 CSS 代码中非法的语法它会直接忽略掉。解析 CSS 的时候会按照如下顺序来定义优先级：</p>
+<blockquote>
+<p>浏览器默认设置 &lt; 用户设置 &lt; 外链样式 &lt; 内联样式 &lt; html 中的 style。</p>
+</blockquote>
+</li>
+<li><p>将 CSS 与 DOM 合并，构建渲染树（renderingtree）。</p>
+<p>DOM Tree + CSSOM –&gt; 渲染树（rendering tree）。渲染树和 DOM 树有点像，但是是有区别的。DOM 树完全和 html 标签一一对应，但是渲染树会忽略掉不需要渲染的元素，比如 head、display:none 的元素等。而且一大段文本中的每一个行在渲染树中都是独立的一个节点。渲染树中的每一个节点都存储有对应的 css 属性。</p>
+</li>
+<li><p>布局和绘制</p>
+<p>一旦渲染树创建好了，浏览器就可以根据渲染树直接把页面绘制到屏幕上。</p>
+<p>以上四个步骤并不是一次性顺序完成的。如果 DOM 或者 CSSOM 被修改，以上过程会被重复执行。实际上，CSS 和 JavaScript 往往会多次修改 DOM 或者 CSSOM。</p>
+</li>
+</ol>
+<h4 id="Repaint-重绘"><a href="#Repaint-重绘" class="headerlink" title="Repaint(重绘)"></a>Repaint(重绘)</h4><p>重绘是改变不影响元素在网页中的位置的元素样式时，譬如 background-color(背景色)， border-color(边框色)，visibility(可见性)，浏览器会根据元素的新属性重新绘制一次(这就是重绘，或者说重新构造样式)，使元素呈现新的外观。</p>
+<p>重绘不会带来重新布局，所以并不一定伴随重排。</p>
+<h4 id="Reflow（重排）"><a href="#Reflow（重排）" class="headerlink" title="Reflow（重排）"></a>Reflow（重排）</h4><p>渲染对象在创建完成并添加到渲染树时，并不包含位置和大小信息。计算这些值的过程称为布局或重排。</p>
+<p>“重绘”不一定需要”重排”，比如改变某个网页元素的颜色，就只会触发”重绘”，不会触发”重排”，因为布局没有改变。</p>
+<p>但是，”重排”必然导致”重绘”，比如改变一个网页元素的位置，就会同时触发”重排”和”重绘”，因为布局改变了。</p>
+<h4 id="引申-浏览器如何优化渲染？"><a href="#引申-浏览器如何优化渲染？" class="headerlink" title="引申 浏览器如何优化渲染？"></a>引申 浏览器如何优化渲染？</h4><p>将多次改变样式属性的操作合并成一次操作<br>将需要多次重排的元素，position 属性设为 absolute 或 fixed，这样此元素就脱离了文档流，它的变化不会影响到其他元素。例如有动画效果的元素就最好设置为绝对定位。</p>
+<p>由于 display 属性为 none 的元素不在渲染树中，对隐藏的元素操作不会引发其他元素的重排。如果要对一个元素进行复杂的操作时，可以先隐藏它，操作完成后再显示。这样只在隐藏和显示时触发 2 次重排。</p>
+<h3 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h3><p>好多方法，这里先上一个使用 reduce 化简的方法，其他后续再说…</p>
+<pre><code class="js">function flatten(arr) &#123;
+  return arr.reduce((flat, toFlatten) =&gt; &#123;
+    return flat.concat(
+      Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
+    );
+  &#125;, []);
+&#125;
+</code></pre>
+<h3 id="中间穿插的-iOS-问题"><a href="#中间穿插的-iOS-问题" class="headerlink" title="中间穿插的 iOS 问题"></a>中间穿插的 iOS 问题</h3><p>不晓得问我这干啥，我也没好好回答。</p>
+<p>可以继续学，学是为了更好的使用，不是为了面试。</p>
+<h2 id="面试评价"><a href="#面试评价" class="headerlink" title="面试评价"></a>面试评价</h2><p>感觉凉了，就让面试官评价了我一下，反馈如下</p>
+<ul>
+<li>简历内容复杂</li>
+<li>简历结构不够清晰直观</li>
+<li>个人 JS 和框架基础不够扎实</li>
+<li>简历抽象不好解读</li>
+</ul>
+<p>这简历我不想改了… </p>
+<p>改不出什么好的东西来，毕竟个人经历就在那里了。</p>
+<p>不好解读一定是别人理解能力有问题…嗯，一定是。</p>
+<p>至于个人JS和框架基础不扎实，emmm…</p>
+<p>我认为JS语言是很直观的，它直观到基本上没有理解的障碍。这就成为了我去理解它的障碍，看看文档就能理解的的东西就没必要去记忆了。用二八法则为自己开脱，但是没办法，面试要问，你就得背…卷</p>
+<p>今晚做算法题，Giao!~。</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
