@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS 指南
+        </div>
+        <div class="post-meta">
+            2022-03-17
+        </div>
+    
+
+    <div class="post-md">
+        <h1 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h1><p>把博客本地文件夹放在了 Onedrive 里，炸了…</p>
+<p>现在心情如图：</p>
+<p><img src="/post/MDN-JS-002/mmp.jpg" alt="mmp"></p>
+<p>开始</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="JavaScript-和-ECMAScript-规范"><a href="#JavaScript-和-ECMAScript-规范" class="headerlink" title="JavaScript 和 ECMAScript 规范"></a>JavaScript 和 ECMAScript 规范</h2><p>JavaScript 的标准化组织是 ECMA</p>
+<p>ECMAScript 规范并没有描述文档对象模型（DOM），该模型由 万维网联盟（W3C） 制定</p>
+<h3 id="JavaScript-入门"><a href="#JavaScript-入门" class="headerlink" title="JavaScript 入门"></a>JavaScript 入门</h3><h3 id="Web-控制台（Web-Console）"><a href="#Web-控制台（Web-Console）" class="headerlink" title="Web 控制台（Web Console）"></a>Web 控制台（Web Console）</h3><p>控制台写了个小函数调用了一下…</p>
+<h1 id="语法和数据类型"><a href="#语法和数据类型" class="headerlink" title="语法和数据类型"></a>语法和数据类型</h1><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>JavaScript 取分大小写，使用 Unicode 字符</p>
+<p>所以可以用 emoji 做变量名吗？</p>
+<pre><code class="js">let 🥑 = &quot;Avocado&quot;;
+console.log(🥑);
+</code></pre>
+<p>试了试，不行…</p>
+<p>试试中文</p>
+<pre><code class="js">let 牛油果 = &quot;Avocado&quot;;
+console.log(牛油果);
+</code></pre>
+<p>可以！！！</p>
+<p>JS（JavaScript）中指令被称为语句。</p>
+<p>Javascript 源码从左往右被扫描并转换成一系列由 token 、控制字符、行终止符、注释和空白字符组成的输入元素。空白字符指的是空格、制表符和换行符等。</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>JavaScript 有三种声明方式。</p>
+<ul>
+<li>var<br> 声明一个变量，可选初始化一个值。</li>
+<li>let<br> 声明一个块作用域的局部变量，可选初始化一个值。</li>
+<li>const<br> 声明一个块作用域的只读常量。</li>
+</ul>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>在应用程序中，使用变量来作为值的符号名。变量的名字又叫做标识符，其需要遵守一定的规则。</p>
+<p>一个 JavaScript 标识符必须以字母、下划线（_）或者美元符号（$）开头；后续的字符也可以是数字（0-9）。因为 JavaScript 语言是区分大小写的，所以字母可以是从“A”到“Z”的大写字母和从“a”到“z”的小写字母。</p>
+<h3 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h3><p>你可以用以下三种方式声明变量：</p>
+<ul>
+<li><p>使用关键词 var 。例如 var x &#x3D; 42。这个语法可以用来声明局部变量和全局变量。</p>
+</li>
+<li><p>直接赋值。例如 x &#x3D; 42。在函数外使用这种形式赋值，会产生一个全局变量。在严格模式下会产生错误。因此你不应该使用这种方式来声明变量。</p>
+</li>
+<li><p>使用关键词 let 。例如 let y &#x3D; 13。这个语法可以用来声明块作用域的局部变量。参考下方变量的作用域(Variable scope) 。</p>
+</li>
+</ul>
+<h3 id="变量求值"><a href="#变量求值" class="headerlink" title="变量求值"></a>变量求值</h3><p>用 var 或 let 语句声明的变量，如果没有赋初始值，则其值为 undefined 。</p>
+<p>如果访问一个未声明的变量会导致抛出一个引用错误（ReferenceError）异常：</p>
+<p>undefined 在布尔类型环境中，会被当做 false.</p>
+<p>数值类型环境中，undefined 会被作为 NaN</p>
+<p>null 在数值类型环境中会被当做 0 来对待，在布尔类型中会被作为 false</p>
+<h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><p>在函数之外声明的变量，叫做全局变量，因为它可被当前文档中的任何其他代码所访问。在函数内部声明的变量，叫做局部变量，因为它只能在当前函数的内部访问。</p>
+<p>ECMAScript 6 之前的 JavaScript 没有语句块作用域；相反，语句块中声明的变量将成为语句块所在函数（或全局作用域）的局部变量。</p>
+<pre><code class="js">if (true) &#123;
+  var x = 5;
+&#125;
+console.log(x); // 5
+</code></pre>
+<p>如果使用 ECMAScript 6 中的 let 声明，上述行为将发生变化。</p>
+<pre><code class="js">if (true) &#123;
+  let y = 5;
+&#125;
+console.log(y); // ReferenceError: y 没有被声明
+</code></pre>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>JavaScript 变量的另一个不同寻常的地方是，你可以先使用变量稍后再声明变量而不会引发异常。这一概念称为变量提升；JavaScript 变量感觉上是被“提升”或移到了函数或语句的最前面。但是，提升后的变量将返回 undefined 值。因此在使用或引用某个变量之后进行声明和初始化操作，这个被提升的变量仍将返回 undefined 值。</p>
+<pre><code class="js">/**
+ * 例子1
+ */
+console.log(x === undefined); // true
+var x = 3;
+
+/**
+ * 例子2
+ */
+// will return a value of undefined
+var myvar = &quot;my value&quot;;
+
+(function () &#123;
+  console.log(myvar); // undefined
+  var myvar = &quot;local value&quot;;
+&#125;)();
+</code></pre>
+<p>等同于</p>
+<pre><code class="js">/**
+ * 例子1
+ */
+var x;
+console.log(x === undefined); // true
+x = 3;
+
+/**
+ * 例子2
+ */
+var myvar = &quot;my value&quot;;
+
+(function () &#123;
+  var myvar;
+  console.log(myvar); // undefined
+  myvar = &quot;local value&quot;;
+&#125;)();
+</code></pre>
+<p>由于存在变量提升，一个函数中所有的 var 语句应尽可能地放在接近函数顶部的地方。这个习惯将大大提升代码的清晰度。</p>
+<p>在 ECMAScript 6 中，let（const）同样会被提升变量到代码块的顶部但是不会被赋予初始值。在变量声明之前引用这个变量，将抛出引用错误（ReferenceError）。这个变量将从代码块一开始的时候就处在一个“暂时性死区”，直到这个变量被声明为止。</p>
+<h3 id="函数提升"><a href="#函数提升" class="headerlink" title="函数提升"></a>函数提升</h3><p>对于函数来说，只有函数声明会被提升到顶部，而函数表达式不会被提升。</p>
+<pre><code class="js">/* 函数声明 */
+
+foo(); // &quot;bar&quot;
+
+function foo() &#123;
+  console.log(&quot;bar&quot;);
+&#125;
+
+/* 函数表达式 */
+
+baz(); // 类型错误：baz 不是一个函数
+
+var baz = function () &#123;
+  console.log(&quot;bar2&quot;);
+&#125;;
+</code></pre>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>实际上，全局变量是全局对象的属性。</p>
+<p>在网页中，（译注：缺省的）全局对象是 window ，所以你可以用形如 window.variable 的语法来设置和访问全局变量。</p>
+<p>因此，你可以通过指定 window 或 frame 的名字，在当前 window 或 frame 访问另一个 window 或 frame 中声明的变量。例如，在文档里声明一个叫 phoneNumber 的变量，那么你就可以在子框架里使用 parent.phoneNumber 的方式来引用它。</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>你可以用关键字 const 创建一个只读的常量。常量标识符的命名规则和变量相同：必须以字母、下划线（_）或美元符号（$）开头并可以包含有字母、数字或下划线。</p>
+<p>常量不可以通过重新赋值改变其值，也不可以在代码运行时重新声明。它必须被初始化为某个值。</p>
+<p>常量的作用域规则与 let 块级作用域变量相同。若省略 const 关键字，则该标识符将被视为变量。</p>
+<p>在同一作用域中，不能使用与变量名或函数名相同的名字来命名常量。例如：</p>
+<pre><code class="js">// 这会造成错误
+function f() &#123;&#125;
+const f = 5;
+
+// 这也会造成错误
+function f() &#123;
+  const g = 5;
+  var g;
+
+  //语句
+&#125;
+</code></pre>
+<p>然而，对象属性被赋值为常量是不受保护的，所以下面的语句执行时不会产生错误。</p>
+<pre><code class="js">const MY_OBJECT = &#123; key: &quot;value&quot; &#125;;
+MY_OBJECT.key = &quot;otherValue&quot;;
+</code></pre>
+<p>同样的，数组的被定义为常量也是不受保护的，所以下面的语句执行时也不会产生错误。</p>
+<pre><code class="js">const MY_ARRAY = [&quot;HTML&quot;, &quot;CSS&quot;];
+MY_ARRAY.push(&quot;JAVASCRIPT&quot;);
+console.log(MY_ARRAY); //logs [&#39;HTML&#39;,&#39;CSS&#39;,&#39;JAVASCRIPT&#39;];
+</code></pre>
+<h2 id="数据结构和类型"><a href="#数据结构和类型" class="headerlink" title="数据结构和类型"></a>数据结构和类型</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>最新的 ECMAScript 标准定义了 8 种数据类型：</p>
+<p>七种基本类型</p>
+<ul>
+<li>布尔值</li>
+<li>null</li>
+<li>undefined</li>
+<li>数字 Number</li>
+<li>任意精度的整数 BigInt</li>
+<li>字符串 String</li>
+<li>代表 Symbol 一种实例是唯一且不可改变的数据类型。</li>
+</ul>
+<p>以及对象 Object</p>
+<p>对象（Objects）和函数（functions）是这门语言的另外两个基本元素。你可以把对象当作存放值的一个命名容器，然后将函数当作你的程序能够执行的步骤。</p>
+<h3 id="数据类型的转换"><a href="#数据类型的转换" class="headerlink" title="数据类型的转换"></a>数据类型的转换</h3><p>+号两边只要出现了字符串，就统一转化为字符串并拼接</p>
+<h3 id="字符串转换为数字"><a href="#字符串转换为数字" class="headerlink" title="字符串转换为数字"></a>字符串转换为数字</h3><p>有一些方法可以将内存中表示一个数字的字符串转换为对应的数字。</p>
+<p>parseInt()和 parseFloat()</p>
+<p>parseInt 方法只能返回整数，所以使用它会丢失小数部分。另外，调用 parseInt 时最好总是带上进制(radix) 参数，这个参数用于指定使用哪一种进制。</p>
+<p>将字符串转换为数字的另一种方法是使用一元加法运算符。</p>
+<pre><code class="js">&quot;1.1&quot; + &quot;1.1&quot; = &quot;1.11.1&quot;
+(+&quot;1.1&quot;) + (+&quot;1.1&quot;) = 2.2
+// 注意：加入括号为清楚起见，不是必需的。
+</code></pre>
+<p>这都是啥啥啥？</p>
+<h2 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h2><p>字面量是由语法表达式定义的常量；或，通过由一定字词组成的语词表达式定义的常量</p>
+<p>在 JavaScript 中，你可以使用各种字面量。这些字面量是脚本中按字面意思给出的固定的值，而不是变量。（译注：字面量是常量，其值是固定的，而且在程序脚本运行中不可更改，比如 false，3.1415，thisIsStringOfHelloworld ，invokedFunction: myFunction(“myArgument”)。本节将介绍以下类型的字面量：</p>
+<h3 id="数组字面量"><a href="#数组字面量" class="headerlink" title="数组字面量"></a>数组字面量</h3>
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
