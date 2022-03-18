@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS JS指南篇——流程控制与错误处理
+        </div>
+        <div class="post-meta">
+            2022-03-18
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="语句块"><a href="#语句块" class="headerlink" title="语句块"></a>语句块</h2><p>用{}包裹的语句</p>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><p>if…eles</p>
+<p>switch…case</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>throw</p>
+<p>try…catch…finally</p>
+<pre><code class="js">openMyFile();
+try &#123;
+  writeMyFile(theData); //This may throw a error
+&#125; catch (e) &#123;
+  handleError(e); // If we got a error we handle it
+&#125; finally &#123;
+  closeMyFile(); // always close the resource
+&#125;
+</code></pre>
+<h2 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h2><p>从 ECMAScript 6 开始，JavaScript 增加了对 Promise 对象的支持，它允许你对延时和异步操作流进行控制。</p>
+<p>Promise 对象有以下几种状态：</p>
+<ul>
+<li>pending：初始的状态，即正在执行，不处于 - - - fulfilled 或 rejected 状态。</li>
+<li>fulfilled：成功的完成了操作。</li>
+<li>rejected：失败，没有完成操作。</li>
+<li>settled：Promise 处于 fulfilled 或 rejected 二者中的任意一个状态, 不会是 pending。</li>
+</ul>
+<pre><code class="js">function imgLoad(url) &#123;
+  return new Promise(function (resolve, reject) &#123;
+    var request = new XMLHttpRequest();
+    request.open(&quot;GET&quot;, url);
+    request.responseType = &quot;blob&quot;;
+    request.onload = function () &#123;
+      if (request.status === 200) &#123;
+        resolve(request.response);
+      &#125; else &#123;
+        reject(
+          Error(
+            &quot;Image didn&#39;t load successfully; error code:&quot; + request.statusText
+          )
+        );
+      &#125;
+    &#125;;
+    request.onerror = function () &#123;
+      reject(Error(&quot;There was a network error.&quot;));
+    &#125;;
+    request.send();
+  &#125;);
+&#125;
+</code></pre>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>基础内容，上午有个面试延迟了，我说下午三点，结果没理我，不晓得什么情况…</p>
+<p>两点还有个面试，一会记录一下。</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
