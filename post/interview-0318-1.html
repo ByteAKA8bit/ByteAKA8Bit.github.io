@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            面试记录
+        </div>
+        <div class="post-meta">
+            2022-03-18
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="面试前"><a href="#面试前" class="headerlink" title="面试前"></a>面试前</h2><p>上午同一家公司的面试延后到了这次面试之后，我没进面试会议，不晓得还能不能面。也不知道会不会影响这次面试。</p>
+<h2 id="面试记录"><a href="#面试记录" class="headerlink" title="面试记录"></a>面试记录</h2><h3 id="CSS-定位有几种，各有什么特点"><a href="#CSS-定位有几种，各有什么特点" class="headerlink" title="CSS 定位有几种，各有什么特点"></a>CSS 定位有几种，各有什么特点</h3><p>fixed 锚定浏览器窗口</p>
+<p>absolute 锚定父元素</p>
+<p>relative 相对于元素本身在文档的位置</p>
+<p>sticky</p>
+<p>static 默认</p>
+<h3 id="CSS-预处理器了解过哪些"><a href="#CSS-预处理器了解过哪些" class="headerlink" title="CSS 预处理器了解过哪些"></a>CSS 预处理器了解过哪些</h3><p>Sass、Less 和 Stylus</p>
+<h3 id="CSS-主题切换有哪些实现方式"><a href="#CSS-主题切换有哪些实现方式" class="headerlink" title="CSS 主题切换有哪些实现方式"></a>CSS 主题切换有哪些实现方式</h3><p>就利用上述预处理提供的一些方法去实现<br>得学啊…</p>
+<h3 id="请问如何检验变量-a-是不是数组类型（Array）"><a href="#请问如何检验变量-a-是不是数组类型（Array）" class="headerlink" title="请问如何检验变量 a 是不是数组类型（Array）"></a>请问如何检验变量 a 是不是数组类型（Array）</h3><p>回答为 instanceOf 和 typeof</p>
+<p>以下是正确回答：</p>
+<pre><code class="js">const a = [1];
+
+console.log(a instanceOf Array);
+console.log(a.constructor === Array);
+console.log(Array.isArray(a));
+console.llog(Object.prototype.toString.call(a) === &quot;[object Array]&quot;);
+console.log(a.__proto__ === Array.prototype);
+console.log(Object.getPrototypeOf(a) === Array.prototype)
+console.log(Array.prototype.isPrototypeOf(a));
+</code></pre>
+<h3 id="typeof-可以判定的类型有哪些"><a href="#typeof-可以判定的类型有哪些" class="headerlink" title="typeof 可以判定的类型有哪些"></a>typeof 可以判定的类型有哪些</h3><ul>
+<li>undefined</li>
+<li>null</li>
+<li>boolean</li>
+<li>string</li>
+<li>number</li>
+<li>object</li>
+<li>function</li>
+<li>symbol(ES6)</li>
+<li>BigInt</li>
+</ul>
+<h3 id="防抖和节流"><a href="#防抖和节流" class="headerlink" title="防抖和节流"></a>防抖和节流</h3><h4 id="防抖-throttle"><a href="#防抖-throttle" class="headerlink" title="防抖 throttle"></a>防抖 throttle</h4><p>一定时间后再执行该事件，若指定时间内内被重复触发，则重新计时</p>
+<p>简易版</p>
+<pre><code class="js">function debounce(func, wait) &#123;
+  let timeout;
+
+  return function () &#123;
+    let context = this; // 保存this指向
+    let args = arguments; // 拿到event对象
+
+    clearTimeout(timeout);
+    timeout = setTimeout(function () &#123;
+      func.apply(context, args);
+    &#125;, wait);
+  &#125;;
+&#125;
+</code></pre>
+<pre><code class="js">function debounce(func, wait, immediate) &#123;
+  let timeout;
+
+  return function () &#123;
+    let context = this;
+    let args = arguments;
+
+    if (timeout) clearTimeout(timeout); // timeout 不为null
+    if (immediate) &#123;
+      let callNow = !timeout; // 第一次会立即执行，以后只有事件执行后才会再次触发
+      timeout = setTimeout(function () &#123;
+        timeout = null;
+      &#125;, wait);
+      if (callNow) &#123;
+        func.apply(context, args);
+      &#125;
+    &#125; else &#123;
+      timeout = setTimeout(function () &#123;
+        func.apply(context, args);
+      &#125;, wait);
+    &#125;
+  &#125;;
+&#125;
+</code></pre>
+<h4 id="节流-debounce"><a href="#节流-debounce" class="headerlink" title="节流 debounce"></a>节流 debounce</h4><p>一定时间内只运行一次，若指定时间内重复触发，只有一次生效</p>
+<p>时间戳节流</p>
+<pre><code class="js">function throttled1(fn, delay = 500) &#123;
+  let oldtime = Date.now();
+  return function (...args) &#123;
+    let newtime = Date.now();
+    if (newtime - oldtime &gt;= delay) &#123;
+      fn.apply(null, args);
+      oldtime = Date.now();
+    &#125;
+  &#125;;
+&#125;
+</code></pre>
+<p>定时器节流</p>
+<pre><code class="js">function throttled2(fn, delay = 500) &#123;
+  let timer = null;
+  return function (...args) &#123;
+    if (!timer) &#123;
+      timer = setTimeout(() =&gt; &#123;
+        fn.apply(this, args);
+        timer = null;
+      &#125;, delay);
+    &#125;
+  &#125;;
+&#125;
+</code></pre>
+<p>时间戳+定时器</p>
+<pre><code class="js">function throttled(fn, delay) &#123;
+  let timer = null;
+  let starttime = Date.now();
+  return function () &#123;
+    let curTime = Date.now(); // 当前时间
+    let remaining = delay - (curTime - starttime); // 从上一次到现在，还剩下多少多余时间
+    let context = this;
+    let args = arguments;
+    clearTimeout(timer);
+    if (remaining &lt;= 0) &#123;
+      fn.apply(context, args);
+      starttime = Date.now();
+    &#125; else &#123;
+      timer = setTimeout(fn, remaining);
+    &#125;
+  &#125;;
+&#125;
+</code></pre>
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>JS 中所有的任务可以分为同步和异步两种</p>
+<p>同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；</p>
+<p>异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
+<ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ol>
+<p>“任务队列”是一个事件的队列（也可以理解成消息的队列），IO 设备完成一项任务，就在”任务队列”中添加一个事件，表示相关的异步任务可以进入”执行栈”了。主线程读取”任务队列”，就是读取里面有哪些事件。</p>
+<p>“任务队列”中的事件，除了 IO 设备的事件以外，还包括一些用户产生的事件（比如鼠标点击、页面滚动等等）。只要指定过回调函数，这些事件发生时就会进入”任务队列”，等待主线程读取。</p>
+<p>所谓”回调函数”（callback），就是那些会被主线程挂起来的代码。异步任务必须指定回调函数，当主线程开始执行异步任务，就是执行对应的回调函数。</p>
+<p>“任务队列”是一个先进先出的数据结构，排在前面的事件，优先被主线程读取。主线程的读取过程基本上是自动的，只要执行栈一清空，”任务队列”上第一位的事件就自动进入主线程。但是，由于存在后文提到的”定时器”功能，主线程首先要检查一下执行时间，某些事件只有到了规定的时间，才能返回主线程。</p>
+<p>主线程从”任务队列”中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为 Event Loop（事件循环）。</p>
+<p>上图中，主线程运行的时候，产生堆（heap）和栈（stack），栈中的代码调用各种外部 API，它们在”任务队列”中加入各种事件（click，load，done）。只要栈中的代码执行完毕，主线程就会去读取”任务队列”，依次执行那些事件所对应的回调函数。</p>
+<p>执行栈中的代码（同步任务），总是在读取”任务队列”（异步任务）之前执行。</p>
+<p>除了放置异步任务的事件，”任务队列”还可以放置定时事件，即指定某些代码在多少时间之后执行。这叫做”定时器”（timer）功能，也就是定时执行的代码。</p>
+<p>定时器功能主要由 setTimeout()和 setInterval()这两个函数来完成，它们的内部运行机制完全一样，区别在于前者指定的代码是一次性执行，后者则为反复执行。</p>
+<p>setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在”任务队列”的尾部添加一个事件，因此要等到同步任务和”任务队列”现有的事件都处理完，才会得到执行。</p>
+<p>HTML5 标准规定了 setTimeout()的第二个参数的最小值（最短间隔），不得低于 4 毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为 10 毫秒。另外，对于那些 DOM 的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每 16 毫秒执行一次。这时使用 requestAnimationFrame()的效果要好于 setTimeout()。</p>
+<p>需要注意的是，setTimeout()只是将事件插入了”任务队列”，必须等到当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码耗时很长，有可能要等很久，所以并没有办法保证，回调函数一定会在 setTimeout()指定的时间执行。</p>
+<h3 id="Vue-的生命周期"><a href="#Vue-的生命周期" class="headerlink" title="Vue 的生命周期"></a>Vue 的生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beforeCreate</td>
+<td>组件实例被创建之初</td>
+</tr>
+<tr>
+<td>created</td>
+<td>组件实例已经完全创建</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>组件挂载之前</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>组件挂载到实例上去之后</td>
+</tr>
+<tr>
+<td>beforeUpdate</td>
+<td>组件数据发生变化，更新之前</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>数据数据更新之后</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>组件实例销毁之前</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>组件实例销毁之后</td>
+</tr>
+<tr>
+<td>activated</td>
+<td>keep-alive 缓存的组件激活时</td>
+</tr>
+<tr>
+<td>deactivated</td>
+<td>keep-alive 缓存的组件停用时调用</td>
+</tr>
+<tr>
+<td>errorCaptured</td>
+<td>捕获一个来自子孙组件的错误时被调用</td>
+</tr>
+</tbody></table>
+<p>new Vue()</p>
+<pre><code class="js">new vm = new Vue(&#123;&#125;);
+</code></pre>
+<p>Init、Events、Lifecycle</p>
+<p>表示刚初始化一个空的 Vue 实例对象，此时对象只有默认的生命周期函数和事件。</p>
+<p>data、methods 都未被初始化</p>
+<p>beforeCreate -&gt; created</p>
+<ul>
+<li>初始化 vue 实例，进行数据观测</li>
+</ul>
+<p>created</p>
+<ul>
+<li>完成数据观测，属性与方法的运算，watch、event 事件回调的配置</li>
+<li>可调用 methods 中的方法，访问和修改 data 数据触发响应式渲染 dom，可通过 computed 和 watch 完成数据计算</li>
+<li>此时 vm.$el 并没有被创建</li>
+</ul>
+<p>created -&gt; beforeMount</p>
+<ul>
+<li>判断是否存在 el 选项，若不存在则停止编译，直到调用 vm.$mount(el)才会继续编译</li>
+<li>优先级：render &gt; template &gt; outerHTML</li>
+<li>vm.el 获取到的是挂载 DOM 的</li>
+</ul>
+<p>beforeMount</p>
+<ul>
+<li>在此阶段可获取到 vm.el</li>
+<li>此阶段 vm.el 虽已完成 DOM 初始化，但并未挂载在 el 选项上</li>
+</ul>
+<p>beforeMount -&gt; mounted</p>
+<ul>
+<li>此阶段 vm.el 完成挂载，vm.$el 生成的 DOM 替换了 el 选项所对应的 DOM</li>
+</ul>
+<p>mounted</p>
+<ul>
+<li>vm.el 已完成 DOM 的挂载与渲染，此刻打印 vm.$el，发现之前的挂载点及内容已被替换成新的 DOM</li>
+</ul>
+<p>beforeUpdate</p>
+<ul>
+<li>更新的数据必须是被渲染在模板上的（el、template、render 之一）</li>
+<li>此时 view 层还未更新</li>
+<li>若在 beforeUpdate 中再次修改数据，不会再次触发更新方法</li>
+</ul>
+<p>updated</p>
+<ul>
+<li>完成 view 层的更新</li>
+<li>若在 updated 中再次修改数据，会再次触发更新方法（beforeUpdate、updated）</li>
+</ul>
+<p>beforeDestroy</p>
+<ul>
+<li>实例被销毁前调用，此时实例属性与方法仍可访问</li>
+</ul>
+<p>destroyed</p>
+<ul>
+<li><p>完全销毁一个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器</p>
+</li>
+<li><p>并不能清除 DOM，仅仅销毁实例</p>
+</li>
+</ul>
+<h3 id="v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式"><a href="#v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式" class="headerlink" title="v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式"></a>v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式</h3><p>v-on绑定DOM，监听并处理DOM事件<br>处理绑定的事件响应函数，对data中的值进行操作<br>v-bind单向传递给DOM</p>
+<h3 id="ES6-的-WeakMap-和-Map-的区别"><a href="#ES6-的-WeakMap-和-Map-的区别" class="headerlink" title="ES6 的 WeakMap 和 Map 的区别"></a>ES6 的 WeakMap 和 Map 的区别</h3><ul>
+<li><p>WeakMap 只能将对象作为键名，null 除外</p>
+</li>
+<li><p>WeakMap 的键名引用的对象是弱引用</p>
+</li>
+<li><p>不可遍历</p>
+</li>
+</ul>
+<h3 id="Echart"><a href="#Echart" class="headerlink" title="Echart"></a>Echart</h3><p>再说…</p>
+<h2 id="面试问题拓展"><a href="#面试问题拓展" class="headerlink" title="面试问题拓展"></a>面试问题拓展</h2><h3 id="浏览器垃圾回收机制"><a href="#浏览器垃圾回收机制" class="headerlink" title="浏览器垃圾回收机制"></a>浏览器垃圾回收机制</h3><h4 id="标记清理"><a href="#标记清理" class="headerlink" title="标记清理"></a>标记清理</h4><p>标记清理是 js 最常用的回收策略，2012 年后所有浏览器都使用了这种策略，此后的对回收策略的改进也是基于这个策略的改进。其策略是：</p>
+<ul>
+<li><p>变量进入上下文，也可理解为作用域，会加上标记，证明其存在于该上下文；</p>
+</li>
+<li><p>将所有在上下文中的变量以及上下文中被访问引用的变量标记去掉，表明这些变量活跃有用；</p>
+</li>
+<li><p>在此之后将被加上标记的变量标记为准备删除的变量，因为上下文中的变量已经无法访问它们；</p>
+</li>
+<li><p>执行内存清理，销毁带标记的所有非活跃值并回收之前被占用的内存；<br>局限：</p>
+</li>
+<li><p>由于是从根对象(全局对象)开始查找，对于那些无法从根对象查询到的对象都将被清除</p>
+</li>
+<li><p>回收后会形成内存碎片，影响后面申请大的连续内存空间</p>
+</li>
+</ul>
+<h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>引用计数策略相对而言不常用，因为弊端较多。其思路是对每个值记录它被引用的次数，通过最后对次数的判断(引用数为 0)来决定是否保留，具体的规则有：</p>
+<ul>
+<li>声明一个变量，赋予它一个引用值时，计数+1；</li>
+<li>同一个值被赋予另外一个变量时，引用+1；</li>
+<li>保存对该值引用的变量被其他值覆盖，引用-1；</li>
+<li>引用为 0，回收内存；</li>
+</ul>
+<p>局限</p>
+<p>无法回收循环引用</p>
+<h2 id="面试感想"><a href="#面试感想" class="headerlink" title="面试感想"></a>面试感想</h2><p>这次是真的确定自己在基础上准备的不够充分了，八股文背不全就很尴尬。</p>
+<p>还是继续冲 MDN 吧</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
