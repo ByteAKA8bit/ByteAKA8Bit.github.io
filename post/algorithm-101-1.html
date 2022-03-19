@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            算法101训练营-反转链表
+        </div>
+        <div class="post-meta">
+            2022-03-19
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>给定一个单链表的头结点 pHead(该头节点是有值的，比如在下图，它的 val 是 1，长度为 n，反转该链表后，返回新链表的表头。</p>
+<p>数据范围：</p>
+<p>0\leq n\leq10000≤n≤1000<br>要求：</p>
+<p>空间复杂度 O(1)O(1) ，时间复杂度 O(n)O(n) 。</p>
+<p>如当输入链表{1,2,3}时，</p>
+<p>经反转后，原链表变为{3,2,1}，所以对应的输出为{3,2,1}。</p>
+<p>以上转换过程如下图所示：</p>
+<p><img src="/post/algorithm-101-1/algorithm001.png" alt="反转链表"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="js">function ReverseList(pHead) &#123;
+  // write code here
+  // 参数检查
+  if (pHead == null || pHead.next == null) &#123;
+    return pHead;
+  &#125;
+  // 初始化中间变量
+  var previousNode = null;
+  var nextNode = null;
+  while (pHead) &#123;
+    // 保存当前节点的下一节点
+    nextNode = pHead.next;
+    // 修改当前节点的指向为上一节点
+    pHead.next = previousNode;
+    // 将当前节点保存为上一节点
+    previousNode = pHead;
+    // 切换到下一节点
+    pHead = nextNode;
+  &#125;
+  return previousNode;
+&#125;
+</code></pre>
+<h2 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h2><ol>
+<li>首先检查入参，假如传入一个空链表或者链表中只有一个值，那就不需要反转，直接返回传入的链表即可。</li>
+<li>初始化两个中间变量，可以理解为下一节点指针和上一节点指针。</li>
+<li>这时候我们就有了三个指针，当前节点指针，下一节点指针和上一节点指针。</li>
+<li>进入循环之后，将下一节点指针指向当前节点的下一节点。</li>
+<li>将当前节点的 next 指针指向上一个节点。</li>
+<li>将上一节点指针指向当前节点，下次循环使用。</li>
+<li>当前节点指针指向到下一节点指针指向的节点。</li>
+<li>一直循环到链表遍历完毕。</li>
+</ol>
+<p>返回上一节点指针（在最后一次循环里，上一节点指针指向了当前节点，当前节点指针指向了下一节点指针指向的 null）。</p>
+<h2 id="总结？"><a href="#总结？" class="headerlink" title="总结？"></a>总结？</h2><p>这里其实有个动图什么的来解释比较合适…</p>
+<p>很简单…</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
