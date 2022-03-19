@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS JS指南篇——循环与迭代
+        </div>
+        <div class="post-meta">
+            2022-03-19
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>今日无事，先搞基础，算法说了好几天没去看，今晚一定要看看，再记录一篇算法的文章出来。</p>
+<h2 id="for-语句"><a href="#for-语句" class="headerlink" title="for 语句"></a>for 语句</h2><p>过</p>
+<h2 id="do…while-语句"><a href="#do…while-语句" class="headerlink" title="do…while 语句"></a>do…while 语句</h2><pre><code class="js">do &#123;
+  statement;
+&#125; while (condition);
+</code></pre>
+<p>过</p>
+<h2 id="while-语句"><a href="#while-语句" class="headerlink" title="while 语句"></a>while 语句</h2><p>过</p>
+<h2 id="label-语句"><a href="#label-语句" class="headerlink" title="label 语句"></a>label 语句</h2><pre><code class="js">var num = 0;
+outPoint: for (var i = 0; i &lt; 10; i++) &#123;
+  for (var j = 0; j &lt; 10; j++) &#123;
+    if (i == 5 &amp;&amp; j == 5) &#123;
+      break outPoint; // 在 i = 5，j = 5 时，跳出所有循环，
+      // 返回到整个 outPoint 下方，继续执行
+    &#125;
+    num++;
+  &#125;
+&#125;
+
+alert(num); // 输出 55
+</code></pre>
+<pre><code class="js">var num = 0;
+outPoint: for (var i = 0; i &lt; 10; i++) &#123;
+  for (var j = 0; j &lt; 10; j++) &#123;
+    if (i == 5 &amp;&amp; j == 5) &#123;
+      continue outPoint;
+    &#125;
+    num++;
+  &#125;
+&#125;
+alert(num); // 95
+</code></pre>
+<p>continue outPoint 语句的作用是跳出当前循环，并跳转到 outPoint（标签）下的 for 循环继续执行。</p>
+<p>类比 C 的 goto</p>
+<h2 id="break-continue"><a href="#break-continue" class="headerlink" title="break continue"></a>break continue</h2><p>过</p>
+<h2 id="for…in-for…of"><a href="#for…in-for…of" class="headerlink" title="for…in for…of"></a>for…in for…of</h2><p>过</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>除了 label 语句，其他的都是常用的，而 label 语句会增加心智负担，用 break 或者 continue 代替掉最好。</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

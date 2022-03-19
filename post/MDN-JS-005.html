@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS JS指南篇——函数
+        </div>
+        <div class="post-meta">
+            2022-03-19
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>听说，函数是 JS 中的一等公民</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>原始类型作为参数传入函数没有关系，引用类型作为参数传入，传入的类似于 C 语言指针，会改变指针指向的地址内的值。</p>
+<pre><code class="js">function myFunc(theObject) &#123;
+  theObject.make = &quot;Toyota&quot;;
+&#125;
+
+var mycar = &#123; make: &quot;Honda&quot;, model: &quot;Accord&quot;, year: 1998 &#125;;
+var x, y;
+
+x = mycar.make; // x获取的值为 &quot;Honda&quot;
+
+myFunc(mycar);
+
+y = mycar.make; // y获取的值为 &quot;Toyota&quot;
+// (make属性被函数改变了)
+</code></pre>
+<h3 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h3><pre><code class="js">const square = function (number) &#123;
+  return number * number;
+&#125;;
+var x = square(4); // x gets the value 16
+</code></pre>
+<pre><code class="js">const factorial = function fac(n) &#123;
+  return n &lt; 2 ? 1 : n * fac(n - 1);
+&#125;;
+
+console.log(factorial(3));
+</code></pre>
+<p>将函数作为参数传递给另一个函数时，函数表达式很方便。</p>
+<pre><code class="js">function map(f, a) &#123;
+  let result = []; // 创建一个数组
+  let i; // 声明一个值，用来循环
+  for (i = 0; i != a.length; i++) result[i] = f(a[i]);
+  return result;
+&#125;
+const f = function (x) &#123;
+  return x * x * x;
+&#125;;
+let numbers = [0, 1, 2, 5, 10];
+let cube = map(f, numbers);
+console.log(cube);
+</code></pre>
+<p>条件定义</p>
+<pre><code class="js">var myFunc;
+if (num == 0) &#123;
+  myFunc = function (theObject) &#123;
+    theObject.make = &quot;Toyota&quot;;
+  &#125;;
+&#125;
+</code></pre>
+<pre><code class="js">new Function(&quot;a&quot;, &quot;b&quot;, &quot;return a + b&quot;);
+</code></pre>
+<h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>每个 JavaScript 函数实际上都是一个 Function 对象。</p>
+<pre><code class="js">(function () &#123;&#125;.constructor === Function); // true
+</code></pre>
+<p>实例方法有 bind(), call(), apply(), toString();</p>
+<pre><code class="js">var x = 10;
+
+function createFunction1() &#123;
+  var x = 20;
+  return new Function(&quot;return x;&quot;); // 这里的 x 指向最上面全局作用域内的 x
+&#125;
+
+function createFunction2() &#123;
+  var x = 20;
+  function f() &#123;
+    return x; // 这里的 x 指向上方本地作用域内的 x
+  &#125;
+  return f;
+&#125;
+
+var f1 = createFunction1();
+console.log(f1()); // 10
+var f2 = createFunction2();
+console.log(f2()); // 20
+</code></pre>
+<h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>在函数内定义的变量不能在函数之外的任何地方访问，一个函数可以访问定义在其范围内的任何变量和函数。</p>
+<h2 id="作用域和函数堆栈"><a href="#作用域和函数堆栈" class="headerlink" title="作用域和函数堆栈"></a>作用域和函数堆栈</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>一个函数可以指向并调用自身。有三种方法可以达到这个目的：</p>
+<ol>
+<li>函数名</li>
+<li>arguments.callee</li>
+<li>作用域下的一个指向该函数的变量名</li>
+</ol>
+<pre><code class="js">var foo = function bar() &#123;
+  // statements go here
+&#125;;
+
+// 在这个函数体内，以下的语句是等价的：
+bar();
+arguments.callee();
+foo();
+
+// 递归需要一个终止条件
+
+function loop(x) &#123;
+  if (x &gt;= 10)
+    // &quot;x &gt;= 10&quot; 是退出条件（等同于 &quot;!(x &lt; 10)&quot;）
+    return;
+  // 做些什么
+  loop(x + 1); // 递归调用
+&#125;
+loop(0);
+
+//有些算法并不能简单的用迭代来实现。例如，获取树结构中所有的节点时，使用递归实现要容易得多：
+function walkTree(node) &#123;
+  if (node == null)
+    //
+    return;
+  // do something with node
+  for (var i = 0; i &lt; node.childNodes.length; i++) &#123;
+    walkTree(node.childNodes[i]);
+  &#125;
+&#125;
+</code></pre>
+<h3 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h3><pre><code class="js">function foo(i) &#123;
+  if (i &lt; 0) return;
+  console.log(&quot;begin:&quot; + i);
+  foo(i - 1);
+  console.log(&quot;end:&quot; + i);
+&#125;
+foo(3);
+
+// 输出:
+
+// begin:3
+// begin:2
+// begin:1
+// begin:0
+// end:0
+// end:1
+// end:2
+// end:3
+// 可以看到压栈和弹出的顺序
+</code></pre>
+<h3 id="嵌套函数和闭包"><a href="#嵌套函数和闭包" class="headerlink" title="嵌套函数和闭包"></a>嵌套函数和闭包</h3><p>可以在一个函数里面嵌套另外一个函数</p>
+<p>嵌套（内部）函数对其容器（外部）函数是私有的。它自身也形成了一个闭包。一个闭包是一个可以自己拥有独立的环境与变量的表达式（通常是函数）。</p>
+<p>既然嵌套函数是一个闭包，就意味着一个嵌套函数可以”继承“容器函数的参数和变量。换句话说，内部函数包含外部函数的作用域。</p>
+<ul>
+<li>内部函数只可以在外部函数中访问。</li>
+<li>内部函数形成了一个闭包：它可以访问外部函数的参数和变量，但是外部函数却不能使用它的参数和变量。</li>
+</ul>
+<pre><code class="js">function addSquares(a, b) &#123;
+  function square(x) &#123;
+    return x * x;
+  &#125;
+  return square(a) + square(b);
+&#125;
+a = addSquares(2, 3); // returns 13
+b = addSquares(3, 4); // returns 25
+c = addSquares(4, 5); // returns 41
+</code></pre>
+<p>由于内部函数形成了闭包，因此你可以调用外部函数并为外部函数和内部函数指定参数：</p>
+<pre><code class="js">function outside(x) &#123;
+  function inside(y) &#123;
+    return x + y;
+  &#125;
+  return inside;
+&#125;
+fn_inside = outside(3); // 可以这样想：给一个函数，使它的值加3
+result = fn_inside(5); // returns 8
+
+result1 = outside(3)(5); // returns 8
+</code></pre>
+<h3 id="保存变量"><a href="#保存变量" class="headerlink" title="保存变量"></a>保存变量</h3><p>一个闭包必须保存它可见作用域中所有参数和变量。因为每一次调用传入的参数都可能不同，每一次对外部函数的调用实际上重新创建了一遍这个闭包。只有当返回的 inside 没有再被引用时，内存才会被释放。</p>
+<p>这与在其他对象中存储引用没什么不同，但是通常不太明显，因为并不能直接设置引用，也不能检查它们。</p>
+<h3 id="多层嵌套函数"><a href="#多层嵌套函数" class="headerlink" title="多层嵌套函数"></a>多层嵌套函数</h3><p>函数可以被多层嵌套，故而形成多个闭包，因此闭包可以包含多个作用域。</p>
+<p>多层闭包递归包含了所有包含它的函数作用域，这个被称为作用域链。</p>
+<h3 id="命名冲突"><a href="#命名冲突" class="headerlink" title="命名冲突"></a>命名冲突</h3><p>当同一个闭包作用域下两个参数或变量同名，就会产生命名冲突。更近的作用域有更高的优先级。</p>
+<p>遵循就近原则。</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包是 JavaScript 中最强大的特性之一。</p>
+<p>由于内部函数可以访问外部函数的作用域，因此当内部函数生命周期大于外部函数时，外部函数中定义的变量和函数的生命周期将比内部函数执行时间长。当内部函数以某种方式被任何一个外部作用域访问时，一个闭包就产生了。</p>
+<pre><code class="js">var createPet = function (name) &#123;
+  var sex;
+
+  return &#123;
+    setName: function (newName) &#123;
+      name = newName;
+    &#125;,
+
+    getName: function () &#123;
+      return name;
+    &#125;,
+
+    getSex: function () &#123;
+      return sex;
+    &#125;,
+
+    setSex: function (newSex) &#123;
+      if (
+        typeof newSex == &quot;string&quot; &amp;&amp;
+        (newSex.toLowerCase() == &quot;male&quot; || newSex.toLowerCase() == &quot;female&quot;)
+      ) &#123;
+        sex = newSex;
+      &#125;
+    &#125;,
+  &#125;;
+&#125;;
+
+var pet = createPet(&quot;Vivie&quot;);
+pet.getName(); // Vivie
+
+pet.setName(&quot;Oliver&quot;);
+pet.setSex(&quot;male&quot;);
+pet.getSex(); // male
+pet.getName(); // Oliver
+</code></pre>
+<p>上述代码中，外部函数 name 变量对内嵌函数来说是可见的，而除了通过内嵌函数本身，没有其他任何方法可以取得内嵌的变量。内嵌函数的内嵌变量就像内嵌函数的保险柜。它们会为内嵌函数保留“稳定”而又安全的数据参与运行。</p>
+<p>最后，闭包要避免命名冲突。</p>
+<h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>函数实参会被保存在一个类似数组的 arguments 对象中。在函数内，可以访问 aguments 来获取实参。</p>
+<p>使用 arguments 就使得函数参数可变。</p>
+<pre><code class="js">function myConcat(separator) &#123;
+  var result = &quot;&quot;; // 把值初始化成一个字符串，这样就可以用来保存字符串了！！
+  var i;
+  // iterate through arguments
+  for (i = 1; i &lt; arguments.length; i++) &#123;
+    result += arguments[i] + separator;
+  &#125;
+  return result;
+&#125;
+</code></pre>
+<p>arguments 只是一个类似于数组的对象，而不是数组，类似数组是指它有索引编号和.length 属性。</p>
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><p>函数参数默认值是 undefined</p>
+<p>函数默认参数可修改。</p>
+<pre><code class="js">function multiply(a, b = 1) &#123;
+  return a * b;
+&#125;
+
+multiply(5); // 5
+</code></pre>
+<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><p>剩余参数语法允许将不确定数量的参数表示为数组。</p>
+<pre><code class="js">function multiply(multiplier, ...theArgs) &#123;
+  return theArgs.map((x) =&gt; multiplier * x);
+&#125;
+
+var arr = multiply(2, 1, 2, 3);
+console.log(arr); // [2, 4, 6]
+</code></pre>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>相对于函数有较短的语法并以词法的方式绑定 this。</p>
+<p>在箭头函数出现之前，每一个新函数都重新定义了自己的 this 值。</p>
+<p>箭头函数捕捉闭包上下文的 this 值。</p>
+<pre><code class="js">function Person() &#123;
+  this.age = 0;
+
+  setInterval(() =&gt; &#123;
+    this.age++; // 这里的`this`正确地指向person对象
+  &#125;, 1000);
+&#125;
+
+var p = new Person();
+</code></pre>
+<h2 id="预定义函数"><a href="#预定义函数" class="headerlink" title="预定义函数"></a>预定义函数</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h3><p>eval()方法会对一串字符串形式的 JavaScript 代码字符求值。</p>
+<h3 id="uneval"><a href="#uneval" class="headerlink" title="uneval()"></a>uneval()</h3><p>uneval()方法创建的一个 Object 的源代码的字符串表示。</p>
+<h3 id="isFinite"><a href="#isFinite" class="headerlink" title="isFinite()"></a>isFinite()</h3><p>isFinite()函数判断传入的值是否是有限的数值。</p>
+<p>如果需要的话，其参数首先被转换为一个数值。</p>
+<h3 id="isNaN"><a href="#isNaN" class="headerlink" title="isNaN()"></a>isNaN()</h3><p>isNaN()函数判断一个值是否是 NaN。</p>
+<p>注意：isNaN 函数内部的强制转换规则十分有趣；</p>
+<p>另一个可供选择的是 ECMAScript 6 中定义 Number.isNaN() , 或者使用 typeof 来判断数值类型。</p>
+<h3 id="parseFloat"><a href="#parseFloat" class="headerlink" title="parseFloat()"></a>parseFloat()</h3><p>parseFloat() 函数解析字符串参数，并返回一个浮点数。</p>
+<h3 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h3><p>parseInt() 函数解析字符串参数，并返回指定的基数（基础数学中的数制）的整数。</p>
+<h3 id="decodeURI"><a href="#decodeURI" class="headerlink" title="decodeURI()"></a>decodeURI()</h3><p>decodeURI() 函数对先前经过 encodeURI 函数或者其他类似方法编码过的字符串进行解码。</p>
+<h3 id="decodeURIComponent"><a href="#decodeURIComponent" class="headerlink" title="decodeURIComponent()"></a>decodeURIComponent()</h3><p>decodeURIComponent()方法对先前经过 encodeURIComponent 函数或者其他类似方法编码过的字符串进行解码。</p>
+<h3 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI()"></a>encodeURI()</h3><p>encodeURI()方法通过用以一个，两个，三个或四个转义序列表示字符的 UTF-8 编码替换统一资源标识符（URI）的某些字符来进行编码（每个字符对应四个转义序列，这四个序列组了两个”替代“字符）。</p>
+<h3 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent()"></a>encodeURIComponent()</h3><p>encodeURIComponent() 方法通过用以一个，两个，三个或四个转义序列表示字符的 UTF-8 编码替换统一资源标识符（URI）的每个字符来进行编码（每个字符对应四个转义序列，这四个序列组了两个”替代“字符）。</p>
+<h3 id="escape"><a href="#escape" class="headerlink" title="escape()"></a>escape()</h3><p>已废弃的 escape() 方法计算生成一个新的字符串，其中的某些字符已被替换为十六进制转义序列。使用 encodeURI 或者 encodeURIComponent 替代本方法。</p>
+<h3 id="unescape"><a href="#unescape" class="headerlink" title="unescape()"></a>unescape()</h3><p>已废弃的 unescape() 方法计算生成一个新的字符串，其中的十六进制转义序列将被其表示的字符替换。上述的转义序列就像 escape 里介绍的一样。因为 unescape 已经废弃，建议使用 decodeURI()或者 decodeURIComponent 替代本方法。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>多层闭包递归包含了所有包含它的函数作用域，这个被称为作用域链。</p>
+<p>闭包要注意命名冲突</p>
+<p>箭头函数没有自己的 this，所以会捕获上下文的 this</p>
+<p>突然想起来面试时，有个问题忘了记录</p>
+<h2 id="前端内存泄漏一般出现在什么情况下"><a href="#前端内存泄漏一般出现在什么情况下" class="headerlink" title="前端内存泄漏一般出现在什么情况下"></a>前端内存泄漏一般出现在什么情况下</h2><h3 id="意外的全局变量"><a href="#意外的全局变量" class="headerlink" title="意外的全局变量"></a>意外的全局变量</h3><p>严格模式可避免</p>
+<pre><code class="js">function foo() &#123;
+  bar = 2;
+  console.log(&quot;bar没有被声明!&quot;);
+&#125;
+</code></pre>
+<h3 id="dom-清空时，还存在引用"><a href="#dom-清空时，还存在引用" class="headerlink" title="dom 清空时，还存在引用"></a>dom 清空时，还存在引用</h3><p>很多时候,为了方便存取,经常会将 DOM 结点暂时存储到数据结构中.但是在不需要该 DOM 节点时,忘记解除对它的引用,则会造成内存泄露.</p>
+<pre><code class="js">var element = &#123;
+  shotCat: document.getElementById(&quot;shotCat&quot;),
+&#125;;
+
+document.body.removeChild(document.getElementById(&quot;shotCat&quot;));
+// 如果element没有被回收,这里移除了 shotCat 节点也是没用的,shotCat 节点依然留存在内存中.
+</code></pre>
+<p>与此类似情景还有: DOM 节点绑定了事件, 但是在移除的时候没有解除事件绑定,那么仅仅移除 DOM 节点也是没用的</p>
+<h3 id="定时器中的内存泄漏"><a href="#定时器中的内存泄漏" class="headerlink" title="定时器中的内存泄漏"></a>定时器中的内存泄漏</h3><pre><code class="js">var someResource = getData();
+setInterval(function () &#123;
+  var node = document.getElementById(&quot;Node&quot;);
+  if (node) &#123;
+    node.innerHTML = JSON.stringify(someResource);
+  &#125;
+&#125;, 1000);
+</code></pre>
+<p>如果没有清除定时器,那么 someResource 就不会被释放,如果刚好它又占用了较大内存,就会引发性能问题. 但是 setTimeout ,它计时结束后它的回调里面引用的对象占用的内存是可以被回收的. 当然有些场景 setTimeout 的计时可能很长, 这样的情况下也是需要纳入考虑的.</p>
+<h3 id="不规范地使用闭包"><a href="#不规范地使用闭包" class="headerlink" title="不规范地使用闭包"></a>不规范地使用闭包</h3><pre><code class="js">function foo() &#123;
+  var a = &#123;&#125;;
+  function bar() &#123;
+    console.log(a);
+  &#125;
+  a.fn = bar;
+  return bar;
+&#125;
+</code></pre>
+<p>bar 和 a 形成了相互循环引用。bar 作为一个闭包,即使它内部什么都没有,foo 中的所有变量都还是隐式地被 bar 所引用。</p>
+<p>即使 bar 内什么都没有还是造成了循环引用,那真正的解决办法就是,不要将 a.fn &#x3D; bar.</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
