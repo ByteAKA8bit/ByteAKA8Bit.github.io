@@ -38,15 +38,40 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/post/algorithm-101-3">算法101训练营-链表指定区间反转和K个一组反转</a>
+        <div class="post-except">
+            开始之前这两个的解法思路和反转链表其实差不多，所以放在一章一起解决
+链表指定区间反转之前写过整个链表的反转，主要做法就是
+
+下一个节点指针指向下一个节点
+
+当前节点的 next 属性指向上一个节点
+
+将上一个节点指针指向当前节点
+
+将当前节点指针移动到下一个节点指针指向的节点
+
+
+描述将一个节点数为 size 链表 m 位置到 n 位置之间的区间反转。
+数据范围链表长度 0 &lt; size &lt;&#x3D; 1000
+0 &lt; m &lt;&#x3D;n &lt;
+            <a class="read-more" href="/post/algorithm-101-3"> ... </a>
+        </div>
+        <div class="post-date">2022.03.20</div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/post/algorithm-101-2">算法101训练营-合并k个已排序的链表</a>
         <div class="post-except">
             开始之前刚才做了反转链表，太简单，没挑战，来道 hard 给自己找点不痛快。
 描述合并 k 个升序的链表并将结果作为一个升序的链表返回其头节点。
-数据范围节点总数 0 \le n \le 50000≤n≤5000
-每个节点的 val 满足 |val| &lt;&#x3D; 1000∣val∣&lt;&#x3D;1000
+数据范围节点总数 0 &lt;&#x3D; n &lt;&#x3D; 5000
+每个节点的 val 满足 |val| &lt;&#x3D; 1000
 要求时间复杂度 O(nlogn)
 思路暴力把所有链表内的值压入数组，对数组排序(.sort(a,b)&#x3D;&gt;a-b）
-然后把遍历数组构造一个新链表
+然后把遍历数组构造一个新链表…
+粗鲁… 太粗鲁了
+分治
             <a class="read-more" href="/post/algorithm-101-2"> ... </a>
         </div>
         <div class="post-date">2022.03.19</div>
@@ -57,14 +82,14 @@
         <div class="post-except">
             描述给定一个单链表的头结点 pHead(该头节点是有值的，比如在下图，它的 val 是 1，长度为 n，反转该链表后，返回新链表的表头。
 数据范围：
-0\leq n\leq10000≤n≤1000要求：
-空间复杂度 O(1)O(1) ，时间复杂度 O(n)O(n) 。
+0 &lt;&#x3D; n &lt;&#x3D; 1000要求：
+空间复杂度 O(1)，时间复杂度 O(n)。
 如当输入链表{1,2,3}时，
 经反转后，原链表变为{3,2,1}，所以对应的输出为{3,2,1}。
 以上转换过程如下图所示：
 
 代码function ReverseList(pHead) &#123;
-  /
+  // w
             <a class="read-more" href="/post/algorithm-101-1"> ... </a>
         </div>
         <div class="post-date">2022.03.19</div>
@@ -103,28 +128,6 @@ outPoint: for (var i = 0; i &lt; 10; i++) &#123;
             <a class="read-more" href="/post/MDN-JS-004"> ... </a>
         </div>
         <div class="post-date">2022.03.19</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/post/interview-0318-2">面试再记</a>
-        <div class="post-except">
-            面试前还是同一家公司，可能不同岗位
-这次有上篇面试记录的文章的加持，其实信心高了不少。
-恰巧，问到的问题也大致相似。这里就看出了总结的重要性。
-面试记录这会就只能记起来回答的不好的问题了。
-还有 MD5 最大的特点是不可逆
-对象拷贝浅拷贝直接赋值
-Object.assign();
-扩展运算符
-lodash(_.clone());
-let obj2 = _.clone(obj1);
-
-深拷贝JSON.parse(JSON.stringify());
-递归赋值
-function 
-            <a class="read-more" href="/post/interview-0318-2"> ... </a>
-        </div>
-        <div class="post-date">2022.03.18</div>
     </div>
     
 </div>

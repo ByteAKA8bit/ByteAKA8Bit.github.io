@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            算法101训练营-链表指定区间反转和K个一组反转
+        </div>
+        <div class="post-meta">
+            2022-03-20
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>这两个的解法思路和反转链表其实差不多，所以放在一章一起解决</p>
+<h2 id="链表指定区间反转"><a href="#链表指定区间反转" class="headerlink" title="链表指定区间反转"></a>链表指定区间反转</h2><p>之前写过整个链表的反转，主要做法就是</p>
+<ol>
+<li><p>下一个节点指针指向下一个节点</p>
+</li>
+<li><p>当前节点的 next 属性指向上一个节点</p>
+</li>
+<li><p>将上一个节点指针指向当前节点</p>
+</li>
+<li><p>将当前节点指针移动到下一个节点指针指向的节点</p>
+</li>
+</ol>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>将一个节点数为 size 链表 m 位置到 n 位置之间的区间反转。</p>
+<h4 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h4><p>链表长度 0 &lt; size &lt;&#x3D; 1000</p>
+<p>0 &lt; m &lt;&#x3D;n &lt; size</p>
+<p>链表中每个节点的值满足 |val| &lt;&#x3D; 1000</p>
+<h4 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h4><p>时间复杂度 O(n)，空间复杂度 O(n)</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>先遍历到开始反转的位置，然后用之前的反转算法略微改造后去遍历。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre><code class="js">function reverseBetween(head, m, n) &#123;
+  // write code here
+  if (m == n) &#123;
+    return head;
+  &#125;
+  // 在head前再构造一个节点
+  let realHead = new ListNode(0);
+  realHead.next = head;
+  // 分别设置两个指针指向前一个节点和当前节点
+  let previous = realHead;
+  let current = head;
+  // 遍历前m-1个节点
+  for (let i = 1; i &lt; m; i++) &#123;
+    previous = previous.next;
+  &#125;
+  // 记录第m个节点
+  current = previous.next;
+  for (let i = 0; i &lt; n - m; i++) &#123;
+    // 记录上一节点指针指向节点的下一个节点
+    let nextNode = previous.next;
+    // 上一节点指针同步到当前节点指针指向的节点去
+    previous.next = current.next;
+    // 当前节点指针后移一个节点
+    current.next = current.next.next;
+    //
+    previous.next.next = nextNode;
+  &#125;
+  return realHead.next;
+&#125;
+</code></pre>
+<h3 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h3><p>代码首先是构造了一个节点指向了传入的头节点，并用 previous 指针指向了构造的节点</p>
+<p>将 current 指针指向了头节点</p>
+<p>这时候就可以用 previous 指针去遍历传入的链表，到 m-1 指定的节点。</p>
+<p>使用 current 获取到 m 节点。</p>
+<p>开始执行反转算法，这个反转算法和整体反转算法略有差异。</p>
+<p>整体反转算法是，遍历到某个节点，记录它的 next，修改节点 next 指向 prev，prev 指向当前节点，当前节点移动到 next。</p>
+<p>而这个算法就不是那么直观了。下面表格重点关注以下 next 指针</p>
+<p>一开始节点是这样的</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-2</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m-1</td>
+<td align="center">m</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center"></td>
+<td align="center">p</td>
+<td align="center">c</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>进入第一次循环,做了以下操作</p>
+<p>let nextNode &#x3D; previous.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-2</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m-1</td>
+<td align="center">m</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center"></td>
+<td align="center">p</td>
+<td align="center">c、n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>previous.next &#x3D; current.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-2</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m-1</td>
+<td align="center">m+1</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center"></td>
+<td align="center">p</td>
+<td align="center">c、n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>current.next &#x3D; current.next.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-2</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m-1</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center"></td>
+<td align="center">p</td>
+<td align="center">c、n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>previous.next.next &#x3D; nextNode;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-2</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m-1</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m</td>
+<td align="center">m+3</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center"></td>
+<td align="center">p</td>
+<td align="center">c、n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>可以看到，第一次循环结束，链表顺序是</p>
+<p>m-2 m-1 m+1 m m+2 m+3 m+4</p>
+<p><img src="/post/algorithm-101-3/firstLoop.jpg" alt="第一次循环后"></p>
+<p>再来执行第二次循环。</p>
+<p>let let nextNode &#x3D; previous.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+<th align="center">m+3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m+1</td>
+<td align="center">m+2</td>
+<td align="center">m</td>
+<td align="center">m+3</td>
+<td align="center">m+4</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center">p</td>
+<td align="center">c</td>
+<td align="center">n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>previous.next &#x3D; current.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+<th align="center">m+3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m+2</td>
+<td align="center">m+2</td>
+<td align="center">m</td>
+<td align="center">m+3</td>
+<td align="center">m+4</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center">p</td>
+<td align="center">c</td>
+<td align="center">n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>current.next &#x3D; current.next.next;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+<th align="center">m+3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+<td align="center">m</td>
+<td align="center">m+3</td>
+<td align="center">m+4</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center">p</td>
+<td align="center">c</td>
+<td align="center">n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>previous.next.next &#x3D; nextNode;</p>
+<table>
+<thead>
+<tr>
+<th align="center">节点</th>
+<th align="center">m-1</th>
+<th align="center">m</th>
+<th align="center">m+1</th>
+<th align="center">m+2</th>
+<th align="center">m+3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">next 指针</td>
+<td align="center">m+2</td>
+<td align="center">m+3</td>
+<td align="center">m</td>
+<td align="center">m+1</td>
+<td align="center">m+4</td>
+</tr>
+<tr>
+<td align="center">辅助指针</td>
+<td align="center">p</td>
+<td align="center">c</td>
+<td align="center">n</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>第二次循环结束时，链表为</p>
+<p>m-2 m-1 m+2 m+1 m m+3 m+4</p>
+<p><img src="/post/algorithm-101-3/secondLoop.jpg" alt="第二次循环后"></p>
+<p>可以总结出，pnext 和 cnext 在每次循环中，后向后移动一位，p 和 c 不移动。</p>
+<p>n 也随着 pnext 的移动而移动。</p>
+<p>就是不断的 m-1 的 next 指向下一个未遍历的节点并反转。</p>
+<p>同时将 m 的 next 指向未遍历且未反转的节点。</p>
+<p>循环完成反转。</p>
+<h2 id="链表-K-个一组反转"><a href="#链表-K-个一组反转" class="headerlink" title="链表 K 个一组反转"></a>链表 K 个一组反转</h2><blockquote>
+<p>写到这已经是凌晨 2:21 了，🐕 命要紧，睡觉了，明天起来补</p>
+</blockquote>
+<h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><h3 id="代码解读-1"><a href="#代码解读-1" class="headerlink" title="代码解读"></a>代码解读</h3>
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
