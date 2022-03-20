@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            MDN速刷 JS JS指南篇——表达式与运算符
+        </div>
+        <div class="post-meta">
+            2022-03-20
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>最近被算法虐待的有些携带了。感觉刷 MDN 好像对我的帮助没有那么大…</p>
+<p>就是这样，每次需要坚持的时候就怀疑坚持下去的意义导致坚持不下去。</p>
+<p>这时候就想做一只把头埋进沙子里的鸵鸟，不要去想意义，先做就好。、</p>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>JS 有以下运算符</p>
+<ul>
+<li>赋值</li>
+<li>比较</li>
+<li>算数</li>
+<li>位</li>
+<li>逻辑</li>
+<li>字符串</li>
+<li>条件（三元）</li>
+<li>逗号</li>
+<li>一元</li>
+<li>关系</li>
+</ul>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><h4 id="赋值运算符简写"><a href="#赋值运算符简写" class="headerlink" title="赋值运算符简写"></a>赋值运算符简写</h4><table>
+<thead>
+<tr>
+<th align="left">名字</th>
+<th align="left">简写的操作符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">赋值(Assignment)</td>
+<td align="left">x &#x3D; y</td>
+<td align="left">x &#x3D; y</td>
+</tr>
+<tr>
+<td align="left">加法赋值(Addition assignment)</td>
+<td align="left">x +&#x3D; y</td>
+<td align="left">x &#x3D; x + y</td>
+</tr>
+<tr>
+<td align="left">减法赋值(Subtraction assignment)</td>
+<td align="left">x -&#x3D; y</td>
+<td align="left">x &#x3D; x - y</td>
+</tr>
+<tr>
+<td align="left">乘法赋值(Multiplication assignment)</td>
+<td align="left">x _&#x3D; y</td>
+<td align="left">x &#x3D; x _ y</td>
+</tr>
+<tr>
+<td align="left">除法赋值(Division assignment)</td>
+<td align="left">x &#x2F;&#x3D; y</td>
+<td align="left">x &#x3D; x &#x2F; y</td>
+</tr>
+<tr>
+<td align="left">求余赋值(Remainder assignment)</td>
+<td align="left">x %&#x3D; y</td>
+<td align="left">x &#x3D; x % y</td>
+</tr>
+<tr>
+<td align="left">求幂赋值(Exponentiation assignment)</td>
+<td align="left">x **&#x3D; y</td>
+<td align="left">x &#x3D; x ** y</td>
+</tr>
+<tr>
+<td align="left">左移位赋值(Left shift assignment)</td>
+<td align="left">x &lt;&lt;&#x3D; y</td>
+<td align="left">x &#x3D; x &lt;&lt; y</td>
+</tr>
+<tr>
+<td align="left">右移位赋值(Right shift assignment)</td>
+<td align="left">x &gt;&gt;&#x3D; y</td>
+<td align="left">x &#x3D; x &gt;&gt; y</td>
+</tr>
+<tr>
+<td align="left">无符号右移位赋值(Unsigned right shift assignment)</td>
+<td align="left">x &gt;&gt;&gt;&#x3D; y</td>
+<td align="left">x &#x3D; x &gt;&gt;&gt; y</td>
+</tr>
+<tr>
+<td align="left">按位与赋值(Bitwise AND assignment)</td>
+<td align="left">x &amp;&#x3D; y</td>
+<td align="left">x &#x3D; x &amp; y</td>
+</tr>
+<tr>
+<td align="left">按位异或赋值(Bitwise XOR assignment)</td>
+<td align="left">x ^&#x3D; y</td>
+<td align="left">x &#x3D; x ^ y</td>
+</tr>
+<tr>
+<td align="left">按位或赋值(Bitwise OR assignment)</td>
+<td align="left">x | &#x3D; y</td>
+<td align="left">x &#x3D; x | y</td>
+</tr>
+</tbody></table>
+<h4 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h4><pre><code class="js">var foo = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;];
+
+// 不使用解构
+var one = foo[0];
+var two = foo[1];
+var three = foo[2];
+
+// 使用解构
+var [one, two, three] = foo;
+</code></pre>
+<h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><p>这里要注意严格等和非严格等</p>
+<p>严格等先判断类型是否相等，再判断值是否相等</p>
+<p>非严格等判断类型是否相等，不相等则转换为同一类型后再判断值是否相等。</p>
+<h3 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h3><p>算数运算符主要要考虑 + 号同时是字符串连接符，字符串连接运算要优先于加法运算。</p>
+<p>求余、自增减、负数、</p>
+<p>一元 + :一元运算符, 如果操作数在之前不是 number，试图将其转换为 number</p>
+<p>二元**：计算 base(底数) 的 exponent(指数)次方, 表示为 base^exponent</p>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><p>位运算符将它的操作数视为 32 位元的二进制串。</p>
+<p>但是返回结果是标准的 JavaScript 数值。</p>
+<p>无符号右移</p>
+<p>把 a 的二进制表示向右移动 b 位，丢弃被移出的所有位，并把左边空出的位都填充为 0</p>
+<p>a&gt;&gt;&gt;b</p>
+<p>而算术右移左边空出的位是根据最高位是 0 和 1 来进行填充的</p>
+<p>注意位运算符“非”将所有的 32 位取反，而值的最高位(最左边的一位)为 1 则表示负数(2-补码表示法)。</p>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>能被转换为 false 的值有 null, 0, NaN, 空字符串(“”)和 undefined。</p>
+<p>注意短路问题</p>
+<p>false &amp;&amp; anything &#x2F;&#x2F; 被短路求值为 false<br>true || anything &#x2F;&#x2F; 被短路求值为 true</p>
+<h3 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h3><p>+</p>
+<p>简写操作符 +&#x3D; 也可以用来拼接字符串</p>
+<pre><code class="js">var myString = &quot;alpha&quot;;
+
+myString += &quot;bet&quot;; // 返回 &quot;alphabet&quot;
+</code></pre>
+<h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><p>a ? b : c</p>
+<pre><code class="js">var status = age &gt;= 18 ? &quot;adult&quot; : &quot;minor&quot;;
+</code></pre>
+<h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><p>对两个操作数进行求值并返回最终操作数的值。它常常用在 for 循环中，在每次循环时对多个变量进行更新。</p>
+<pre><code class="js">var x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var a = [x, x, x, x, x];
+
+for (var i = 0, j = 9; i &lt;= j; i++, j--)
+  console.log(&quot;a[&quot; + i + &quot;][&quot; + j + &quot;]= &quot; + a[i][j]);
+</code></pre>
+<h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3><h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><pre><code class="js">delete objectName.property;
+delete ArrayName[index];
+delete property; // legal only within a with statement
+</code></pre>
+<p>第三行的形式只在 with 声明的状态下是合法的， 从对象中删除一个属性。</p>
+<p>你能使用 delete 删除各种各样的隐式声明， 但是被 var 声明的除外。</p>
+<p>如果 delete 操作成功，属性或者元素会变成 undefined。如果 delete 可行会返回 true，如果不成功返回 false。</p>
+<pre><code class="js">x = 42;
+var y = 43;
+myobj = new Number();
+myobj.h = 4; // create property h
+delete x; // returns true (can delete if declared implicitly)
+delete y; // returns false (cannot delete if declared with var)
+delete Math.PI; // returns false (cannot delete predefined properties)
+delete myobj.h; // returns true (can delete user-defined properties)
+delete myobj; // returns true (can delete if declared implicitly)
+</code></pre>
+<p>删除数组中的元素时，数组的长度是不变的，例如删除 a[3], a[4]，a[4]和 a[3] 仍然存在变成了 undefined。</p>
+<p>delete 删除数组中的一个元素，这个元素就不在数组中了。例如，trees[3]被删除，trees[3] 仍然可寻址并返回 undefined。</p>
+<pre><code class="js">var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+delete trees[3];
+if (3 in trees) &#123;
+  // 不会被执行
+&#125;
+</code></pre>
+<p>如果想让数组中存在一个元素但是是 undefined 值，使用 undefined 关键字而不是 delete 操作. 如下： trees[3]分配一个 undefined,但是这个数组元素仍然存在:</p>
+<pre><code class="js">var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+trees[3] = undefined;
+if (3 in trees) &#123;
+  // this gets executed（会被执行）
+&#125;
+</code></pre>
+<h4 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h4><p>typeof 操作符返回一个表示 operand 类型的字符串值。operand 可为字符串、变量、关键词或对象，其类型将被返回。operand 两侧的括号为可选。</p>
+<pre><code class="js">var myFun = new Function(&quot;5 + 2&quot;);
+var shape = &quot;round&quot;;
+var size = 1;
+var today = new Date();
+
+typeof myFun; // returns &quot;function&quot;
+typeof shape; // returns &quot;string&quot;
+typeof size; // returns &quot;number&quot;
+typeof today; // returns &quot;object&quot;
+typeof dontExist; // returns &quot;undefined&quot;
+
+typeof true; // returns &quot;boolean&quot;
+typeof null; // returns &quot;object&quot;
+
+typeof 62; // returns &quot;number&quot;
+typeof &quot;Hello world&quot;; // returns &quot;string&quot;
+
+typeof document.lastModified; // returns &quot;string&quot;
+typeof window.length; // returns &quot;number&quot;
+typeof Math.LN2; // returns &quot;number&quot;
+
+typeof blur; // returns &quot;function&quot;
+typeof eval; // returns &quot;function&quot;
+typeof parseInt; // returns &quot;function&quot;
+typeof shape.split; // returns &quot;function&quot;
+
+typeof Date; // returns &quot;function&quot;
+typeof Function; // returns &quot;function&quot;
+typeof Math; // returns &quot;object&quot;
+typeof Option; // returns &quot;function&quot;
+typeof String; // returns &quot;function&quot;
+</code></pre>
+<h4 id="void-运算符"><a href="#void-运算符" class="headerlink" title="void 运算符"></a>void 运算符</h4><p>void 运算符,表明一个运算没有返回值。</p>
+<p>你可以使用 void 运算符指明一个超文本链接。该表达式是有效的，但是并不会在当前文档中进行加载。</p>
+<p>如下创建了一个超链接文本，当用户单击该文本时，不会有任何效果。</p>
+<pre><code class="js">&lt;a href=&quot;javascript:void(0)&quot;&gt;Click here to do nothing&lt;/a&gt;
+</code></pre>
+<pre><code class="js">&lt;a href=&quot;javascript:void(document.form.submit())&quot;&gt;Click here to submit&lt;/a&gt;
+</code></pre>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>如果所指定的属性确实存在于所指定的对象中，则会返回 true</p>
+<pre><code class="js">// Arrays
+var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+0 in trees; // returns true
+3 in trees; // returns true
+6 in trees; // returns false
+&quot;bay&quot; in trees; // returns false (you must specify the index number,
+// not the value at that index)
+&quot;length&quot; in trees; // returns true (length is an Array property)
+
+// Predefined objects
+&quot;PI&quot; in Math; // returns true
+var myString = new String(&quot;coral&quot;);
+&quot;length&quot; in myString; // returns true
+
+// Custom objects
+var mycar = &#123; make: &quot;Honda&quot;, model: &quot;Accord&quot;, year: 1998 &#125;;
+&quot;make&quot; in mycar; // returns true
+&quot;model&quot; in mycar; // returns true
+</code></pre>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>如果所判别的对象确实是所指定的类型，则返回 true。</p>
+<pre><code class="js">var theDay = new Date(1995, 12, 17);
+if (theDay instanceof Date) &#123;
+  // statements to execute
+&#125;
+</code></pre>
+<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>成员</td>
+<td>. []</td>
+</tr>
+<tr>
+<td>调用 &#x2F; 实例创建</td>
+<td>() new</td>
+</tr>
+<tr>
+<td>取反&#x2F;自增</td>
+<td>! ~ - + ++ – typeof void delete</td>
+</tr>
+<tr>
+<td>乘&#x2F;除</td>
+<td>_ &#x2F; %</td>
+</tr>
+<tr>
+<td>加&#x2F;减</td>
+<td>+ -</td>
+</tr>
+<tr>
+<td>位移</td>
+<td>&lt;&lt; &gt;&gt; &gt;&gt;&gt;</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>&lt; &lt;&#x3D; &gt; &gt;&#x3D; in instanceof</td>
+</tr>
+<tr>
+<td>等于</td>
+<td>&#x3D;&#x3D; !&#x3D; &#x3D;&#x3D;&#x3D; !&#x3D;&#x3D;</td>
+</tr>
+<tr>
+<td>位与</td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td>位异或</td>
+<td>^</td>
+</tr>
+<tr>
+<td>位或</td>
+<td>|</td>
+</tr>
+<tr>
+<td>逻辑与</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>逻辑或</td>
+<td>||</td>
+</tr>
+<tr>
+<td>条件运算</td>
+<td>?:</td>
+</tr>
+<tr>
+<td>赋值</td>
+<td>&#x3D; +&#x3D; -&#x3D; _&#x3D; &#x2F;&#x3D; %&#x3D; &lt;&lt;&#x3D; &gt;&gt;&#x3D; &gt;&gt;&gt;&#x3D; &amp;&#x3D; ^&#x3D; | &#x3D;</td>
+</tr>
+<tr>
+<td>逗号</td>
+<td>,</td>
+</tr>
+</tbody></table>
+<h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><p>JavaScript 有以下表达式类型</p>
+<ul>
+<li>算数: 得出一个数字, 例如 3.14159. (通常使用 arithmetic operators.)</li>
+<li>字符串: 得出一个字符串, 例如, “Fred” 或 “234”. (通常使用 string operators.)</li>
+<li>逻辑值: 得出 true 或者 false. (经常涉及到 logical operators.)</li>
+<li>基本表达式: javascript 中基本的关键字和一般表达式。</li>
+<li>左值表达式: 分配给左值。</li>
+</ul>
+<h3 id="基本表达式"><a href="#基本表达式" class="headerlink" title="基本表达式"></a>基本表达式</h3><h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><p>this 关键字被用于指代当前的对象。</p>
+<h4 id="分组操作符"><a href="#分组操作符" class="headerlink" title="分组操作符"></a>分组操作符</h4><p>分组操作符（）控制了表达式中计算的优先级</p>
+<h4 id="数值推导"><a href="#数值推导" class="headerlink" title="数值推导"></a>数值推导</h4><pre><code class="js">[for (i of [ 1, 2, 3 ]) i*i ];
+// [ 1, 4, 9 ]
+
+var abc = [ &quot;A&quot;, &quot;B&quot;, &quot;C&quot; ];
+[for (letters of abc) letters.toLowerCase()];
+// [ &quot;a&quot;, &quot;b&quot;, &quot;c&quot; ]
+</code></pre>
+<h3 id="左值表达式"><a href="#左值表达式" class="headerlink" title="左值表达式"></a>左值表达式</h3><p>左值可以作为赋值的目标。</p>
+<h4 id="new"><a href="#new" class="headerlink" title="new"></a>new</h4><p>你可以使用 new operator 创建一个自定义类型或者是预置类型的对象实例。</p>
+<pre><code class="js">var objectName = new objectType([param1, param2, ..., paramN]);
+</code></pre>
+<h4 id="super"><a href="#super" class="headerlink" title="super"></a>super</h4><p>super 关键字可以用来调用一个对象父类的函数，它在用来调用一个类的父类的构造函数时非常有用，比如：</p>
+<pre><code class="js">super([arguments]); // calls the parent constructor. super.functionOnParent([arguments])
+</code></pre>
+<h4 id="扩展语句"><a href="#扩展语句" class="headerlink" title="扩展语句"></a>扩展语句</h4><p>扩展语句符允许一个表达式在原地展开， 当需要多个参数 (比如函数调用时) 或者多个值(比如字面量数组) 。</p>
+<pre><code class="js">var parts = [&quot;shoulder&quot;, &quot;knees&quot;];
+var lyrics = [&quot;head&quot;, ...parts, &quot;and&quot;, &quot;toes&quot;];
+
+function f(x, y, z) &#123;&#125;
+var args = [0, 1, 2];
+f(...args);
+</code></pre>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
