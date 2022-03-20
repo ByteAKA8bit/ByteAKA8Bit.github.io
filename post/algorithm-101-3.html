@@ -375,7 +375,47 @@
 <h2 id="链表-K-个一组反转"><a href="#链表-K-个一组反转" class="headerlink" title="链表 K 个一组反转"></a>链表 K 个一组反转</h2><blockquote>
 <p>写到这已经是凌晨 2:21 了，🐕 命要紧，睡觉了，明天起来补</p>
 </blockquote>
-<h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><h3 id="代码解读-1"><a href="#代码解读-1" class="headerlink" title="代码解读"></a>代码解读</h3>
+<h3 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h3><p>将给出的链表中的节点每 k 个一组翻转，返回翻转后的链表。</p>
+<p>如果链表中的节点数不是 k 的倍数，将最后剩下的节点保持原样。</p>
+<p>你不能更改节点中的值，只能更改节点本身。</p>
+<h4 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h4><p>0 &lt;&#x3D; n &lt;&#x3D; 2000 ， 1 &lt;&#x3D; k &lt;&#x3D; 2000。</p>
+<p>链表中每个元素都满足 0 &lt;&#x3D; val &lt;&#x3D; 1000。</p>
+<h4 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h4><p>空间复杂度 O(1)，时间复杂度 O(n)。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>就按照 k 个一组反转，然后递归调反转后续的链表即可。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><pre><code class="js">function reverseKGroup(head, k) &#123;
+  // write code here
+  let pre = null;
+  let current = head;
+  let node = head;
+  // 循环检查剩余节点是否有k个，没有直接返回
+  for (let i = 0; i &lt; k; i++) &#123;
+    if (node === null) &#123;
+      return head;
+    &#125;
+    node = node.next;
+  &#125;
+  // 反转前k个节点 并加入到链中
+  for (let i = 0; i &lt; k; i++) &#123;
+    // 记录下一个节点
+    let temp = current.next;
+    // 反转链表
+    current.next = pre;
+    // 获取到当前节点作为前一个节点，供下次循环使用
+    pre = current;
+    // 获取到下一个节点，供下次循环使用
+    current = temp;
+  &#125;
+  // 递归反转直到结束
+  head.next = reverseKGroup(current, k);
+  return pre;
+&#125;
+</code></pre>
+<h3 id="代码解读-1"><a href="#代码解读-1" class="headerlink" title="代码解读"></a>代码解读</h3><p>代码先对入参进行了一个检查，看剩余节点，这是递归的结束条件。</p>
+<p>然后就是反转k个节点.</p>
+<p>然后将剩余节点放入递归去反转。</p>
+<p>比较简单。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>今晚刷刷MDN吧，算法刚不动了。</p>
+
     </div>
 
 </div>

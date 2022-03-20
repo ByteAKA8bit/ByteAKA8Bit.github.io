@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            算法101训练营-手串颜色问题
+        </div>
+        <div class="post-meta">
+            2022-03-20
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>作为一个手串艺人，有金主向你订购了一条包含 n 个杂色串珠的手串——每个串珠要么无色，要么涂了若干种颜色。为了使手串的色彩看起来不那么单调，金主要求，手串上的任意一种颜色（不包含无色），在任意连续的 m 个串珠里至多出现一次（注意这里手串是一个环形）。手串上的颜色一共有 c 种。现在按顺时针序告诉你 n 个串珠的手串上，每个串珠用所包含的颜色分别有哪些。请你判断该手串上有多少种颜色不符合要求。即询问有多少种颜色在任意连续 m 个串珠中出现了至少两次。</p>
+<h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h3><p>第一行输入 n，m，c 三个数，用空格隔开。(1 &lt;&#x3D; n &lt;&#x3D; 10000, 1 &lt;&#x3D; m &lt;&#x3D; 1000, 1 &lt;&#x3D; c &lt;&#x3D; 50) 接下来 n 行每行的第一个数 num_i(0 &lt;&#x3D; num_i &lt;&#x3D; c)表示第 i 颗珠子有多少种颜色。接下来依次读入 num_i 个数字，每个数字 x 表示第 i 颗柱子上包含第 x 种颜色(1 &lt;&#x3D; x &lt;&#x3D; c)</p>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h3><p>一个非负整数，表示该手链上有多少种颜色不符需求。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><blockquote>
+<p>5 2 3<br>3 1 2 3<br>0<br>2 2 3<br>1 2<br>1 3</p>
+</blockquote>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><blockquote>
+<p>2</p>
+</blockquote>
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><blockquote>
+<p>第一种颜色出现在第 1 颗串珠，与规则无冲突。<br>第二种颜色分别出现在第 1，3，4 颗串珠，第 3 颗与第 4 颗串珠相邻，所以不合要求。<br>第三种颜色分别出现在第 1，3，5 颗串珠，第 5 颗串珠的下一个是第 1 颗，所以不合要求。<br>总计有 2 种颜色的分布是有问题的。<br>这里第 2 颗串珠是透明的。</p>
+</blockquote>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>存储每个颜色所在的珠子的位置，然后排序后遍历，两个位置的间距小于 m 则不合格。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="js">// 初始化串珠总个数，连续的串珠个数，颜色种类数，所有串珠的颜色信息数组, 同一颜色的串珠数组, 不合格的颜色个数
+let ballNums,
+  linkNums,
+  colorNums,
+  ballColor = [],
+  sameColorBall = [],
+  count = 0;
+[ballNums, linkNums, colorNums] = readline()
+  .split(&quot; &quot;)
+  .map((item) =&gt; Number(item));
+
+// 依次保存每个串珠所用颜色信息
+// 数组的每个元素都是一个数组，元素数组的第一位代表颜色个数，后续代表所用颜色
+for (let i = 0; i &lt; ballNums; ++i) &#123;
+  ballColor[i] = readline()
+    .split(&quot; &quot;)
+    .map((item) =&gt; Number(item));
+&#125;
+
+// 将同一颜色出现的串珠序号进行收集
+ballColor.forEach((item, index) =&gt; &#123;
+  // 若该串珠所用颜色种类大于0
+  // console.log(item, &#39;item&#39;);
+  if (item[0] &gt; 0) &#123;
+    let colorArr = item.slice(1);
+    // 下面的item代表不同的颜色种类
+    colorArr.forEach((color) =&gt; &#123;
+      // 如果之前已经保存过使用某颜色的串珠序号，则直接将其添加到数组中去
+      if (sameColorBall[color]) &#123;
+        sameColorBall[color].push(index + 1);
+      &#125; else &#123;
+        sameColorBall[color] = [index + 1];
+      &#125;
+    &#125;);
+  &#125;
+&#125;);
+sameColorBall.forEach((item) =&gt; &#123;
+  // sameColorBall[0]代表使用‘0’这种颜色的所有串珠的序号数组,这里的序号是按顺序排列的
+  for (let i = 0; i &lt; item.length - 1; ++i) &#123;
+    if (item[i + 1] - item[i] &lt; linkNums) &#123;
+      ++count;
+      break;
+    &#125;
+    if (ballNums - item[item.length - 1] + item[0] &lt; linkNums) &#123;
+      ++count;
+      break;
+    &#125;
+  &#125;
+&#125;);
+
+console.log(count);
+</code></pre>
+<h2 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h2><p>缓一缓再解读…</p>
+<p>先刷 MDN</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
