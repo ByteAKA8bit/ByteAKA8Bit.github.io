@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            面试专项训练——webpack_未完待续
+        </div>
+        <div class="post-meta">
+            2022-03-21
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>几天没见面试题，很焦虑。今天找找 webpack 的面试题看看。</p>
+<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><h3 id="webpack-treeShakiing-机制的原理是什么"><a href="#webpack-treeShakiing-机制的原理是什么" class="headerlink" title="webpack treeShakiing 机制的原理是什么"></a>webpack treeShakiing 机制的原理是什么</h3><p>Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术。</p>
+<h4 id="Tree-shaking-如何工作"><a href="#Tree-shaking-如何工作" class="headerlink" title="Tree shaking 如何工作"></a>Tree shaking 如何工作</h4><p>ES6 前，我们可以使用 CommonJS 引入模块：require()，这种引入是动态的，也意味着我们可以基于条件来导入需要的代码：</p>
+<pre><code class="js">let dynamicModule;
+// 动态导入
+if (condition) &#123;
+  myDynamicModule = require(&quot;foo&quot;);
+&#125; else &#123;
+  myDynamicModule = require(&quot;bar&quot;);
+&#125;
+</code></pre>
+<p>但是 CommonJS 规范无法确定在实际运行前需要或者不需要某些模块，所以 CommonJS 不适合 tree-shaking 机制。</p>
+<p>在 ES6 中，引入了完全静态的导入语法：import。这也意味着下面的导入是不可行的：</p>
+<pre><code class="js">// 不可行，ES6 的import是完全静态的
+if (condition) &#123;
+  myDynamicModule = require(&quot;foo&quot;);
+&#125; else &#123;
+  myDynamicModule = require(&quot;bar&quot;);
+&#125;
+</code></pre>
+<p>我们只能通过导入所有的包后再进行条件获取。如下：</p>
+<pre><code class="js">import foo from &quot;foo&quot;;
+import bar from &quot;bar&quot;;
+
+if (condition) &#123;
+  // foo.xxxx
+&#125; else &#123;
+  // bar.xxx
+&#125;
+</code></pre>
+<p>我们只能通过导入所有的包后再进行条件获取。如下：</p>
+<pre><code class="js">import foo from &quot;foo&quot;;
+import bar from &quot;bar&quot;;
+
+if (condition) &#123;
+  // foo.xxxx
+&#125; else &#123;
+  // bar.xxx
+&#125;
+</code></pre>
+<p>ES6 的 import 语法可以完美使用 tree shaking，因为可以在代码不运行的情况下就能分析出不需要的代码。</p>
+<p>因为 tree shaking 只能在静态 modules 下工作。ECMAScript 6 模块加载是静态的,因此整个依赖树可以被静态地推导出解析语法树。所以在 ES6 中使用 tree shaking 是非常容易的。</p>
+<h4 id="Tree-Shaking-原理总结"><a href="#Tree-Shaking-原理总结" class="headerlink" title="Tree Shaking 原理总结"></a>Tree Shaking 原理总结</h4><ul>
+<li>ES6 Module 引入进行静态分析，故而编译的时候正确判断到底加载了那些模块</li>
+<li>静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码</li>
+</ul>
+<p>CommonJS 是一种模块规范，最初被应用于 Nodejs，成为 Nodejs 的模块规范。运行在浏览器端的 JavaScript 由于也缺少类似的规范，在 ES6 出来之前，前端也实现了一套相同的模块规范 (例如: AMD)，用来对前端模块进行管理。自 ES6 起，引入了一套新的 ES6 Module 规范，在语言标准的层面上实现了模块功能，而且实现得相当简单，有望成为浏览器和服务器通用的模块解决方案。但目前浏览器对 ES6 Module 兼容还不太好，我们平时在 Webpack 中使用的 export 和 import，会经过 Babel 转换为 CommonJS 规范。在使用上的差别主要有：</p>
+<ol>
+<li><p>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</p>
+</li>
+<li><p>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。</p>
+</li>
+<li><p>CommonJs 是单个值导出，ES6 Module 可以导出多个</p>
+</li>
+</ol>
+<p>4。 CommonJs 是动态语法可以写在判断里，ES6 Module 静态语法只能写在顶层</p>
+<p>5。 CommonJs 的 this 是当前模块，ES6 Module 的 this 是 undefined</p>
+<h3 id="webpack-类似的工具还有哪些，它们之间有什么区别"><a href="#webpack-类似的工具还有哪些，它们之间有什么区别" class="headerlink" title="webpack 类似的工具还有哪些，它们之间有什么区别"></a>webpack 类似的工具还有哪些，它们之间有什么区别</h3><h4 id="模块化工具"><a href="#模块化工具" class="headerlink" title="模块化工具"></a>模块化工具</h4><p>模块化是一种处理复杂系统分解为更好的可管理模块的方式，可以用来分割，组织和打包应用。</p>
+<p>每个模块完成一个特定的子功能，所有模块按某种方法组装起来，成为一个整体（bundle）</p>
+<p>模块打包工具除了 webpack 外，还有：</p>
+<ul>
+<li>Rollup</li>
+<li>Parcel</li>
+<li>Snowpack</li>
+<li>Vite</li>
+</ul>
+<p>gulp 和 grunt 只是定义为构建工具，不参与类比</p>
+<h4 id="Rollup"><a href="#Rollup" class="headerlink" title="Rollup"></a>Rollup</h4><p>rollup 是一款 ES Modules 打包器，作用和 webpack 相似。不过比 webpack 要小巧一些，Vue、React 和 three.js 都在使用。</p>
+<pre><code class="js">// ./src/messages.js
+export default &#123;
+  hi: &quot;Hey Guys, I am zce~&quot;,
+&#125;;
+
+// ./src/logger.js
+export const log = (msg) =&gt; &#123;
+  console.log(&quot;---------- INFO ----------&quot;);
+  console.log(msg);
+  console.log(&quot;--------------------------&quot;);
+&#125;;
+
+export const error = (msg) =&gt; &#123;
+  console.error(&quot;---------- ERROR ----------&quot;);
+  console.error(msg);
+  console.error(&quot;---------------------------&quot;);
+&#125;;
+
+// ./src/index.js
+import &#123; log &#125; from &quot;./logger&quot;;
+import messages from &quot;./messages&quot;;
+log(messages.hi);
+</code></pre>
+<p>rollup .&#x2F;src&#x2F;index.js –file .&#x2F;dist&#x2F;bundle.js</p>
+<p>打包结果如下：</p>
+<pre><code class="js">//bundle.js
+const log = (msg) =&gt; &#123;
+  console.log(&quot;---------- INFO ----------&quot;);
+  console.log(msg);
+  console.log(&quot;--------------------------&quot;);
+&#125;;
+
+var messages = &#123;
+  hi: &quot;Hey Guys, I am zce~&quot;,
+&#125;;
+
+// 导入模块成员
+
+// 使用模块成员
+log(messages.hi);
+</code></pre>
+<p>可以看到代码很简洁，没有像 webpack 那样存在引导代码和模块。</p>
+<p>error 方法没有被调用，输出结果中就没有 error 方法，这是 rollup 默认开启 Tree-shaking 优化了输出结果。</p>
+<ul>
+<li>输出代码简洁、效率更高</li>
+<li>默认支持 Tree-shaking</li>
+</ul>
+<p>但是缺点在于</p>
+<ul>
+<li>加载其他类型资源文件或者支持导入 CommonJS 模块，又或是编译 ES 新特性等这些额外的需求，需要使用插件去完成。</li>
+</ul>
+<p>不适合开发应用使用。因为需要使用第三方模块，而且第三方模块大都使用 CommonJS 方式导出成员，并且 rollup 不支持 HMR，开发效率不如 webpack。</p>
+<h4 id="Parcel"><a href="#Parcel" class="headerlink" title="Parcel"></a>Parcel</h4><p>傻瓜式前端打包器，只需要简单的命令即可构建前端 app。</p>
+<p>和 webpack 一样支持任意类型文件作为打包入口</p>
+<p>但建议使用 HTML 文件为入口，该 HTML 文件像正常开发一样编写代码，引用资源。如下：</p>
+<pre><code class="html">&lt;!-- ./src/index.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;title&gt;Parcel Tutorials&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>main.js 文件通过 ES Moudle 方法导入其他模块成员</p>
+<pre><code class="js">// ./src/main.js
+import &#123; log &#125; from &quot;./logger&quot;;
+log(&quot;hello parcel&quot;);
+// ./src/logger.js
+export const log = (msg) =&gt; &#123;
+  console.log(&quot;---------- INFO ----------&quot;);
+  console.log(msg);
+&#125;;
+</code></pre>
+<p>使用打包命令：</p>
+<pre><code class="shell">parcel src/index.html
+</code></pre>
+<p>执行命令后，parcel 不仅会打包应用，同时也会开启一个开发服务器，和 webpack Dev Server 一样</p>
+<p>支持 HMR，且用法简单</p>
+<p>自动安装依赖。</p>
+<p>webpack 开发阶段突然使用安装某个第三方依赖，必然会终止 dev server 然后安装再启动。而 Parcel 则免了这繁琐的工作流程。</p>
+<p>Parcel 能够零配置加载其他类型的资源文件，无须像 webpack 那样配置对应的 loader</p>
+<p>打包是多进程的，构建速度比 webpack 快。输出文件也会被默认压缩，css 会被单独提取到单个文件中。</p>
+<h4 id="Snowpack"><a href="#Snowpack" class="headerlink" title="Snowpack"></a>Snowpack</h4><p>较复杂的打包工具（如 Webpack 或 Parcel）的替代方案，利用 JavaScript 的本机模块系统，避免不必要的工作并保持流畅的开发体验。</p>
+<p>开发阶段，每次保存单个文件时，Webpack 和 parcel 都需要重新构建和打包应用程序的整个 bundle。而 snowpack 为每个文件构建一次，就可以永久缓存，文件更改时，snowpack 会重新构建该单个文件。</p>
+<p>下图为 webpack 与 snowpack 打包区别：</p>
+<p><img src="/post/interview-webpack/snowpack.png" alt="snowpack"></p>
+<p>可以 snowpack 在重新构建每次变更时，几乎没有是将浪费，只需要在浏览器中进行 HMR 更新。</p>
+<h4 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h4><p>是一种新型前端构建工具，能够显著提升前端开发体验。</p>
+<p>它主要由两部分组成：</p>
+<ul>
+<li>一个开发服务器，它基于 原生 ES 模块 提供了丰富的内建功能，如速度快到惊人的 HMR。</li>
+<li>一套构建指令，它使用 Rollup 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。</li>
+</ul>
+<p>其作用类似于 webpack+webpack dev server，其特点如下：</p>
+<ul>
+<li>快速的冷启动</li>
+<li>即时的 HMR</li>
+<li>真正的按需编译</li>
+</ul>
+<p>Vite 会直接启动开发服务器，不需要进行打包操作。所以它不需要分析依赖、不需要编译，因此启动速度非常快。</p>
+<p>利用浏览器支持 ES Module 的特性，当浏览器请求到某个模块的时候，再根据需要对模块的内容进行编译，这种方式可以缩短编译时间。</p>
+<p><img src="/post/interview-webpack/vite.png" alt="Vite"></p>
+<p>HMR 时，当修改一个模块的时候，仅需让浏览器重新请求该模块即可，无需像 webpack 那样把该模块的相关依赖全部编译一次。</p>
+<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><p>相比于上述的模块化工具，webpack 大而全，很多常用的功能开箱即用。</p>
+<p>最大的特点是一切皆模块和按需加载</p>
+<p>相比于其他构建工具，具有以下优势：</p>
+<ul>
+<li>高兼容性：对 CommonJS、AMD、ES6 的语法做了兼容</li>
+<li>万物皆模块：对 JS、CSS、图片等资源文件都支持打包</li>
+<li>开箱即用：提供 HMR、Tree-Shaking 等功能</li>
+<li>代码分割：可以将代码切割成不同的 chunk，实现按需加载，降低了初始化时间。</li>
+<li>插件系统：具有强大的 plugin 接口，具有更好的灵活性和扩展性</li>
+<li>易于调试：支持 sourceUrls 和 SourceMaps</li>
+<li>快速运行：wenpack 使用异步 IO 并具有多级缓存，这使得 webpack 很快，在增量编译上更加快</li>
+<li>生态环境：社区内容丰富，出现问题容易解决。</li>
+</ul>
+<h3 id="如何提高-webpack-的构建速度"><a href="#如何提高-webpack-的构建速度" class="headerlink" title="如何提高 webpack 的构建速度"></a>如何提高 webpack 的构建速度</h3><p>如果项目涉及到的页面越多，功能和业务代码不断增长，webpack 的构建时间也会加长，会影响开发效率。</p>
+<p>所以有了以下常见的构建优化方法：</p>
+<ul>
+<li>优化 loader 配置</li>
+<li>合理使用 resolve.extensions</li>
+<li>优化 resolve.modules</li>
+<li>优化 resolve.aliaa</li>
+<li>使用 DLLplugin 插件</li>
+<li>使用 cache-loader</li>
+<li>terser 启动多线程</li>
+<li>合理使用 sourceMap</li>
+</ul>
+<h4 id="优化-loader-配置"><a href="#优化-loader-配置" class="headerlink" title="优化 loader 配置"></a>优化 loader 配置</h4><p>在使用 loader 时，可以通过配置 inclued、exclued、test 属性来匹配文件，通过 includ、exclude 规定哪些匹配应用 loader。</p>
+<p>以 ES6 项目为例，在配置 babel-loader 时</p>
+<pre><code class="js">module.exports = &#123;
+  module: &#123;
+    rules: [
+      &#123;
+        // 如果项目源码中只有 js 文件就不要写成 /\.jsx?$/，提升正则表达式性能
+        test: /\.js$/,
+        // babel-loader 支持缓存转换出的结果，通过 cacheDirectory 选项开启
+        use: [&quot;babel-loader?cacheDirectory&quot;],
+        // 只对项目根目录下的 src 目录中的文件采用 babel-loader
+        include: path.resolve(__dirname, &quot;src&quot;),
+      &#125;,
+    ],
+  &#125;,
+&#125;;
+</code></pre>
+<h4 id="合理使用-resolve-extensions"><a href="#合理使用-resolve-extensions" class="headerlink" title="合理使用 resolve.extensions"></a>合理使用 resolve.extensions</h4><p>resolve 可以帮助 webpack 从每个 require&#x2F;import 语句中，找到需要引入的合适的模块代码。</p>
+<p>通过 resolve.extensions 是解析到文件时自动添加拓展名，默认情况如下：</p>
+<pre><code class="js">module.exports = &#123;
+    ...
+    extensions:[&quot;.warm&quot;,&quot;.mjs&quot;,&quot;.js&quot;,&quot;.json&quot;]
+&#125;
+</code></pre>
+<p>当我们引入文件时，若没有文件后缀名，则会根据数组内的值依次查找</p>
+<p>当我们配置时，则不要随便把所有后缀都写在里面，这会调用多次文件的查找，减慢打包速度。</p>
+<h4 id="优化-resolve-modules"><a href="#优化-resolve-modules" class="headerlink" title="优化 resolve.modules"></a>优化 resolve.modules</h4><p>resolve.modules 用于配置 webpack 去哪些目录下寻找第三方模块。默认为[“node_modules”]，所以默认会从 node_modules 中查找</p>
+<p>当安装的第三方模块都放在项目根目录下的.&#x2F;node_modules 目录下时，可以指明第三方模块存放的绝对路径，减少寻找：</p>
+<pre><code class="js">module.exports = &#123;
+  resolve: &#123;
+    // 使用绝对路径指明第三方模块存放的位置，以减少搜索步骤
+    // 其中 __dirname 表示当前工作目录，也就是项目根目录
+    modules: [path.resolve(__dirname, &quot;node_modules&quot;)],
+  &#125;,
+&#125;;
+</code></pre>
+<p>这在 webpack5 里已经是默认配置了吧…</p>
+<h4 id="resolve-alias"><a href="#resolve-alias" class="headerlink" title="resolve.alias"></a>resolve.alias</h4><p>alias 给一些常用的路径起了一个别名，特别时当项目目录层级深时时，某个文件的路径可能是.&#x2F;..&#x2F;..&#x2F;..&#x2F;……的形式</p>
+<pre><code class="js">module.exports = &#123;
+    ...
+    resolve:&#123;
+        alias:&#123;
+            &quot;@&quot;:path.resolve(__dirname,&#39;./src&#39;)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="使用-DLLPlugin-插件"><a href="#使用-DLLPlugin-插件" class="headerlink" title="使用 DLLPlugin 插件"></a>使用 DLLPlugin 插件</h4><p>DLL 动态链接库，是为软件在 windows 中实现共享函数库的一种实现方式，webpack 内置了 DLL 功能，可将共享的，不常改动的代码，抽离为一个共享的库。这个库在之后的编译中，会被引入到其他项目的代码中。</p>
+<p>分两步</p>
+<ul>
+<li>打包</li>
+</ul>
+<pre><code class="js">module.exports = &#123;
+    ...
+    plugins:[
+        new webpack.DllPlugin(&#123;
+            name:&#39;dll_[name]&#39;,
+            path:path.resolve(__dirname,&quot;./dll/[name].mainfest.json&quot;)
+        &#125;)
+    ]
+&#125;
+</code></pre>
+<ul>
+<li>引入</li>
+</ul>
+<pre><code class="js">module.exports = &#123;
+    ...
+    // 对mainfest.json映射文件进行分析，获取要使用的DLL库
+    new webpack.DllReferencePlugin(&#123;
+        context:path.resolve(__dirname,&quot;./dll/dll_react.js&quot;),
+        mainfest:path.resolve(__dirname,&quot;./dll/react.mainfest.json&quot;)
+    &#125;),
+
+    // 将DLL引入HTML中
+    new AddAssetHtmlPlugin(&#123;
+        outputPath:&quot;./auto&quot;,
+        filepath:path.resolve(__dirname,&quot;./dll/dll_react.js&quot;)
+    &#125;)
+&#125;
+</code></pre>
+<h4 id="使用-cache-loader"><a href="#使用-cache-loader" class="headerlink" title="使用 cache-loader"></a>使用 cache-loader</h4><p>在一些性能开销较大的 loader 之前添加 cache-loader，将结果缓存到磁盘，显著提升二次构建速度</p>
+<p>保存和读取缓存文件会有一些时间开销，所以只适用于性能开销较大的 loader</p>
+<pre><code class="js">module.exports = &#123;
+  module: &#123;
+    rules: [
+      &#123;
+        test: /\.ext$/,
+        use: [&quot;cache-loader&quot;, ...loaders],
+        include: path.resolve(&quot;src&quot;),
+      &#125;,
+    ],
+  &#125;,
+&#125;;
+</code></pre>
+<h4 id="terser-启动多线程"><a href="#terser-启动多线程" class="headerlink" title="terser 启动多线程"></a>terser 启动多线程</h4><pre><code class="js">module.exports = &#123;
+  optimization: &#123;
+    minimizer: [
+      new TerserPlugin(&#123;
+        parallel: true,
+      &#125;),
+    ],
+  &#125;,
+&#125;;
+</code></pre>
+<h4 id="合理使用-sourceMap"><a href="#合理使用-sourceMap" class="headerlink" title="合理使用 sourceMap"></a>合理使用 sourceMap</h4><p>打包生成 sourceMap 的时候，如果信息越详细，打包速度就会越慢。</p>
+<p><img src="/post/interview-webpack/sourceMap.png" alt="sourceMap"></p>
+<h3 id="如何借助-webpack-来优化前端性能"><a href="#如何借助-webpack-来优化前端性能" class="headerlink" title="如何借助 webpack 来优化前端性能"></a>如何借助 webpack 来优化前端性能</h3><h4 id="JS-代码压缩"><a href="#JS-代码压缩" class="headerlink" title="JS 代码压缩"></a>JS 代码压缩</h4><p>terser 是一个用于 JS 压缩和混淆的 plugin。可以使得打包后输出的 bundle 更小。</p>
+<p>production 模式下，webpack 默认使用的就是 TerserPlugin 来处理 JS</p>
+<pre><code class="js">const TerserPlugin = require(&quot;terser-webpack-plugin&quot;);
+module.exports = &#123;
+  // ...
+  optimization: &#123;
+    minimize: true,
+    minimizer: [
+      new TerserPlugin(&#123;
+        parallel: true, // 电脑cpu核数-1
+      &#125;),
+    ],
+  &#125;,
+&#125;;
+</code></pre>
+<ul>
+<li><p>extractComments</p>
+<p>默认值 true，表示会将注释抽取到一个单独的文件中，开发阶段可以设置为 false，不保留注释。</p>
+</li>
+<li><p>parallel</p>
+<p>使用多进程并发进行构建，提高构建速度，默认为 true，线程数为 os.cup().length - 1.</p>
+</li>
+<li><p>terserOptions 其他配置</p>
+<ul>
+<li>compress：设置压缩选项</li>
+<li>mangle：设置混淆选项</li>
+<li>toplevel：设置变量是否进行装欢</li>
+<li>keep_classname：保留类名称</li>
+<li>keep_fnames：保留函数名称</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h4 id="CSS-代码压缩"><a href="#CSS-代码压缩" class="headerlink" title="CSS 代码压缩"></a>CSS 代码压缩</h4><p>CSS 压缩通常都是去除一些无用的空格</p>
+<p>在 webpack 里可以用 css-minimizer-webpack-plugin 插件来压缩 CSS 代码</p>
+<pre><code class="js">const CssMinimizerPlugin = require(&quot;css-minimizer-webpack-plugin&quot;);
+module.exports = &#123;
+  // ...
+  optimization: &#123;
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(&#123;
+        parallel: true,
+      &#125;),
+    ],
+  &#125;,
+&#125;;
+</code></pre>
+<h4 id="Html-文件代码压缩"><a href="#Html-文件代码压缩" class="headerlink" title="Html 文件代码压缩"></a>Html 文件代码压缩</h4><p>同样的，可以用 HtmlWebpackPlugin 来对 HTML 问价进行压缩</p>
+<pre><code class="js">module.exports = &#123;
+  // ...
+  plugin: [
+    new HtmlwebpackPlugin(&#123;
+      //...
+      minify: &#123;
+        minifyCSS: false, // 是否压缩css
+        collapseWhitespace: false, // 是否折叠空格
+        removeComments: true, // 是否移除注释
+      &#125;,
+    &#125;),
+  ],
+&#125;;
+</code></pre>
+<p>除了设置 minify，还会使用到另一个插件 html-minifier-terser</p>
+<h4 id="文件大小压缩"><a href="#文件大小压缩" class="headerlink" title="文件大小压缩"></a>文件大小压缩</h4><pre><code class="js">new ComepressionPlugin(&#123;
+  test: /\.(css|js)$/, // 哪些文件需要压缩
+  threshold: 500, // 设置文件多大开始压缩
+  minRatio: 0.7, // 至少压缩的比例
+  algorithm: &quot;gzip&quot;, // 采用的压缩算法
+&#125;);
+</code></pre>
+<h4 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h4><pre><code class="js">module: &#123;
+  rules: [
+    &#123;
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        &#123;
+          loader: &quot;file-loader&quot;,
+          options: &#123;
+            name: &quot;[name]_[hash].[ext]&quot;,
+            outputPath: &quot;images/&quot;,
+          &#125;,
+        &#125;,
+        &#123;
+          loader: &quot;image-webpack-loader&quot;,
+          options: &#123;
+            // 压缩 jpeg 的配置
+            mozjpeg: &#123;
+              progressive: true,
+              quality: 65,
+            &#125;,
+            // 使用 imagemin**-optipng 压缩 png，enable: false 为关闭
+            optipng: &#123;
+              enabled: false,
+            &#125;,
+            // 使用 imagemin-pngquant 压缩 png
+            pngquant: &#123;
+              quality: &quot;65-90&quot;,
+              speed: 4,
+            &#125;,
+            // 压缩 gif 的配置
+            gifsicle: &#123;
+              interlaced: false,
+            &#125;,
+            // 开启 webp，会把 jpg 和 png 图片压缩为 webp 格式
+            webp: &#123;
+              quality: 75,
+            &#125;,
+          &#125;,
+        &#125;,
+      ],
+    &#125;,
+  ];
+&#125;
+</code></pre>
+<h4 id="Tree-Shaking"><a href="#Tree-Shaking" class="headerlink" title="Tree Shaking"></a>Tree Shaking</h4><p>说白了就是删除掉冗余代码</p>
+<p>依赖于 ES modules 的静态语法分析</p>
+<p>有两种方案</p>
+<p>usedExports：通过标记某些函数是否被使用，之后通过 Terser 来进行优化的<br>sideEffects：跳过整个模块&#x2F;文件，直接查看该文件是否有副作用</p>
+<h5 id="usedExports"><a href="#usedExports" class="headerlink" title="usedExports"></a>usedExports</h5><pre><code class="js">module.exports = &#123;
+  //...
+  optimization: &#123;
+    usedExports,
+  &#125;,
+&#125;;
+</code></pre>
+<p>使用之后，没被用上的代码在 webpack 打包中会加入 unused harmony export mul 注释，用来告知 Terser 在优化时，可以删除掉这段代码</p>
+<h5 id="sideEffects"><a href="#sideEffects" class="headerlink" title="sideEffects"></a>sideEffects</h5><p>配置方法是在 package.json 中设置 sideEffects 属性</p>
+<p>如果 sideEffects 设置为 false，就是告知 webpack 可以安全的删除未用到的 exports</p>
+<p>如果有些文件需要保留，可以设置为数组的形式</p>
+<pre><code class="json">&quot;sideEffecis&quot;:[&quot;./src/util/format.js&quot;, &quot;*.css&quot;] // 所有的css文件]
+</code></pre>
+<p>还可以对 CSS 进行 tree shaking</p>
+<pre><code class="js">const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;);
+const PurgeCssPlugin = require(&quot;purgecss-webpack-plugin&quot;);
+
+module.exports = &#123;
+  //...
+  modules: &#123;
+    rules: [
+      &#123;
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, &quot;css-loader&quot;],
+      &#125;,
+    ],
+  &#125;,
+  plugins: [
+    new MiniCssExtractPlugin(&#123;
+      filename: &quot;[name]&quot;.css,
+    &#125;),
+  ],
+&#125;;
+</code></pre>
+<p>到这里我发现我目前来总结和回答 webpack 问题是不合理的，因为没有基础…</p>
+<p>总结一定是在系统学习的基础上来进行的，这篇文章难产就是因为 webpack 其实并不了解</p>
+<blockquote>
+<p>mark 一下，目前是 22 年 3 月 22 日 21 点 44 分，我决定先去学习 webpack 基础和原理<br>完成基础学习后再回头来看这些面试问题<br>PS: 今天收到了一家公司的入职邀请，可能有点小激动，博客要继续写下去，总结要继续做下去</p>
+</blockquote>
+<h4 id="代码分离"><a href="#代码分离" class="headerlink" title="代码分离"></a>代码分离</h4><h4 id="内联-chunk"><a href="#内联-chunk" class="headerlink" title="内联 chunk"></a>内联 chunk</h4><h3 id="引申问题：说说常规的前端性能优化手段"><a href="#引申问题：说说常规的前端性能优化手段" class="headerlink" title="引申问题：说说常规的前端性能优化手段"></a>引申问题：说说常规的前端性能优化手段</h3><h4 id="content-方面"><a href="#content-方面" class="headerlink" title="content 方面"></a>content 方面</h4><ul>
+<li>减少 HTTP 请求：合并文件、CSS 精灵、inline Image</li>
+<li>减少 DNS 查询：DNS 查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS 缓存、将资源分布到恰当数量的主机名，平衡并行下载和 DNS 查询</li>
+<li>避免重定向：多余的中间访问</li>
+<li>使 Ajax 可缓存</li>
+<li>非必须组件延迟加载</li>
+<li>未来所需组件预加载</li>
+<li>减少 DOM 元素数量</li>
+<li>将资源放到不同的域下：浏览器同时从一个域下载资源的数目有限，增加域可以提高并行下载量</li>
+<li>减少 iframe 数量</li>
+<li>不要 404</li>
+</ul>
+<h4 id="Server-方面"><a href="#Server-方面" class="headerlink" title="Server 方面"></a>Server 方面</h4><ul>
+<li>使用 CDN</li>
+<li>添加 Expires 或者 Cache-Control 响应头</li>
+<li>对组件使用 Gzip 压缩</li>
+<li>配置 ETag</li>
+<li>Flush Buffer Early</li>
+<li>Ajax 使用 GET 进行请求</li>
+<li>避免空 src 的 img 标签</li>
+</ul>
+<h4 id="Cookie-方面"><a href="#Cookie-方面" class="headerlink" title="Cookie 方面"></a>Cookie 方面</h4><ul>
+<li>减小 cookie 大小</li>
+<li>引入资源的域名不要包含 cookie</li>
+<li>css 方面</li>
+<li>将样式表放到页面顶部</li>
+<li>不使用 CSS 表达式</li>
+<li>不使用 IE 的 Filter</li>
+</ul>
+<h4 id="Javascript-方面"><a href="#Javascript-方面" class="headerlink" title="Javascript 方面"></a>Javascript 方面</h4><ul>
+<li>将脚本放到页面底部</li>
+<li>将 javascript 和 css 从外部引入</li>
+<li>压缩 javascript 和 css</li>
+<li>删除不需要的脚本</li>
+<li>减少 DOM 访问</li>
+<li>合理设计事件监听器</li>
+</ul>
+<h4 id="图片方面"><a href="#图片方面" class="headerlink" title="图片方面"></a>图片方面</h4><ul>
+<li>优化图片：根据实际颜色需要选择色深、压缩</li>
+<li>优化 css 精灵</li>
+<li>不要在 HTML 中拉伸图片</li>
+<li>保证 favicon.ico 小并且可缓存</li>
+</ul>
+<h3 id="webpack-的热更新是如何做到的？原理是什么？"><a href="#webpack-的热更新是如何做到的？原理是什么？" class="headerlink" title="webpack 的热更新是如何做到的？原理是什么？"></a>webpack 的热更新是如何做到的？原理是什么？</h3><h3 id="webpack-proxy-的工作原理，为什么能解决跨域"><a href="#webpack-proxy-的工作原理，为什么能解决跨域" class="headerlink" title="webpack proxy 的工作原理，为什么能解决跨域"></a>webpack proxy 的工作原理，为什么能解决跨域</h3><h3 id="webpack-中有哪些常见的-plugin，解决了什么问题"><a href="#webpack-中有哪些常见的-plugin，解决了什么问题" class="headerlink" title="webpack 中有哪些常见的 plugin，解决了什么问题"></a>webpack 中有哪些常见的 plugin，解决了什么问题</h3><h3 id="webpack-中有哪些常见的-loader，解决了什么问题"><a href="#webpack-中有哪些常见的-loader，解决了什么问题" class="headerlink" title="webpack 中有哪些常见的 loader，解决了什么问题"></a>webpack 中有哪些常见的 loader，解决了什么问题</h3><h3 id="webpack-的构建流程"><a href="#webpack-的构建流程" class="headerlink" title="webpack 的构建流程"></a>webpack 的构建流程</h3><h3 id="对-webpack-的理解，它解决了哪些问题？"><a href="#对-webpack-的理解，它解决了哪些问题？" class="headerlink" title="对 webpack 的理解，它解决了哪些问题？"></a>对 webpack 的理解，它解决了哪些问题？</h3><h3 id="loader-和-plugin-的区别，编写-loader-和-plugin-的思路"><a href="#loader-和-plugin-的区别，编写-loader-和-plugin-的思路" class="headerlink" title="loader 和 plugin 的区别，编写 loader 和 plugin 的思路"></a>loader 和 plugin 的区别，编写 loader 和 plugin 的思路</h3><h3 id="babel-的原理是什么"><a href="#babel-的原理是什么" class="headerlink" title="babel 的原理是什么"></a>babel 的原理是什么</h3><h3 id="如何提高-webpack-的打包速度"><a href="#如何提高-webpack-的打包速度" class="headerlink" title="如何提高 webpack 的打包速度"></a>如何提高 webpack 的打包速度</h3><h3 id="对比一下各种打包工具的优劣（webpack、rollup、parcel）"><a href="#对比一下各种打包工具的优劣（webpack、rollup、parcel）" class="headerlink" title="对比一下各种打包工具的优劣（webpack、rollup、parcel）"></a>对比一下各种打包工具的优劣（webpack、rollup、parcel）</h3><h3 id="谈谈你对-webpack-的认识"><a href="#谈谈你对-webpack-的认识" class="headerlink" title="谈谈你对 webpack 的认识"></a>谈谈你对 webpack 的认识</h3>
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
