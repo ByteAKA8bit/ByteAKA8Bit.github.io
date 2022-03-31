@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            工作小记——入职第二天
+        </div>
+        <div class="post-meta">
+            2022-03-31
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="迟到"><a href="#迟到" class="headerlink" title="迟到"></a>迟到</h2><p>受第一天的负面情绪影响，今天早上惊醒已经是 8 点 25 分，虽说公司离得不是很远，但是也是要迟到了。</p>
+<p>磨蹭的洗了头，牙都没刷就去赶地铁。</p>
+<p>急急忙忙出错了地铁口，迟到了 5 分钟。</p>
+<h2 id="上午"><a href="#上午" class="headerlink" title="上午"></a>上午</h2><p>上午客户反馈修改意见了，很烦这种拉三四个微信群说事的情况。</p>
+<p>写代码的就两个人，拉了三个群说事，我们两个人包围了十几个人。</p>
+<p>就是又给出了四条修改意见。</p>
+<p>有一个高德地图锁定搜索范围的小问题，我信誓旦旦的告诉别人这个没办法…</p>
+<h2 id="下午"><a href="#下午" class="headerlink" title="下午"></a>下午</h2><p>下午有人找我解决地图的事。</p>
+<p>发现了高德有锁定搜索范围的属性…</p>
+<p>脸都红了</p>
+<p>记一记</p>
+<pre><code class="js">var placeSearch = new AMap.PlaceSearch(&#123;
+  type: &#39;餐饮服务&#39;, // 兴趣点类别
+  pageSize: 5, // 单页显示结果条数
+  pageIndex: 1, // 页码
+  citylimit: true, //是否强制限制在设置的城市内搜索
+  map: map, // 展现结果的地图实例
+  panel: &#39;panel&#39;, // 结果列表将在此容器中进行展示。
+  autoFitView: true, // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
+&#125;);
+
+this.placeSearch.setCity(city); // 设定感兴趣的城市
+
+this.placeSearch.search(keyWords); // 关键字搜索
+</code></pre>
+<p>我要这么干就不是我炒公司，是公司炒我了…</p>
+<h2 id="加班"><a href="#加班" class="headerlink" title="加班"></a>加班</h2><p>加班看了看小程序的架构，走了一下工单的数据流结束了入职第二天的工作。</p>
+<p>我慌了啊，下午这事干的。</p>
+<p>后端把一个导入功能前后端都做完了，我还在说地图不能改…</p>
+<p>晚上跑到凯德 MALL 想找点吃的，结果没找到</p>
+<p>没有夜生活的地方…</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
