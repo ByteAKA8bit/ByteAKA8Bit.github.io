@@ -207,7 +207,7 @@ var daysLeft = Math.round(daysLeft); //返回今年剩下的天数
 <p>这个例子中，创建了一个包含今天的日期的 Date 对象，并命名为 today，然后创建了一个名为 endYear 的 Date 对象，并把年份设置为当前年份，接着使用 today 和 endYear 的 getTime 分别获取今天和年底的毫秒数，再根据每一天的毫秒数，计算出了今天到年底的天数，最后四舍五入得到今年剩下的天数。</p>
 <p>parse 方法对于从日期字符串赋值给现有的 Date 对象很有用，例如：以下代码使用 parse 和 setTime 分配了一个日期值给 IPOdate 对象：</p>
 <pre><code class="js">var IPOdate = new Date();
-IPOdate.setTime(Date.parse(&quot;Aug 9, 1995&quot;));
+IPOdate.setTime(Date.parse(&#39;Aug 9, 1995&#39;));
 </code></pre>
 
     </div>

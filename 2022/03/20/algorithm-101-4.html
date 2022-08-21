@@ -64,14 +64,14 @@ let ballNums,
   sameColorBall = [],
   count = 0;
 [ballNums, linkNums, colorNums] = readline()
-  .split(&quot; &quot;)
+  .split(&#39; &#39;)
   .map((item) =&gt; Number(item));
 
 // 依次保存每个串珠所用颜色信息
 // 数组的每个元素都是一个数组，元素数组的第一位代表颜色个数，后续代表所用颜色
 for (let i = 0; i &lt; ballNums; ++i) &#123;
   ballColor[i] = readline()
-    .split(&quot; &quot;)
+    .split(&#39; &#39;)
     .map((item) =&gt; Number(item));
 &#125;
 

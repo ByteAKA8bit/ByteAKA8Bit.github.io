@@ -46,10 +46,10 @@
         <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><p>听说，函数是 JS 中的一等公民</p>
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>原始类型作为参数传入函数没有关系，引用类型作为参数传入，传入的类似于 C 语言指针，会改变指针指向的地址内的值。</p>
 <pre><code class="js">function myFunc(theObject) &#123;
-  theObject.make = &quot;Toyota&quot;;
+  theObject.make = &#39;Toyota&#39;;
 &#125;
 
-var mycar = &#123; make: &quot;Honda&quot;, model: &quot;Accord&quot;, year: 1998 &#125;;
+var mycar = &#123; make: &#39;Honda&#39;, model: &#39;Accord&#39;, year: 1998 &#125;;
 var x, y;
 
 x = mycar.make; // x获取的值为 &quot;Honda&quot;
@@ -88,11 +88,11 @@ console.log(cube);
 <pre><code class="js">var myFunc;
 if (num == 0) &#123;
   myFunc = function (theObject) &#123;
-    theObject.make = &quot;Toyota&quot;;
+    theObject.make = &#39;Toyota&#39;;
   &#125;;
 &#125;
 </code></pre>
-<pre><code class="js">new Function(&quot;a&quot;, &quot;b&quot;, &quot;return a + b&quot;);
+<pre><code class="js">new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a + b&#39;);
 </code></pre>
 <h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>每个 JavaScript 函数实际上都是一个 Function 对象。</p>
 <pre><code class="js">(function () &#123;&#125;.constructor === Function); // true
@@ -102,7 +102,7 @@ if (num == 0) &#123;
 
 function createFunction1() &#123;
   var x = 20;
-  return new Function(&quot;return x;&quot;); // 这里的 x 指向最上面全局作用域内的 x
+  return new Function(&#39;return x;&#39;); // 这里的 x 指向最上面全局作用域内的 x
 &#125;
 
 function createFunction2() &#123;
@@ -158,9 +158,9 @@ function walkTree(node) &#123;
 </code></pre>
 <h3 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h3><pre><code class="js">function foo(i) &#123;
   if (i &lt; 0) return;
-  console.log(&quot;begin:&quot; + i);
+  console.log(&#39;begin:&#39; + i);
   foo(i - 1);
-  console.log(&quot;end:&quot; + i);
+  console.log(&#39;end:&#39; + i);
 &#125;
 foo(3);
 
@@ -231,8 +231,8 @@ result1 = outside(3)(5); // returns 8
 
     setSex: function (newSex) &#123;
       if (
-        typeof newSex == &quot;string&quot; &amp;&amp;
-        (newSex.toLowerCase() == &quot;male&quot; || newSex.toLowerCase() == &quot;female&quot;)
+        typeof newSex == &#39;string&#39; &amp;&amp;
+        (newSex.toLowerCase() == &#39;male&#39; || newSex.toLowerCase() == &#39;female&#39;)
       ) &#123;
         sex = newSex;
       &#125;
@@ -240,11 +240,11 @@ result1 = outside(3)(5); // returns 8
   &#125;;
 &#125;;
 
-var pet = createPet(&quot;Vivie&quot;);
+var pet = createPet(&#39;Vivie&#39;);
 pet.getName(); // Vivie
 
-pet.setName(&quot;Oliver&quot;);
-pet.setSex(&quot;male&quot;);
+pet.setName(&#39;Oliver&#39;);
+pet.setSex(&#39;male&#39;);
 pet.getSex(); // male
 pet.getName(); // Oliver
 </code></pre>
@@ -253,7 +253,7 @@ pet.getName(); // Oliver
 <h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>函数实参会被保存在一个类似数组的 arguments 对象中。在函数内，可以访问 aguments 来获取实参。</p>
 <p>使用 arguments 就使得函数参数可变。</p>
 <pre><code class="js">function myConcat(separator) &#123;
-  var result = &quot;&quot;; // 把值初始化成一个字符串，这样就可以用来保存字符串了！！
+  var result = &#39;&#39;; // 把值初始化成一个字符串，这样就可以用来保存字符串了！！
   var i;
   // iterate through arguments
   for (i = 1; i &lt; arguments.length; i++) &#123;
@@ -314,21 +314,21 @@ var p = new Person();
 <h2 id="前端内存泄漏一般出现在什么情况下"><a href="#前端内存泄漏一般出现在什么情况下" class="headerlink" title="前端内存泄漏一般出现在什么情况下"></a>前端内存泄漏一般出现在什么情况下</h2><h3 id="意外的全局变量"><a href="#意外的全局变量" class="headerlink" title="意外的全局变量"></a>意外的全局变量</h3><p>严格模式可避免</p>
 <pre><code class="js">function foo() &#123;
   bar = 2;
-  console.log(&quot;bar没有被声明!&quot;);
+  console.log(&#39;bar没有被声明!&#39;);
 &#125;
 </code></pre>
 <h3 id="dom-清空时，还存在引用"><a href="#dom-清空时，还存在引用" class="headerlink" title="dom 清空时，还存在引用"></a>dom 清空时，还存在引用</h3><p>很多时候,为了方便存取,经常会将 DOM 结点暂时存储到数据结构中.但是在不需要该 DOM 节点时,忘记解除对它的引用,则会造成内存泄露.</p>
 <pre><code class="js">var element = &#123;
-  shotCat: document.getElementById(&quot;shotCat&quot;),
+  shotCat: document.getElementById(&#39;shotCat&#39;),
 &#125;;
 
-document.body.removeChild(document.getElementById(&quot;shotCat&quot;));
+document.body.removeChild(document.getElementById(&#39;shotCat&#39;));
 // 如果element没有被回收,这里移除了 shotCat 节点也是没用的,shotCat 节点依然留存在内存中.
 </code></pre>
 <p>与此类似情景还有: DOM 节点绑定了事件, 但是在移除的时候没有解除事件绑定,那么仅仅移除 DOM 节点也是没用的</p>
 <h3 id="定时器中的内存泄漏"><a href="#定时器中的内存泄漏" class="headerlink" title="定时器中的内存泄漏"></a>定时器中的内存泄漏</h3><pre><code class="js">var someResource = getData();
 setInterval(function () &#123;
-  var node = document.getElementById(&quot;Node&quot;);
+  var node = document.getElementById(&#39;Node&#39;);
   if (node) &#123;
     node.innerHTML = JSON.stringify(someResource);
   &#125;

@@ -159,7 +159,7 @@ console.log(Array.prototype.isPrototypeOf(a));
   &#125;;
 &#125;
 </code></pre>
-<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><h4 id="JS任务"><a href="#JS任务" class="headerlink" title="JS任务"></a>JS任务</h4><p>JS 中所有的任务可以分为同步和异步两种</p>
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><h4 id="JS-任务"><a href="#JS-任务" class="headerlink" title="JS 任务"></a>JS 任务</h4><p>JS 中所有的任务可以分为同步和异步两种</p>
 <p>同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；</p>
 <p>异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
 <ol>
@@ -289,7 +289,7 @@ console.log(Array.prototype.isPrototypeOf(a));
 <li><p>并不能清除 DOM，仅仅销毁实例</p>
 </li>
 </ul>
-<h3 id="v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式"><a href="#v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式" class="headerlink" title="v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式"></a>v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式</h3><p>v-on绑定DOM，监听并处理DOM事件<br>处理绑定的事件响应函数，对data中的值进行操作<br>v-bind单向传递给DOM</p>
+<h3 id="v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式"><a href="#v-model-x3D-”a”-拆解成-v-on-和-v-bind-的形式" class="headerlink" title="v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式"></a>v-model&#x3D;”a” 拆解成 v-on 和 v-bind 的形式</h3><p>v-on 绑定 DOM，监听并处理 DOM 事件<br>处理绑定的事件响应函数，对 data 中的值进行操作<br>v-bind 单向传递给 DOM</p>
 <h3 id="ES6-的-WeakMap-和-Map-的区别"><a href="#ES6-的-WeakMap-和-Map-的区别" class="headerlink" title="ES6 的 WeakMap 和 Map 的区别"></a>ES6 的 WeakMap 和 Map 的区别</h3><ul>
 <li><p>WeakMap 只能将对象作为键名，null 除外</p>
 </li>

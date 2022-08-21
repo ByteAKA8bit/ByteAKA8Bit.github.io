@@ -46,7 +46,7 @@
         <h1 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h1><p>把博客本地文件夹放在了 OneDrive 里，炸了…</p>
 <p>死活推不上去了，修复半天。</p>
 <p>现在心情如图：</p>
-<p><img src="/MDN-JS-00/mmp.jpg" alt="mmp"></p>
+<p><img src="/2022/03/17/MDN-JS-00/mmp.jpg" alt="mmp"></p>
 <p>开始</p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="JavaScript-和-ECMAScript-规范"><a href="#JavaScript-和-ECMAScript-规范" class="headerlink" title="JavaScript 和 ECMAScript 规范"></a>JavaScript 和 ECMAScript 规范</h2><p>JavaScript 的标准化组织是 ECMA</p>
 <p>ECMAScript 规范并没有描述文档对象模型（DOM），该模型由 万维网联盟（W3C） 制定</p>
@@ -58,7 +58,7 @@ console.log(🥑);
 </code></pre>
 <p>试了试，不行…</p>
 <p>试试中文</p>
-<pre><code class="js">let 牛油果 = &quot;Avocado&quot;;
+<pre><code class="js">let 牛油果 = &#39;Avocado&#39;;
 console.log(牛油果);
 </code></pre>
 <p>可以！！！</p>
@@ -66,9 +66,9 @@ console.log(牛油果);
 <p>Javascript 源码从左往右被扫描并转换成一系列由 token 、控制字符、行终止符、注释和空白字符组成的输入元素。空白字符指的是空格、制表符和换行符等。</p>
 <h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>JavaScript 有三种声明方式。</p>
 <ul>
-<li>var<br> 声明一个变量，可选初始化一个值。</li>
-<li>let<br> 声明一个块作用域的局部变量，可选初始化一个值。</li>
-<li>const<br> 声明一个块作用域的只读常量。</li>
+<li>var<br>声明一个变量，可选初始化一个值。</li>
+<li>let<br>声明一个块作用域的局部变量，可选初始化一个值。</li>
+<li>const<br>声明一个块作用域的只读常量。</li>
 </ul>
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>在应用程序中，使用变量来作为值的符号名。变量的名字又叫做标识符，其需要遵守一定的规则。</p>
 <p>一个 JavaScript 标识符必须以字母、下划线（_）或者美元符号（$）开头；后续的字符也可以是数字（0-9）。因为 JavaScript 语言是区分大小写的，所以字母可以是从“A”到“Z”的大写字母和从“a”到“z”的小写字母。</p>
@@ -110,11 +110,11 @@ var x = 3;
  * 例子2
  */
 // will return a value of undefined
-var myvar = &quot;my value&quot;;
+var myvar = &#39;my value&#39;;
 
 (function () &#123;
   console.log(myvar); // undefined
-  var myvar = &quot;local value&quot;;
+  var myvar = &#39;local value&#39;;
 &#125;)();
 </code></pre>
 <p>等同于</p>
@@ -128,12 +128,12 @@ x = 3;
 /**
  * 例子2
  */
-var myvar = &quot;my value&quot;;
+var myvar = &#39;my value&#39;;
 
 (function () &#123;
   var myvar;
   console.log(myvar); // undefined
-  myvar = &quot;local value&quot;;
+  myvar = &#39;local value&#39;;
 &#125;)();
 </code></pre>
 <p>由于存在变量提升，一个函数中所有的 var 语句应尽可能地放在接近函数顶部的地方。这个习惯将大大提升代码的清晰度。</p>
@@ -144,7 +144,7 @@ var myvar = &quot;my value&quot;;
 foo(); // &quot;bar&quot;
 
 function foo() &#123;
-  console.log(&quot;bar&quot;);
+  console.log(&#39;bar&#39;);
 &#125;
 
 /* 函数表达式 */
@@ -152,7 +152,7 @@ function foo() &#123;
 baz(); // 类型错误：baz 不是一个函数
 
 var baz = function () &#123;
-  console.log(&quot;bar2&quot;);
+  console.log(&#39;bar2&#39;);
 &#125;;
 </code></pre>
 <h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>实际上，全局变量是全局对象的属性。</p>
@@ -175,12 +175,12 @@ function f() &#123;
 &#125;
 </code></pre>
 <p>然而，对象属性被赋值为常量是不受保护的，所以下面的语句执行时不会产生错误。</p>
-<pre><code class="js">const MY_OBJECT = &#123; key: &quot;value&quot; &#125;;
-MY_OBJECT.key = &quot;otherValue&quot;;
+<pre><code class="js">const MY_OBJECT = &#123; key: &#39;value&#39; &#125;;
+MY_OBJECT.key = &#39;otherValue&#39;;
 </code></pre>
 <p>同样的，数组的被定义为常量也是不受保护的，所以下面的语句执行时也不会产生错误。</p>
-<pre><code class="js">const MY_ARRAY = [&quot;HTML&quot;, &quot;CSS&quot;];
-MY_ARRAY.push(&quot;JAVASCRIPT&quot;);
+<pre><code class="js">const MY_ARRAY = [&#39;HTML&#39;, &#39;CSS&#39;];
+MY_ARRAY.push(&#39;JAVASCRIPT&#39;);
 console.log(MY_ARRAY); //logs [&#39;HTML&#39;,&#39;CSS&#39;,&#39;JAVASCRIPT&#39;];
 </code></pre>
 <h2 id="数据结构和类型"><a href="#数据结构和类型" class="headerlink" title="数据结构和类型"></a>数据结构和类型</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>最新的 ECMAScript 标准定义了 8 种数据类型：</p>
@@ -205,12 +205,12 @@ console.log(MY_ARRAY); //logs [&#39;HTML&#39;,&#39;CSS&#39;,&#39;JAVASCRIPT&#39;
 (+&quot;1.1&quot;) + (+&quot;1.1&quot;) = 2.2
 // 注意：加入括号为清楚起见，不是必需的。
 </code></pre>
-<p><img src="/MDN-JS-00/sha.jpg" alt="啥？"></p>
+<p><img src="/2022/03/17/MDN-JS-00/sha.jpg" alt="啥？"></p>
 <h2 id="字面量"><a href="#字面量" class="headerlink" title="字面量"></a>字面量</h2><p>字面量是由语法表达式定义的常量；或，通过由一定字词组成的语词表达式定义的常量</p>
 <p>在 JavaScript 中，你可以使用各种字面量。这些字面量是脚本中按字面意思给出的固定的值，而不是变量。（译注：字面量是常量，其值是固定的，而且在程序脚本运行中不可更改，比如 false，3.1415，thisIsStringOfHelloworld ，invokedFunction: myFunction(“myArgument”)。本节将介绍以下类型的字面量：</p>
 <h3 id="数组字面量"><a href="#数组字面量" class="headerlink" title="数组字面量"></a>数组字面量</h3><p>数组字面值是一个封闭在方括号对([])中的包含有零个或多个表达式的列表，其中每个表达式代表数组的一个元素。当你使用数组字面值创建一个数组时，该数组将会以指定的值作为其元素进行初始化，而其长度被设定为元素的个数。</p>
 <p>下面的示例用 3 个元素生成数组 coffees，它的长度是 3。</p>
-<pre><code class="js">var coffees = [&quot;French Roast&quot;, &quot;Colombian&quot;, &quot;Kona&quot;];
+<pre><code class="js">var coffees = [&#39;French Roast&#39;, &#39;Colombian&#39;, &#39;Kona&#39;];
 
 var a = [3];
 
@@ -222,12 +222,12 @@ console.log(a[0]); // 3
 <p>数组字面值同时也是数组对象。</p>
 <p>数组字面值中的多余逗号</p>
 <p>（译注：声明时）你不必列举数组字面值中的所有元素。若你在同一行中连写两个逗号（,），数组中就会产生一个没有被指定的元素，其初始值是 undefined。以下示例创建了一个名为 fish 的数组：</p>
-<pre><code class="js">var fish = [&quot;Lion&quot;, , &quot;Angel&quot;];
+<pre><code class="js">var fish = [&#39;Lion&#39;, , &#39;Angel&#39;];
 </code></pre>
 <p>在这个数组中，有两个已被赋值的元素，和一个空元素（fish[0]是”Lion”，fish[1]是 undefined，而 fish[2]是”Angel”；译注：此时数组的长度属性 fish.length 是 3)。</p>
 <p>如果你在元素列表的尾部添加了一个逗号，它将会被忽略。在下面的例子中，数组的长度是 3，并不存在 myList[3]这个元素</p>
 <p>再看一个例子。在这里，该数组的长度是 4，元素 myList[1]和 myList[3]被漏掉了。（但是）只有最后的那个逗号被忽略。</p>
-<pre><code class="js">var myList = [&quot;home&quot;, , &quot;school&quot;, ,];
+<pre><code class="js">var myList = [&#39;home&#39;, , &#39;school&#39;, ,];
 </code></pre>
 <h3 id="布尔字面量-Boolean-literals"><a href="#布尔字面量-Boolean-literals" class="headerlink" title="布尔字面量 (Boolean literals)"></a>布尔字面量 (Boolean literals)</h3><p>布尔类型有两种字面量：true 和 false。</p>
 <h3 id="整数-Integers"><a href="#整数-Integers" class="headerlink" title="整数 (Integers)"></a>整数 (Integers)</h3><p>整数可以用十进制（基数为 10）、十六进制（基数为 16）、八进制（基数为 8）以及二进制（基数为 2）表示。</p>
@@ -249,34 +249,32 @@ console.log(a[0]); // 3
 ()内单选 []必填
 </code></pre>
 <p>例如：</p>
-<pre><code class="js">3.14
--.2345789 // -0.23456789
--3.12e+12  // -3.12*10^12
-.1e-23    // 0.1*10^(-23)=10^(-24)=1e-24
+<pre><code class="js">3.14 -
+  0.2345789 - // -0.23456789
+  3.12e12; // -3.12*10^12
+0.1e-23; // 0.1*10^(-23)=10^(-24)=1e-24
 </code></pre>
-<h3 id="对象字面量-Object-literals"><a href="#对象字面量-Object-literals" class="headerlink" title="对象字面量 (Object literals)"></a>对象字面量 (Object literals)</h3><p>对象字面值是封闭在花括号对({})中的一个对象的零个或多个”属性名-值”对的（元素）列表。你不能在一条语句的开头就使用对象字面值，这将导致错误或产生超出预料的行为， 因为此时左花括号（{）会被认为是一个语句块的起始符号。（译者：这 里需要对语句statement、块block等基本名词的解释）</p>
-<p>以下是一个对象字面值的例子。对象car的第一个元素（译注：即一个属性&#x2F;值对）定义了属性myCar；第二个元素，属性getCar，引用了一个函数（即CarTypes(“Honda”)）；第三个元素，属性special，使用了一个已有的变量（即Sales）。</p>
-<pre><code class="js">var Sales = &quot;Toyota&quot;;
+<h3 id="对象字面量-Object-literals"><a href="#对象字面量-Object-literals" class="headerlink" title="对象字面量 (Object literals)"></a>对象字面量 (Object literals)</h3><p>对象字面值是封闭在花括号对({})中的一个对象的零个或多个”属性名-值”对的（元素）列表。你不能在一条语句的开头就使用对象字面值，这将导致错误或产生超出预料的行为， 因为此时左花括号（{）会被认为是一个语句块的起始符号。（译者：这 里需要对语句 statement、块 block 等基本名词的解释）</p>
+<p>以下是一个对象字面值的例子。对象 car 的第一个元素（译注：即一个属性&#x2F;值对）定义了属性 myCar；第二个元素，属性 getCar，引用了一个函数（即 CarTypes(“Honda”)）；第三个元素，属性 special，使用了一个已有的变量（即 Sales）。</p>
+<pre><code class="js">var Sales = &#39;Toyota&#39;;
 
 function CarTypes(name) &#123;
-  return (name === &quot;Honda&quot;) ?
-    name :
-    &quot;Sorry, we don&#39;t sell &quot; + name + &quot;.&quot; ;
+  return name === &#39;Honda&#39; ? name : &quot;Sorry, we don&#39;t sell &quot; + name + &#39;.&#39;;
 &#125;
 
-var car = &#123; myCar: &quot;Saturn&quot;, getCar: CarTypes(&quot;Honda&quot;), special: Sales &#125;;
+var car = &#123; myCar: &#39;Saturn&#39;, getCar: CarTypes(&#39;Honda&#39;), special: Sales &#125;;
 
-console.log(car.myCar);   // Saturn
-console.log(car.getCar);  // Honda
+console.log(car.myCar); // Saturn
+console.log(car.getCar); // Honda
 console.log(car.special); // Toyota
 </code></pre>
 <p>更进一步的，你可以使用数字或字符串字面值作为属性的名字，或者在另一个字面值内嵌套上一个字面值。如下的示例中使用了这些可选项。</p>
-<pre><code class="js">var car = &#123; manyCars: &#123;a: &quot;Saab&quot;, &quot;b&quot;: &quot;Jeep&quot;&#125;, 7: &quot;Mazda&quot; &#125;;
+<pre><code class="js">var car = &#123; manyCars: &#123; a: &#39;Saab&#39;, b: &#39;Jeep&#39; &#125;, 7: &#39;Mazda&#39; &#125;;
 
 console.log(car.manyCars.b); // Jeep
 console.log(car[7]); // Mazda
 </code></pre>
-<p>对象属性名字可以是任意字符串，包括空串。如果对象属性名字不是合法的javascript标识符，它必须用””包裹。属性的名字不合法，那么便不能用.访问属性值，而是通过类数组标记(“[]”)访问和赋值。</p>
+<p>对象属性名字可以是任意字符串，包括空串。如果对象属性名字不是合法的 javascript 标识符，它必须用””包裹。属性的名字不合法，那么便不能用.访问属性值，而是通过类数组标记(“[]”)访问和赋值。</p>
 <pre><code class="js">var unusualPropertyNames = &#123;
   &quot;&quot;: &quot;An empty string&quot;,
   &quot;!&quot;: &quot;Bang!&quot;
@@ -286,56 +284,55 @@ console.log(unusualPropertyNames[&quot;&quot;]);  // An empty string
 console.log(unusualPropertyNames.!);    // 语法错误: Unexpected token !
 console.log(unusualPropertyNames[&quot;!&quot;]); // Bang!
 </code></pre>
-<h4 id="增强的对象字面量"><a href="#增强的对象字面量" class="headerlink" title="增强的对象字面量"></a>增强的对象字面量</h4><p>在ES2015，对象字面值扩展支持在创建时设置原型，简写了 foo: foo 形式的属性赋值，方法定义，支持父方法调用，以及使用表达式动态计算属性名。总之，这些也使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从这些便利中更加受益。</p>
+<h4 id="增强的对象字面量"><a href="#增强的对象字面量" class="headerlink" title="增强的对象字面量"></a>增强的对象字面量</h4><p>在 ES2015，对象字面值扩展支持在创建时设置原型，简写了 foo: foo 形式的属性赋值，方法定义，支持父方法调用，以及使用表达式动态计算属性名。总之，这些也使对象字面值和类声明更加紧密地联系起来，让基于对象的设计从这些便利中更加受益。</p>
 <pre><code class="js">var obj = &#123;
-    // __proto__
-    __proto__: theProtoObj,
-    // Shorthand for ‘handler: handler’
-    handler,
-    // Methods
-    toString() &#123;
-     // Super calls
-     return &quot;d &quot; + super.toString();
-    &#125;,
-    // Computed (dynamic) property names
-    [ &#39;prop_&#39; + (() =&gt; 42)() ]: 42
+  // __proto__
+  __proto__: theProtoObj,
+  // Shorthand for ‘handler: handler’
+  handler,
+  // Methods
+  toString() &#123;
+    // Super calls
+    return &#39;d &#39; + super.toString();
+  &#125;,
+  // Computed (dynamic) property names
+  [&#39;prop_&#39; + (() =&gt; 42)()]: 42,
 &#125;;
 </code></pre>
 <p>需要注意：</p>
-<pre><code class="js">var foo = &#123;a: &quot;alpha&quot;, 2: &quot;two&quot;&#125;;
-console.log(foo.a);    // alpha
-console.log(foo[2]);   // two
+<pre><code class="js">var foo = &#123; a: &#39;alpha&#39;, 2: &#39;two&#39; &#125;;
+console.log(foo.a); // alpha
+console.log(foo[2]); // two
 //console.log(foo.2);  // SyntaxError: missing ) after argument list
 //console.log(foo[a]); // ReferenceError: a is not defined
-console.log(foo[&quot;a&quot;]); // alpha
-console.log(foo[&quot;2&quot;]); // two
+console.log(foo[&#39;a&#39;]); // alpha
+console.log(foo[&#39;2&#39;]); // two
 </code></pre>
 <h3 id="RegExp-字面值"><a href="#RegExp-字面值" class="headerlink" title="RegExp 字面值"></a>RegExp 字面值</h3><p>一个正则表达式是字符被斜线（译注：正斜杠“&#x2F;”）围成的表达式。下面是一个正则表达式文字的一个例子。</p>
 <pre><code class="js">var re = /ab+c/;
 </code></pre>
 <h3 id="字符串字面量-String-literals"><a href="#字符串字面量-String-literals" class="headerlink" title="字符串字面量 (String literals)"></a>字符串字面量 (String literals)</h3><p>字符串字面量是由双引号（”）对或单引号（’）括起来的零个或多个字符。字符串被限定在同种引号之间；也即，必须是成对单引号或成对双引号。下面的例子都是字符串字面值：</p>
-<pre><code class="js">&quot;foo&quot;
-&#39;bar&#39;
-&quot;1234&quot;
-&quot;one line \n another line&quot;
-&quot;John&#39;s cat&quot;
+<pre><code class="js">&#39;foo&#39;;
+&#39;bar&#39;;
+&#39;1234&#39;;
+&#39;one line \n another line&#39;;
+&quot;John&#39;s cat&quot;;
 </code></pre>
-<p>你可以在字符串字面值上使用字符串对象的所有方法——JavaScript会自动将字符串字面值转换为一个临时字符串对象，调用该方法，然后废弃掉那个临时的字符串对象。你也能用对字符串字面值使用类似String.length的属性：</p>
-<pre><code class="js">console.log(&quot;John&#39;s cat&quot;.length)
+<p>你可以在字符串字面值上使用字符串对象的所有方法——JavaScript 会自动将字符串字面值转换为一个临时字符串对象，调用该方法，然后废弃掉那个临时的字符串对象。你也能用对字符串字面值使用类似 String.length 的属性：</p>
+<pre><code class="js">console.log(&quot;John&#39;s cat&quot;.length);
 // 将打印字符串中的字符个数（包括空格）
 // 结果为：10
 </code></pre>
-<p>在ES2015中，还提供了一种模板字面量（template literals），模板字符串提供了一些语法糖来帮你构造字符串。这与Perl、Python还有其他语言中的字符串插值（string interpolation）的特性非常相似。除此之外，你可以在通过模板字符串前添加一个tag来自定义模板字符串的解析过程，这可以用来防止注入攻击，或者用来建立基于字符串的高级数据抽象。</p>
+<p>在 ES2015 中，还提供了一种模板字面量（template literals），模板字符串提供了一些语法糖来帮你构造字符串。这与 Perl、Python 还有其他语言中的字符串插值（string interpolation）的特性非常相似。除此之外，你可以在通过模板字符串前添加一个 tag 来自定义模板字符串的解析过程，这可以用来防止注入攻击，或者用来建立基于字符串的高级数据抽象。</p>
 <pre><code class="js">// Basic literal string creation
-`In JavaScript &#39;\n&#39; is a line-feed.`
-
-// Multiline strings
+`In JavaScript &#39;\n&#39; is a line-feed.`// Multiline strings
 `In JavaScript this is
- not legal.`
+ not legal.`;
 
 // String interpolation
-var name = &quot;Bob&quot;, time = &quot;today&quot;;
-`Hello $&#123;name&#125;, how are you $&#123;time&#125;?`
+var name = &#39;Bob&#39;,
+  time = &#39;today&#39;;
+`Hello $&#123;name&#125;, how are you $&#123;time&#125;?`;
 
 // Construct an HTTP request prefix is used to interpret the replacements and construction
 POST`http://foo.org/bar?a=$&#123;a&#125;&amp;b=$&#123;b&#125;
@@ -345,7 +342,7 @@ POST`http://foo.org/bar?a=$&#123;a&#125;&amp;b=$&#123;b&#125;
        &quot;bar&quot;: $&#123;bar&#125;&#125;`(myOnReadyStateChangeHandler);
 </code></pre>
 <p>除非有特别需要使用字符串对象，否则,你应当始终使用字符串字面值。</p>
-<h4 id="在字符串中使用的特殊字符"><a href="#在字符串中使用的特殊字符" class="headerlink" title="在字符串中使用的特殊字符"></a>在字符串中使用的特殊字符</h4><p>以下表格列举了你能在JavaScript的字符串中使用的特殊字符。</p>
+<h4 id="在字符串中使用的特殊字符"><a href="#在字符串中使用的特殊字符" class="headerlink" title="在字符串中使用的特殊字符"></a>在字符串中使用的特殊字符</h4><p>以下表格列举了你能在 JavaScript 的字符串中使用的特殊字符。</p>
 <table>
 <thead>
 <tr>
@@ -355,7 +352,7 @@ POST`http://foo.org/bar?a=$&#123;a&#125;&amp;b=$&#123;b&#125;
 </thead>
 <tbody><tr>
 <td align="left">\0</td>
-<td align="left">Null字节</td>
+<td align="left">Null 字节</td>
 </tr>
 <tr>
 <td align="left">\b</td>
@@ -395,54 +392,54 @@ POST`http://foo.org/bar?a=$&#123;a&#125;&amp;b=$&#123;b&#125;
 </tr>
 <tr>
 <td align="left">\XXX</td>
-<td align="left">由从0到377最多三位八进制数XXX表示的 Latin-1 字符。例如，\251是版权符号的八进制序列。</td>
+<td align="left">由从 0 到 377 最多三位八进制数 XXX 表示的 Latin-1 字符。例如，\251 是版权符号的八进制序列。</td>
 </tr>
 <tr>
 <td align="left">\xXX</td>
-<td align="left">由从00和FF的两位十六进制数字XX表示的Latin-1字符。例如，\ xA9是版权符号的十六进制序列。</td>
+<td align="left">由从 00 和 FF 的两位十六进制数字 XX 表示的 Latin-1 字符。例如，\ xA9 是版权符号的十六进制序列。</td>
 </tr>
 <tr>
 <td align="left">\uXXXX</td>
-<td align="left">由四位十六进制数字XXXX表示的Unicode字符。例如，\ u00A9是版权符号的Unicode序列。见Unicode escape sequences (Unicode 转义字符).</td>
+<td align="left">由四位十六进制数字 XXXX 表示的 Unicode 字符。例如，\ u00A9 是版权符号的 Unicode 序列。见 Unicode escape sequences (Unicode 转义字符).</td>
 </tr>
 <tr>
 <td align="left">\u{XXXXX}</td>
-<td align="left">Unicode代码点 (code point) 转义字符。例如，\u{2F804} 相当于Unicode转义字符 \uD87E\uDC04的简写。</td>
+<td align="left">Unicode 代码点 (code point) 转义字符。例如，\u{2F804} 相当于 Unicode 转义字符 \uD87E\uDC04 的简写。</td>
 </tr>
 </tbody></table>
-<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>对于那些未出现在表2.1中的字符，其所带的前导反斜线’&#39;将被忽略。但是，这一用法已被废弃，应当避免使用。</p>
+<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>对于那些未出现在表 2.1 中的字符，其所带的前导反斜线’&#39;将被忽略。但是，这一用法已被废弃，应当避免使用。</p>
 <p>通过在引号前加上反斜线’&#39;，可以在字符串中插入引号，这就是引号转义。例如:</p>
-<pre><code class="js">var quote = &quot;He read \&quot;The Cremation of Sam McGee\&quot; by R.W. Service.&quot;;
+<pre><code class="js">var quote = &#39;He read &quot;The Cremation of Sam McGee&quot; by R.W. Service.&#39;;
 console.log(quote);
 </code></pre>
 <p>代码的运行结果为:</p>
 <p>He read “The Cremation of Sam McGee” by R.W. Service.</p>
 <p>要在字符串中插入’&#39;字面值，必须转义反斜线。例如，要把文件路径 c:\temp 赋值给一个字符串，可以采用如下方式:</p>
-<pre><code class="js">var home = &quot;c:\\temp&quot;;
+<pre><code class="js">var home = &#39;c:\\temp&#39;;
 </code></pre>
 <p>也可以在换行之前加上反斜线以转义换行（译注：实际上就是一条语句拆成多行书写），这样反斜线和换行都不会出现在字符串的值中。</p>
-<pre><code class="js">var str = &quot;this string \
+<pre><code class="js">var str =
+  &#39;this string \
 is broken \
 across multiple\
-lines.&quot;
-console.log(str);   // this string is broken across multiplelines.
+lines.&#39;;
+console.log(str); // this string is broken across multiplelines.
 </code></pre>
-<p>Javascript没有“heredoc”语法，但可以用行末的换行符转义和转义的换行来近似实现。</p>
+<p>Javascript 没有“heredoc”语法，但可以用行末的换行符转义和转义的换行来近似实现。</p>
 <pre><code class="js">var poem =
-&quot;Roses are red,\n\
+  &#39;Roses are red,\n\
 Violets are blue.\n\
 Sugar is sweet,\n\
-and so is foo.&quot;
+and so is foo.&#39;;
 </code></pre>
 <p>ECMAScript 2015 增加了一种新的字面量，叫做模板字面量 template literals。它包含一些新特征，包括了多行字符串！</p>
-<pre><code class="js">var poem =
-`Roses are red,
+<pre><code class="js">var poem = `Roses are red,
 Violets are blue.
 Sugar is sweet,
-and so is foo.`
+and so is foo.`;
 </code></pre>
 <h1 id="暂停小结"><a href="#暂停小结" class="headerlink" title="暂停小结"></a>暂停小结</h1><p>真是基础的不能再基础了。</p>
-<p>ES6的一些新特性，模板字符串、块级作用域、变量提升、函数提升、对象属性和方法的简写…</p>
+<p>ES6 的一些新特性，模板字符串、块级作用域、变量提升、函数提升、对象属性和方法的简写…</p>
 
     </div>
 

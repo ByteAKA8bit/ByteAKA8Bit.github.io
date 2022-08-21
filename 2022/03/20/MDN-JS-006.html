@@ -133,7 +133,7 @@
 <td align="left">x &#x3D; x | y</td>
 </tr>
 </tbody></table>
-<h4 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h4><pre><code class="js">var foo = [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;];
+<h4 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h4><pre><code class="js">var foo = [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;];
 
 // 不使用解构
 var one = foo[0];
@@ -162,19 +162,19 @@ var [one, two, three] = foo;
 <p>false &amp;&amp; anything &#x2F;&#x2F; 被短路求值为 false<br>true || anything &#x2F;&#x2F; 被短路求值为 true</p>
 <h3 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h3><p>+</p>
 <p>简写操作符 +&#x3D; 也可以用来拼接字符串</p>
-<pre><code class="js">var myString = &quot;alpha&quot;;
+<pre><code class="js">var myString = &#39;alpha&#39;;
 
-myString += &quot;bet&quot;; // 返回 &quot;alphabet&quot;
+myString += &#39;bet&#39;; // 返回 &quot;alphabet&quot;
 </code></pre>
 <h3 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h3><p>a ? b : c</p>
-<pre><code class="js">var status = age &gt;= 18 ? &quot;adult&quot; : &quot;minor&quot;;
+<pre><code class="js">var status = age &gt;= 18 ? &#39;adult&#39; : &#39;minor&#39;;
 </code></pre>
 <h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><p>对两个操作数进行求值并返回最终操作数的值。它常常用在 for 循环中，在每次循环时对多个变量进行更新。</p>
 <pre><code class="js">var x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var a = [x, x, x, x, x];
 
 for (var i = 0, j = 9; i &lt;= j; i++, j--)
-  console.log(&quot;a[&quot; + i + &quot;][&quot; + j + &quot;]= &quot; + a[i][j]);
+  console.log(&#39;a[&#39; + i + &#39;][&#39; + j + &#39;]= &#39; + a[i][j]);
 </code></pre>
 <h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3><h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><pre><code class="js">delete objectName.property;
 delete ArrayName[index];
@@ -195,22 +195,22 @@ delete myobj; // returns true (can delete if declared implicitly)
 </code></pre>
 <p>删除数组中的元素时，数组的长度是不变的，例如删除 a[3], a[4]，a[4]和 a[3] 仍然存在变成了 undefined。</p>
 <p>delete 删除数组中的一个元素，这个元素就不在数组中了。例如，trees[3]被删除，trees[3] 仍然可寻址并返回 undefined。</p>
-<pre><code class="js">var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+<pre><code class="js">var trees = new Array(&#39;redwood&#39;, &#39;bay&#39;, &#39;cedar&#39;, &#39;oak&#39;, &#39;maple&#39;);
 delete trees[3];
 if (3 in trees) &#123;
   // 不会被执行
 &#125;
 </code></pre>
 <p>如果想让数组中存在一个元素但是是 undefined 值，使用 undefined 关键字而不是 delete 操作. 如下： trees[3]分配一个 undefined,但是这个数组元素仍然存在:</p>
-<pre><code class="js">var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+<pre><code class="js">var trees = new Array(&#39;redwood&#39;, &#39;bay&#39;, &#39;cedar&#39;, &#39;oak&#39;, &#39;maple&#39;);
 trees[3] = undefined;
 if (3 in trees) &#123;
   // this gets executed（会被执行）
 &#125;
 </code></pre>
 <h4 id="typeof-操作符"><a href="#typeof-操作符" class="headerlink" title="typeof 操作符"></a>typeof 操作符</h4><p>typeof 操作符返回一个表示 operand 类型的字符串值。operand 可为字符串、变量、关键词或对象，其类型将被返回。operand 两侧的括号为可选。</p>
-<pre><code class="js">var myFun = new Function(&quot;5 + 2&quot;);
-var shape = &quot;round&quot;;
+<pre><code class="js">var myFun = new Function(&#39;5 + 2&#39;);
+var shape = &#39;round&#39;;
 var size = 1;
 var today = new Date();
 
@@ -224,7 +224,7 @@ typeof true; // returns &quot;boolean&quot;
 typeof null; // returns &quot;object&quot;
 
 typeof 62; // returns &quot;number&quot;
-typeof &quot;Hello world&quot;; // returns &quot;string&quot;
+typeof &#39;Hello world&#39;; // returns &quot;string&quot;
 
 typeof document.lastModified; // returns &quot;string&quot;
 typeof window.length; // returns &quot;number&quot;
@@ -244,29 +244,29 @@ typeof String; // returns &quot;function&quot;
 <h4 id="void-运算符"><a href="#void-运算符" class="headerlink" title="void 运算符"></a>void 运算符</h4><p>void 运算符,表明一个运算没有返回值。</p>
 <p>你可以使用 void 运算符指明一个超文本链接。该表达式是有效的，但是并不会在当前文档中进行加载。</p>
 <p>如下创建了一个超链接文本，当用户单击该文本时，不会有任何效果。</p>
-<pre><code class="js">&lt;a href=&quot;javascript:void(0)&quot;&gt;Click here to do nothing&lt;/a&gt;
+<pre><code class="js">&lt;a href=&#39;javascript:void(0)&#39;&gt;Click here to do nothing&lt;/a&gt;
 </code></pre>
-<pre><code class="js">&lt;a href=&quot;javascript:void(document.form.submit())&quot;&gt;Click here to submit&lt;/a&gt;
+<pre><code class="js">&lt;a href=&#39;javascript:void(document.form.submit())&#39;&gt;Click here to submit&lt;/a&gt;
 </code></pre>
 <h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>如果所指定的属性确实存在于所指定的对象中，则会返回 true</p>
 <pre><code class="js">// Arrays
-var trees = new Array(&quot;redwood&quot;, &quot;bay&quot;, &quot;cedar&quot;, &quot;oak&quot;, &quot;maple&quot;);
+var trees = new Array(&#39;redwood&#39;, &#39;bay&#39;, &#39;cedar&#39;, &#39;oak&#39;, &#39;maple&#39;);
 0 in trees; // returns true
 3 in trees; // returns true
 6 in trees; // returns false
-&quot;bay&quot; in trees; // returns false (you must specify the index number,
+&#39;bay&#39; in trees; // returns false (you must specify the index number,
 // not the value at that index)
-&quot;length&quot; in trees; // returns true (length is an Array property)
+&#39;length&#39; in trees; // returns true (length is an Array property)
 
 // Predefined objects
-&quot;PI&quot; in Math; // returns true
-var myString = new String(&quot;coral&quot;);
-&quot;length&quot; in myString; // returns true
+&#39;PI&#39; in Math; // returns true
+var myString = new String(&#39;coral&#39;);
+&#39;length&#39; in myString; // returns true
 
 // Custom objects
-var mycar = &#123; make: &quot;Honda&quot;, model: &quot;Accord&quot;, year: 1998 &#125;;
-&quot;make&quot; in mycar; // returns true
-&quot;model&quot; in mycar; // returns true
+var mycar = &#123; make: &#39;Honda&#39;, model: &#39;Accord&#39;, year: 1998 &#125;;
+&#39;make&#39; in mycar; // returns true
+&#39;model&#39; in mycar; // returns true
 </code></pre>
 <h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>如果所判别的对象确实是所指定的类型，则返回 true。</p>
 <pre><code class="js">var theDay = new Date(1995, 12, 17);
@@ -371,8 +371,8 @@ var abc = [ &quot;A&quot;, &quot;B&quot;, &quot;C&quot; ];
 <pre><code class="js">super([arguments]); // calls the parent constructor. super.functionOnParent([arguments])
 </code></pre>
 <h4 id="扩展语句"><a href="#扩展语句" class="headerlink" title="扩展语句"></a>扩展语句</h4><p>扩展语句符允许一个表达式在原地展开， 当需要多个参数 (比如函数调用时) 或者多个值(比如字面量数组) 。</p>
-<pre><code class="js">var parts = [&quot;shoulder&quot;, &quot;knees&quot;];
-var lyrics = [&quot;head&quot;, ...parts, &quot;and&quot;, &quot;toes&quot;];
+<pre><code class="js">var parts = [&#39;shoulder&#39;, &#39;knees&#39;];
+var lyrics = [&#39;head&#39;, ...parts, &#39;and&#39;, &#39;toes&#39;];
 
 function f(x, y, z) &#123;&#125;
 var args = [0, 1, 2];

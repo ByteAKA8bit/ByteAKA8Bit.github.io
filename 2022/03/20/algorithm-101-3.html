@@ -246,7 +246,7 @@
 </tbody></table>
 <p>可以看到，第一次循环结束，链表顺序是</p>
 <p>m-2 m-1 m+1 m m+2 m+3 m+4</p>
-<p><img src="/algorithm-101-/firstLoop.jpg" alt="第一次循环后"></p>
+<p><img src="/2022/03/20/algorithm-101-/firstLoop.jpg" alt="第一次循环后"></p>
 <p>再来执行第二次循环。</p>
 <p>let let nextNode &#x3D; previous.next;</p>
 <table>
@@ -366,7 +366,7 @@
 </tbody></table>
 <p>第二次循环结束时，链表为</p>
 <p>m-2 m-1 m+2 m+1 m m+3 m+4</p>
-<p><img src="/algorithm-101-/secondLoop.jpg" alt="第二次循环后"></p>
+<p><img src="/2022/03/20/algorithm-101-/secondLoop.jpg" alt="第二次循环后"></p>
 <p>可以总结出，pnext 和 cnext 在每次循环中，后向后移动一位，p 和 c 不移动。</p>
 <p>n 也随着 pnext 的移动而移动。</p>
 <p>就是不断的 m-1 的 next 指向下一个未遍历的节点并反转。</p>
@@ -411,10 +411,10 @@
 &#125;
 </code></pre>
 <h3 id="代码解读-1"><a href="#代码解读-1" class="headerlink" title="代码解读"></a>代码解读</h3><p>代码先对入参进行了一个检查，看剩余节点，这是递归的结束条件。</p>
-<p>然后就是反转k个节点.</p>
+<p>然后就是反转 k 个节点.</p>
 <p>然后将剩余节点放入递归去反转。</p>
 <p>比较简单。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>今晚刷刷MDN吧，算法刚不动了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>今晚刷刷 MDN 吧，算法刚不动了。</p>
 
     </div>
 

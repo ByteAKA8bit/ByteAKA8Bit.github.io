@@ -44,7 +44,7 @@
 
     <div class="post-md">
         <h1 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h1><p>没想到我 🥑 也有今天，还要从 JS 基础开始看起。</p>
-<p><img src="/MDN-JS-00/xwzj.jpg" alt="学无止境"></p>
+<p><img src="/2022/03/17/MDN-JS-00/xwzj.jpg" alt="学无止境"></p>
 <h1 id="JavaScript-到底是什么"><a href="#JavaScript-到底是什么" class="headerlink" title="JavaScript 到底是什么"></a>JavaScript 到底是什么</h1><p>是一门完备的 动态编程语言。当应用于 HTML 文档时，可为网站提供动态交互特性。由布兰登·艾克（ Brendan Eich，Mozilla 项目、Mozilla 基金会和 Mozilla 公司的联合创始人）发明。</p>
 <p>开发者们基于 JavaScript 核心编写了大量实用工具，可以使 开发工作事半功倍。其中包括：</p>
 <ul>
@@ -53,9 +53,9 @@
 <li>第三方框架和库 —— 用来快速构建网站和应用。</li>
 </ul>
 <h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><pre><code class="js">// 用DOM API querySelector()选中了h1标签并存储在了myHeading变量中
-let myHeading = document.querySelector(&quot;h1&quot;);
+let myHeading = document.querySelector(&#39;h1&#39;);
 // 修改h1标签中的textContent属性
-myHeading.textContent = &quot;Hello world!&quot;;
+myHeading.textContent = &#39;Hello world!&#39;;
 </code></pre>
 <h1 id="JavaScript-快速入门"><a href="#JavaScript-快速入门" class="headerlink" title="JavaScript 快速入门"></a>JavaScript 快速入门</h1><p>变量</p>
 <p>变量是存储值的容器。要声明一个变量，需要使用 let 或 var 关键字，然后输入合适的变量名。</p>
@@ -74,9 +74,9 @@ var myVariable2;
 <p>行注释、块注释</p>
 <p>运算符</p>
 <ul>
-<li><p>一元运算符<br> 取非：！</p>
+<li><p>一元运算符<br>取非：！</p>
 </li>
-<li><p>二元运算符<br> 加：+<br>减、乘、除：-、*、&#x2F;<br>赋值：&#x3D;<br>等于：&#x3D;&#x3D;&#x3D;<br>不等于：!&#x3D;&#x3D;</p>
+<li><p>二元运算符<br>加：+<br>减、乘、除：-、*、&#x2F;<br>赋值：&#x3D;<br>等于：&#x3D;&#x3D;&#x3D;<br>不等于：!&#x3D;&#x3D;</p>
 </li>
 <li><p>三元运算符<br>? :</p>
 </li>
@@ -90,39 +90,39 @@ var myVariable2;
 <pre><code class="js">// let myHeading = document.querySelector(&quot;h1&quot;);
 // myHeading.textContent = &quot;Hello world!&quot;;
 
-document.querySelector(&quot;html&quot;).onclick = function () &#123;
-  alert(&quot;别戳我，我怕疼。&quot;);
+document.querySelector(&#39;html&#39;).onclick = function () &#123;
+  alert(&#39;别戳我，我怕疼。&#39;);
 &#125;;
 
-let myImage = document.querySelector(&quot;img&quot;);
+let myImage = document.querySelector(&#39;img&#39;);
 
 myImage.onclick = function () &#123;
-  let mySrc = myImage.getAttribute(&quot;src&quot;);
-  if (mySrc === &quot;images/firefox-icon.png&quot;) &#123;
-    myImage.setAttribute(&quot;src&quot;, &quot;images/firefox2.png&quot;);
+  let mySrc = myImage.getAttribute(&#39;src&#39;);
+  if (mySrc === &#39;images/firefox-icon.png&#39;) &#123;
+    myImage.setAttribute(&#39;src&#39;, &#39;images/firefox2.png&#39;);
   &#125; else &#123;
-    myImage.setAttribute(&quot;src&quot;, &quot;images/firefox-icon.png&quot;);
+    myImage.setAttribute(&#39;src&#39;, &#39;images/firefox-icon.png&#39;);
   &#125;
 &#125;;
 
-let myButton = document.querySelector(&quot;button&quot;);
-let myHeading = document.querySelector(&quot;h1&quot;);
+let myButton = document.querySelector(&#39;button&#39;);
+let myHeading = document.querySelector(&#39;h1&#39;);
 
 function setUserName() &#123;
-  let myName = prompt(&quot;请输入你的名字。&quot;);
+  let myName = prompt(&#39;请输入你的名字。&#39;);
   if (!myName || myName === null) &#123;
     setUserName();
   &#125; else &#123;
-    localStorage.setItem(&quot;name&quot;, myName);
-    myHeading.innerHTML = &quot;Mozilla 酷毙了，&quot; + myName;
+    localStorage.setItem(&#39;name&#39;, myName);
+    myHeading.innerHTML = &#39;Mozilla 酷毙了，&#39; + myName;
   &#125;
 &#125;
 
-if (!localStorage.getItem(&quot;name&quot;)) &#123;
+if (!localStorage.getItem(&#39;name&#39;)) &#123;
   setUserName();
 &#125; else &#123;
-  let storedName = localStorage.getItem(&quot;name&quot;);
-  myHeading.textContent = &quot;Mozilla 酷毙了，&quot; + storedName;
+  let storedName = localStorage.getItem(&#39;name&#39;);
+  myHeading.textContent = &#39;Mozilla 酷毙了，&#39; + storedName;
 &#125;
 
 myButton.onclick = function () &#123;
