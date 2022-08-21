@@ -246,7 +246,7 @@
 </tbody></table>
 <p>可以看到，第一次循环结束，链表顺序是</p>
 <p>m-2 m-1 m+1 m m+2 m+3 m+4</p>
-<p><img src="/algorithm-101-3/firstLoop.jpg" alt="第一次循环后"></p>
+<p><img src="/algorithm-101-/firstLoop.jpg" alt="第一次循环后"></p>
 <p>再来执行第二次循环。</p>
 <p>let let nextNode &#x3D; previous.next;</p>
 <table>
@@ -366,7 +366,7 @@
 </tbody></table>
 <p>第二次循环结束时，链表为</p>
 <p>m-2 m-1 m+2 m+1 m m+3 m+4</p>
-<p><img src="/algorithm-101-3/secondLoop.jpg" alt="第二次循环后"></p>
+<p><img src="/algorithm-101-/secondLoop.jpg" alt="第二次循环后"></p>
 <p>可以总结出，pnext 和 cnext 在每次循环中，后向后移动一位，p 和 c 不移动。</p>
 <p>n 也随着 pnext 的移动而移动。</p>
 <p>就是不断的 m-1 的 next 指向下一个未遍历的节点并反转。</p>

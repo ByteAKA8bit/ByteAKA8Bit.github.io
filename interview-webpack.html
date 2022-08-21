@@ -200,7 +200,7 @@ export const log = (msg) =&gt; &#123;
 <h4 id="Snowpack"><a href="#Snowpack" class="headerlink" title="Snowpack"></a>Snowpack</h4><p>较复杂的打包工具（如 Webpack 或 Parcel）的替代方案，利用 JavaScript 的本机模块系统，避免不必要的工作并保持流畅的开发体验。</p>
 <p>开发阶段，每次保存单个文件时，Webpack 和 parcel 都需要重新构建和打包应用程序的整个 bundle。而 snowpack 为每个文件构建一次，就可以永久缓存，文件更改时，snowpack 会重新构建该单个文件。</p>
 <p>下图为 webpack 与 snowpack 打包区别：</p>
-<p><img src="/interview-webpack/snowpack.png" alt="snowpack"></p>
+<p><img src="/interview-webpac/snowpack.png" alt="snowpack"></p>
 <p>可以 snowpack 在重新构建每次变更时，几乎没有是将浪费，只需要在浏览器中进行 HMR 更新。</p>
 <h4 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h4><p>是一种新型前端构建工具，能够显著提升前端开发体验。</p>
 <p>它主要由两部分组成：</p>
@@ -216,7 +216,7 @@ export const log = (msg) =&gt; &#123;
 </ul>
 <p>Vite 会直接启动开发服务器，不需要进行打包操作。所以它不需要分析依赖、不需要编译，因此启动速度非常快。</p>
 <p>利用浏览器支持 ES Module 的特性，当浏览器请求到某个模块的时候，再根据需要对模块的内容进行编译，这种方式可以缩短编译时间。</p>
-<p><img src="/interview-webpack/vite.png" alt="Vite"></p>
+<p><img src="/interview-webpac/vite.png" alt="Vite"></p>
 <p>HMR 时，当修改一个模块的时候，仅需让浏览器重新请求该模块即可，无需像 webpack 那样把该模块的相关依赖全部编译一次。</p>
 <h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><p>相比于上述的模块化工具，webpack 大而全，很多常用的功能开箱即用。</p>
 <p>最大的特点是一切皆模块和按需加载</p>
@@ -350,7 +350,7 @@ export const log = (msg) =&gt; &#123;
 &#125;;
 </code></pre>
 <h4 id="合理使用-sourceMap"><a href="#合理使用-sourceMap" class="headerlink" title="合理使用 sourceMap"></a>合理使用 sourceMap</h4><p>打包生成 sourceMap 的时候，如果信息越详细，打包速度就会越慢。</p>
-<p><img src="/interview-webpack/sourceMap.png" alt="sourceMap"></p>
+<p><img src="/interview-webpac/sourceMap.png" alt="sourceMap"></p>
 <h3 id="如何借助-webpack-来优化前端性能"><a href="#如何借助-webpack-来优化前端性能" class="headerlink" title="如何借助 webpack 来优化前端性能"></a>如何借助 webpack 来优化前端性能</h3><h4 id="JS-代码压缩"><a href="#JS-代码压缩" class="headerlink" title="JS 代码压缩"></a>JS 代码压缩</h4><p>terser 是一个用于 JS 压缩和混淆的 plugin。可以使得打包后输出的 bundle 更小。</p>
 <p>production 模式下，webpack 默认使用的就是 TerserPlugin 来处理 JS</p>
 <pre><code class="js">const TerserPlugin = require(&#39;terser-webpack-plugin&#39;);
@@ -600,7 +600,7 @@ module.exports = &#123;
   &#125;,
 &#125;;
 </code></pre>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p><img src="/interview-webpack/hmr.png" alt="HMR"></p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p><img src="/interview-webpac/hmr.png" alt="HMR"></p>
 <ul>
 <li>Webpack Compile：将 JS 源代码编译成 bundle.js</li>
 <li>HMR Server：用来将热更新的文件输出给 HMR Runtime</li>
@@ -831,7 +831,7 @@ function webpack(options) &#123;
 &#125;
 </code></pre>
 <p>在 Compiler 开始生成文件前，钩子 emit 会被执行，这是我们修改最终文件的最后一个机会</p>
-<p><img src="/interview-webpack/webpack.png" alt="webpack"></p>
+<p><img src="/interview-webpac/webpack.png" alt="webpack"></p>
 <h3 id="对-webpack-的理解，它解决了哪些问题？"><a href="#对-webpack-的理解，它解决了哪些问题？" class="headerlink" title="对 webpack 的理解，它解决了哪些问题？"></a>对 webpack 的理解，它解决了哪些问题？</h3><p>在开发过程中会遇到以下问题</p>
 <ul>
 <li>需要通过模块化的方式来开发</li>
