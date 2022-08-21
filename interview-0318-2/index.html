@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>Avoocadoo | 莫得感情的牛油果</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <a class="logo" href="/">Avoocadoo</a>
+    <a class="go-home" href="/">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-main-title">
+            面试再记
+        </div>
+        <div class="post-meta">
+            2022-03-18
+        </div>
+    
+
+    <div class="post-md">
+        <h2 id="面试前"><a href="#面试前" class="headerlink" title="面试前"></a>面试前</h2><p>还是同一家公司，可能不同岗位</p>
+<p>这次有上篇面试记录的文章的加持，其实信心高了不少。</p>
+<p>恰巧，问到的问题也大致相似。这里就看出了总结的重要性。</p>
+<h2 id="面试记录"><a href="#面试记录" class="headerlink" title="面试记录"></a>面试记录</h2><p>这会就只能记起来回答的不好的问题了。</p>
+<p>还有 MD5 最大的特点是不可逆</p>
+<h3 id="对象拷贝"><a href="#对象拷贝" class="headerlink" title="对象拷贝"></a>对象拷贝</h3><h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><p>直接赋值</p>
+<p>Object.assign();</p>
+<p>扩展运算符</p>
+<p>lodash(_.clone());</p>
+<pre><code class="js">let obj2 = _.clone(obj1);
+</code></pre>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>JSON.parse(JSON.stringify());</p>
+<p>递归赋值</p>
+<pre><code class="js">function deepClone(obj) &#123;
+  let objClone = Array.isArray(obj) ? [] : &#123;&#125;;
+  if (obj &amp;&amp; typeof obj === &quot;object&quot;) &#123;
+    for (key in obj) &#123;
+      //判断是否为自身属性
+      if (obj.hasOwnProperty(key)) &#123;
+        //判断ojb子元素是否为对象，如果是，递归复制
+        if (obj[key] &amp;&amp; typeof obj[key] === &quot;object&quot;) &#123;
+          objClone[key] = deepClone(obj[key]);
+        &#125; else &#123;
+          //如果不是，简单复制
+          objClone[key] = obj[key];
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+  return objClone;
+&#125;
+</code></pre>
+<blockquote>
+<p>下雪，吃涮 🐏 肉去，回来再说… 嘿嘿！</p>
+<p>现在是北京时间 22 年 03 月 18 日 20:19<br>我吃涮 🐏 肉回来了，真好吃!</p>
+</blockquote>
+<p>OK,走之前复制了上面的递归拷贝算法,现在认真看看</p>
+<p>当传入参数是对象时,用 for…in 遍历对象,遇到对象嵌套,递归</p>
+<p>如果是值,就拷贝进新的对象内</p>
+<p>这算法改造改造也可以做纯对象(不含数组)的扁平化啊</p>
+<p>lodash(_.cloneDeep());</p>
+<pre><code class="js">let obj2 = _.cloneDeep(obj1);
+</code></pre>
+<h3 id="JSON-stringify、parse-的缺陷"><a href="#JSON-stringify、parse-的缺陷" class="headerlink" title="JSON.stringify、parse 的缺陷"></a>JSON.stringify、parse 的缺陷</h3><p>这个是对象拷贝的一个引申问题</p>
+<p>实际上这种做法有一些缺陷</p>
+<ul>
+<li><p>如果对象里属性是 function,则不会拷贝成功</p>
+<pre><code class="js">let obj = &#123;
+  fun: function name(params) &#123;&#125;,
+&#125;;
+
+console.log(obj); // &#123; fun: [Function: name] &#125;
+let temp = JSON.parse(JSON.stringify(obj));
+console.log(temp); // &#123;&#125;
+</code></pre>
+</li>
+<li><p>如果拷贝的对象中某个属性值为 undefined,则拷贝后该属性会丢失</p>
+<pre><code class="js">let obj = &#123;
+  a: 2,
+  name: undefined,
+&#125;;
+
+console.log(obj); // &#123;a:2, name: undefined &#125;
+let temp = JSON.parse(JSON.stringify(obj));
+console.log(temp); // &#123;a:2&#125;
+</code></pre>
+</li>
+<li><p>如果拷贝的对象中又正则表达式,则拷贝之后的对象正则表达式会变为 Object,但对象是{}</p>
+<pre><code class="js">let obj = &#123;
+  a: 2,
+  name: /abc/,
+&#125;;
+
+console.log(obj); // &#123; a:2, name: /abc/ &#125;
+let temp = JSON.parse(JSON.stringify(obj));
+console.log(temp); // &#123;a:2, name:&#123;&#125;&#125;
+</code></pre>
+</li>
+<li><p>对象数组中的拷贝也是</p>
+<pre><code class="js">let obj = [&#123; name: undefined &#125;];
+console.log(obj); // [ &#123; name: undefined &#125; ]
+let temp = JSON.parse(JSON.stringify(obj));
+console.log(temp); // [ &#123;&#125; ]
+</code></pre>
+</li>
+</ul>
+<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>上篇面试记录中的文章是 copy 的，这次我们自己理解记录一下</p>
+<h4 id="JS-中的任务"><a href="#JS-中的任务" class="headerlink" title="JS 中的任务"></a>JS 中的任务</h4><p>JS 中任务有两类，同步任务和异步任务</p>
+<p>同步任务会阻塞主线程，直到执行完毕</p>
+<p>而异步任务则不直接由主线程调度，而是放入任务队列，只有任务队列通知主线程那个异步任务可以执行了，主线程才执行该任务。这种机制就有了以下固定步骤：</p>
+<ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ol>
+<h4 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h4><p>任务队列是一个事件的队列（也可以理解成消息的队列），I&#x2F;O 完成了一项任务，就在任务队列中添加一个事件，表示相关的异步任务可以进入“执行栈”了。主线程读取任务队列，就是读取里面有哪些事件。</p>
+<p>“任务队列”中的事件，除了 I&#x2F;O 的事件以外，还包括一些用户产生的事件（比如鼠标点击、页面滚动等等）。只要指定过回调函数，这些事件发生时就会进入”任务队列”，等待主线程读取。</p>
+<p>所谓”回调函数”（callback），就是那些会被主线程挂起来的代码。异步任务必须指定回调函数，当主线程开始执行异步任务，就是执行对应的回调函数。</p>
+<p>“任务队列”是一个先进先出的数据结构，排在前面的事件，优先被主线程读取。主线程的读取过程基本上是自动的，只要执行栈一清空，”任务队列”上第一位的事件就自动进入主线程。但是，由于存在后文提到的”定时器”功能，主线程首先要检查一下执行时间，某些事件只有到了规定的时间，才能返回主线程。</p>
+<h4 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h4><p>主线程从任务队列中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为 Event Loop。</p>
+<p>主线程运行时，产生堆和栈，栈中的代码调用各种外部 API，它们在任务队列中加入各种事件。之要栈中代码执行完毕，主线程就会去读取任务队列，依次执行那些事件所对应的回调函数。</p>
+<p>执行栈中的代码（同步任务），总是在读取任务队列（异步任务）之前执行。</p>
+<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><p>除了放置异步任务的事件，任务队列还可以放置定时事件，即指定某些代码在多少时间后执行。这叫做定时器功能，也就是定时执行的代码。</p>
+<p>定时器功能主要由 setTimeout()和 setInterval()这两个函数来完成，它们的内部运行机制完全一样，区别在于前者指定的代码是一次性执行，后者则为反复执行。</p>
+<p>setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在”任务队列”的尾部添加一个事件，因此要等到同步任务和”任务队列”现有的事件都处理完，才会得到执行。</p>
+<p>HTML5 标准规定了 setTimeout()的第二个参数的最小值（最短间隔），不得低于 4 毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为 10 毫秒。另外，对于那些 DOM 的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每 16 毫秒执行一次。这时使用 requestAnimationFrame()的效果要好于 setTimeout()。</p>
+<p>需要注意的是，setTimeout()只是将事件插入了”任务队列”，必须等到当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码耗时很长，有可能要等很久，所以并没有办法保证，回调函数一定会在 setTimeout()指定的时间执行。</p>
+<h3 id="Vue-过滤器"><a href="#Vue-过滤器" class="headerlink" title="Vue 过滤器"></a>Vue 过滤器</h3><p>Vue3 已移除，但还是了解一下，晓古通今嘛…</p>
+<p>在 Vue2 中，开发者可以使用过滤器来处理通用文本格式</p>
+<p>例如：</p>
+<pre><code class="html">&lt;template&gt;
+  &lt;h1&gt;Bank Account Balance&lt;/h1&gt;
+  &lt;p&gt;&#123;&#123; accountBalance | currencyUSD &#125;&#125;&lt;/p&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default &#123;
+    props: &#123;
+      accountBalance: &#123;
+        type: Number,
+        required: true,
+      &#125;,
+    &#125;,
+    filters: &#123;
+      currencyUSD(value) &#123;
+        return &quot;$&quot; + value;
+      &#125;,
+    &#125;,
+  &#125;;
+&lt;/script&gt;
+</code></pre>
+<p>Vue.js 允许你自定义过滤器，用于一些常见的文本格式化。过滤器可以用在两个地方：双花括号插值和 v-bind 表达式。过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符号指示：</p>
+<pre><code class="html">&lt;!-- 在双花括号中 --&gt;
+&#123;&#123; message | capitalize &#125;&#125;
+
+&lt;!-- 在 `v-bind` 中 --&gt;
+&lt;div v-bind:id=&quot;rawId | formatId&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>你可以在一个组件的选项中定义本地的过滤器：</p>
+<pre><code class="js">filters: &#123;
+  capitalize: function (value) &#123;
+    if (!value) return &#39;&#39;
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  &#125;
+&#125;
+</code></pre>
+<p>或者在创建 Vue 实例之前全局定义过滤器：</p>
+<pre><code class="js">Vue.filter(&quot;capitalize&quot;, function (value) &#123;
+  if (!value) return &quot;&quot;;
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.slice(1);
+&#125;);
+
+new Vue(&#123;
+  // ...
+&#125;);
+</code></pre>
+<p>当全局过滤器和局部过滤器重名时，会采用局部过滤器。</p>
+<p>过滤器可以串联：</p>
+<pre><code class="html">&#123;&#123; message | filterA | filterB &#125;&#125;
+</code></pre>
+<p>在这个例子中，filterA 被定义为接收单个参数的过滤器函数，表达式 message 的值将作为参数传入到函数中。然后继续调用同样被定义为接收单个参数的过滤器函数 filterB，将 filterA 的结果传递到 filterB 中。</p>
+<p>过滤器是 JavaScript 函数，因此可以接收参数：</p>
+<pre><code class="html">&#123;&#123; message | filterA('arg1', arg2) &#125;&#125;
+</code></pre>
+<p>这里，filterA 被定义为接收三个参数的过滤器函数。其中 message 的值作为第一个参数，普通字符串 ‘arg1’ 作为第二个参数，表达式 arg2 的值作为第三个参数。</p>
+<h3 id="Vue-vm-nextTick"><a href="#Vue-vm-nextTick" class="headerlink" title="Vue vm.$nextTick"></a>Vue vm.$nextTick</h3><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM</p>
+<p>看完是不是有一堆问号？我们从中找出来产生问号的关键词</p>
+<p>下次 DOM 更新循环结束之后?<br>执行延迟回调?<br>更新后的 DOM?</p>
+<blockquote>
+<p>经典的抛出问题，然后解答的教学套路。nice！</p>
+</blockquote>
+<p>我们从上面三个疑问大胆猜想一下</p>
+<p>vue 更新 DOM 是有策略的，不是同步更新<br>nextTick 可以接收一个函数做为入参<br>nextTick 后能拿到最新的数据</p>
+<p>好了，我们问题都抛出来了，先来看一下如何使用</p>
+<pre><code class="js">import &#123; createApp, nextTick &#125; from &quot;vue&quot;;
+const app = createApp(&#123;
+  setup() &#123;
+    const message = ref(&quot;Hello!&quot;);
+    const changeMessage = async (newMessage) =&gt; &#123;
+      message.value = newMessage;
+      // 这里获取DOM的value是旧值
+      await nextTick();
+      // nextTick 后获取DOM的value是更新后的值
+      console.log(&quot;Now DOM is updated&quot;);
+    &#125;;
+  &#125;,
+&#125;);
+</code></pre>
+<h4 id="JS-运行机制"><a href="#JS-运行机制" class="headerlink" title="JS 运行机制"></a>JS 运行机制</h4><p>JS 是一个单线程的语言，即某一时间只能做某一件事。</p>
+<p>语言是否支持多线程取决于语言的用途，如果在同一时间，一个线程添加了 DOM，另一个删除了 DOM，这时候，怎么办？</p>
+<p>所以 JS 的应用场景导致了 JS 是一个单线程的语言。</p>
+<p>既然是单线程，就意味着任务需要排队执行，后面的任务要等待先被调度的任务完成之后才能执行。假如有一个任务执行时间过长，从用户角度上讲不需要等待的任务就会一直等待。于是 JS 中就出现了异步的概念。</p>
+<ul>
+<li>同步 在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务</li>
+<li>异步 不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行</li>
+</ul>
+<p>这里再来解释以下<strong>运行机制</strong>这个东西</p>
+<ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步</li>
+</ol>
+<p>这和上面是有重复内容的。</p>
+<h4 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h4><p>再回头看 nextTick</p>
+<p>实现很简单，完全是基于语言执行机制实现，直接创建一个异步任务，那么 nextTick 自然就达到在同步任务后执行的目的</p>
+<pre><code class="ts">const p = Promise.resolve();
+// 定义一个函数，参数为可选类型为函数 返回值为Promise函数
+export function nextTick(fn?: () =&gt; void): Promise&lt;void&gt; &#123;
+  return fn ? p.then(fn) : p;
+&#125;
+</code></pre>
+<p>如果我们给 nextTick 传入一个回调函数，那么 nextTick 会将传入的回调函数放入异步任务里，那么回调函数的执行,就会比本次的同步任务慢，但是我们并不能确定 nextTick 要比 DOM 渲染后执行，这个执行顺序要怎么才能确定呢？</p>
+<p>它还有几个兄弟帮忙</p>
+<p>queueJob、queuePostFlushCb</p>
+<p>queueJob 维护 job 列队，有去重逻辑，保证任务的唯一性，每次调用去执行 queueFlush</p>
+<p>queuePostFlushCb 维护 cb 列队，被调用的时候去重，每次调用去执行 queueFlush</p>
+<pre><code class="ts">const queue: (Job | null)[] = [];
+export function queueJob(job: Job) &#123;
+  // 去重
+  if (!queue.includes(job)) &#123;
+    queue.push(job);
+    queueFlush();
+  &#125;
+&#125;
+
+export function queuePostFlushCb(cb: Function | Function[]) &#123;
+  if (!isArray(cb)) &#123;
+    postFlushCbs.push(cb);
+  &#125; else &#123;
+    postFlushCbs.push(...cb);
+  &#125;
+  queueFlush();
+&#125;
+</code></pre>
+<p>queueFlush</p>
+<p>开启异步任务(nextTick)处理 flushJobs</p>
+<pre><code class="ts">function queueFlush() &#123;
+  // 避免重复调用flushJobs
+  if (!isFlushing &amp;&amp; !isFlushPending) &#123;
+    isFlushPending = true;
+    nextTick(flushJobs);
+  &#125;
+&#125;
+</code></pre>
+<p>我擦，后面看不懂了，果然，看不懂的代码才是好代码，凡是能看懂的都是 💩…</p>
+<p>好家伙，十几块的坑位，面试问我这个，真是看得起我，为了不辜负这份尊重，我得换个地方查查怎么搞懂它。</p>
+<p>flushJobs</p>
+<p>处理队列，先对队列进行排序，执行 queue 中的 job，处理完后再处理 postFlusCbs,如果队列没有被清空会递归调用 flushJobs 清空队列。</p>
+<pre><code class="ts">function flushJobs(seen?: CountMap) &#123;
+  isFlushPending = false;
+  isFlushing = true;
+  let job;
+  if (__DEV__) &#123;
+    seen = seen || new Map();
+  &#125;
+
+  // Sort queue before flush.
+  // This ensures that:
+  // 1. Components are updated from parent to child. (because parent is always
+  //    created before the child so its render effect will have smaller
+  //    priority number)
+  // 2. If a component is unmounted during a parent component&#39;s update,
+  //    its update can be skipped.
+  // Jobs can never be null before flush starts, since they are only invalidated
+  // during execution of another flushed job.
+  queue.sort((a, b) =&gt; getId(a!) - getId(b!));
+
+  while ((job = queue.shift()) !== undefined) &#123;
+    if (job === null) &#123;
+      continue;
+    &#125;
+    if (__DEV__) &#123;
+      checkRecursiveUpdates(seen!, job);
+    &#125;
+    callWithErrorHandling(job, null, ErrorCodes.SCHEDULER);
+  &#125;
+  flushPostFlushCbs(seen);
+  isFlushing = false;
+  // some postFlushCb queued jobs!
+  // keep flushing until it drains.
+  if (queue.length || postFlushCbs.length) &#123;
+    flushJobs(seen);
+  &#125;
+&#125;
+</code></pre>
+<p>好了，实现全在上面了，好像还没有解开我们的疑问，我们需要搞清楚 queueJob 及 queuePostFlushCb 是怎么被调用的。</p>
+<pre><code class="ts">//  renderer.ts
+function createDevEffectOptions(
+  instance: ComponentInternalInstance
+): ReactiveEffectOptions &#123;
+  return &#123;
+    scheduler: queueJob,
+    onTrack: instance.rtc ? e =&gt; invokeArrayFns(instance.rtc!, e) : void 0,
+    onTrigger: instance.rtg ? e =&gt; invokeArrayFns(instance.rtg!, e) : void 0
+  &#125;
+&#125;
+
+// effect.ts
+const run = (effect: ReactiveEffect) =&gt; &#123;
+  ...
+
+  if (effect.options.scheduler) &#123;
+    effect.options.scheduler(effect)
+  &#125; else &#123;
+    effect()
+  &#125;
+&#125;
+</code></pre>
+<p>看到这里有没有恍然大悟的感觉？原来当响应式对象发生改变后，执行 effect 如果有 scheduler 这个参数，会执行这个 scheduler 函数，并且把 effect 当做参数传入</p>
+<p>绕口了，简单点就是 queueJob(effect)，嗯，清楚了，这也是数据发生改变后页面不会立即更新的原因。</p>
+<h4 id="为什么要-nextTick"><a href="#为什么要-nextTick" class="headerlink" title="为什么要 nextTick"></a>为什么要 nextTick</h4><p>一个例子让大家明白，如果没有 nextTick 更新机制，那么 num 每次更新值都会触发视图更新，有了 nextTick 机制，只需要更新一次，所以为什么有 nextTick 存在，相信大家心里已经有答案了。</p>
+<pre><code class="html">&#123;&#123;num&#125;&#125;
+</code></pre>
+<pre><code class="ts">for (let i = 0; i &lt; 100000; i++) &#123;
+  num = i;
+&#125;
+</code></pre>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>nextTick 是 vue 中的更新策略，也是性能优化手段，基于 JS 执行机制实现</p>
+<p>vue 中我们改变数据时不会立即触发视图，如果需要实时获取到最新的 DOM，这个时候可以手动调用 nextTick</p>
+<p>嗯，写的很好… 好就好在，我看不懂。</p>
+<p><img src="/interview-0318-2/hyrs.jpg" alt="怀疑人生"></p>
+<h3 id="封装过哪些工具类"><a href="#封装过哪些工具类" class="headerlink" title="封装过哪些工具类"></a>封装过哪些工具类</h3><p>封装过 Axios，抄的 vue-element-admin 那个模板的</p>
+<h3 id="Vue-源码"><a href="#Vue-源码" class="headerlink" title="Vue 源码"></a>Vue 源码</h3><p>刚刚读了 nextTick，看懂个大概，现在记录也晚了…</p>
+<p>继续怀疑人生</p>
+<p><img src="/interview-0318-2/hyrs.jpg" alt="我是废物"></p>
+<h3 id="数组的-reduce-函数"><a href="#数组的-reduce-函数" class="headerlink" title="数组的 reduce 函数"></a>数组的 reduce 函数</h3><p>就这这个有趣的小东西，让我露了怯，暴露了我的真实 JS 水平…</p>
+<pre><code class="js">arr.reduce(callback, [initialValue]);
+</code></pre>
+<p>reduce 为数组中的每一个元素依次执行回调函数，不包括数组中被删除或从未被赋值的元素，接受四个参数：初始值（或者上一次回调函数的返回值），当前元素值，当前索引，调用 reduce 的数组。</p>
+<pre><code class="js">callback （执行数组中每个值的函数，包含四个参数）
+
+    1、previousValue （上一次调用回调返回的值，或者是提供的初始值（initialValue））
+    2、currentValue （数组中当前被处理的元素）
+    3、index （当前元素在数组中的索引）
+    4、array （调用 reduce 的数组）
+
+initialValue （作为第一次调用 callback 的第一个参数。）
+</code></pre>
+<pre><code class="js">var arr = [1, 2, 3, 4];
+var sum = arr.reduce(function (prev, cur, index, arr) &#123;
+  console.log(prev, cur, index);
+  return prev + cur;
+&#125;);
+console.log(arr, sum);
+
+/* 输出结果
+1 2 1
+3 3 2
+6 4 3
+[1, 2, 3, 4] 10
+*/
+</code></pre>
+<p>index 从 1 开始，第一个 prev 的值是数组的第一个值。</p>
+<pre><code class="js">var  arr = [1, 2, 3, 4];
+var sum = arr.reduce(function(prev, cur, index, arr) &#123;
+    console.log(prev, cur, index);
+    return prev + cur;
+&#125;，0) //注意这里设置了初始值
+console.log(arr, sum);
+
+/* 输出结果
+0 1 0
+1 2 1
+3 3 2
+6 4 3
+[1, 2, 3, 4] 10
+*/
+</code></pre>
+<p>这里的 index 是从 0 开始的，第一次的 prev 是设置的初始值 0。</p>
+<p>空数组不设置初始值使用 reduce 会报错。</p>
+<p>设置了初始值就不会报错。</p>
+<h4 id="一些高级用法"><a href="#一些高级用法" class="headerlink" title="一些高级用法"></a>一些高级用法</h4><p>统计元素个数</p>
+<pre><code class="js">let names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Tiff&quot;, &quot;Bruce&quot;, &quot;Alice&quot;];
+
+let nameNum = names.reduce((pre, cur) =&gt; &#123;
+  if (cur in pre) &#123;
+    pre[cur]++;
+  &#125; else &#123;
+    pre[cur] = 1;
+  &#125;
+  return pre;
+&#125;, &#123;&#125;);
+console.log(nameNum); //&#123;Alice: 2, Bob: 1, Tiff: 1, Bruce: 1&#125;
+</code></pre>
+<p>去重</p>
+<pre><code class="js">let arr = [1, 2, 3, 4, 4, 1];
+let newArr = arr.reduce((pre, cur) =&gt; &#123;
+  if (!pre.includes(cur)) &#123;
+    return pre.concat(cur);
+  &#125; else &#123;
+    return pre;
+  &#125;
+&#125;, []);
+console.log(newArr); // [1, 2, 3, 4]
+</code></pre>
+<p>数组扁平化</p>
+<pre><code class="js">let arr = [
+  [0, 1],
+  [2, 3],
+  [4, [5, 6, 7]],
+];
+const newArr = function (arr) &#123;
+  return arr.reduce(
+    (pre, cur) =&gt; pre.concat(Array.isArray(cur) ? newArr(cur) : cur),
+    []
+  );
+&#125;;
+console.log(newArr(arr)); //[0, 1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<p>对象数组内属性操作</p>
+<pre><code class="js">var result = [
+  &#123;
+    subject: &quot;math&quot;,
+    score: 10,
+  &#125;,
+  &#123;
+    subject: &quot;chinese&quot;,
+    score: 20,
+  &#125;,
+  &#123;
+    subject: &quot;english&quot;,
+    score: 30,
+  &#125;,
+];
+
+var sum = result.reduce(function (prev, cur) &#123;
+  return cur.score + prev;
+&#125;, 0);
+console.log(sum); //60
+</code></pre>
+<h3 id="Vue-双向绑定的原理细节"><a href="#Vue-双向绑定的原理细节" class="headerlink" title="Vue 双向绑定的原理细节"></a>Vue 双向绑定的原理细节</h3><p>前两天做了简单的实现…</p>
+<p>今天就忘了</p>
+<p>就回答了一些组成的部分，obversor、wathcer、compiler、mvvm</p>
+<p>明天再搞一遍，顺便写篇文章记录一下。</p>
+<h2 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h2><p>还行，比今天第一场被吊打要舒服一点，最起码答上来了不少。</p>
+<p>遇到八股文，回答的怎么样，目前我基本就靠命中率，运气也被算进了我实力的重要内容之中…</p>
+<p>这回完全没有之前那么丧的感觉了，但是 MDN 还得冲</p>
+
+    </div>
+
+</div>
+                <div class="footer">
+    <span>Copyright © 2022 Avoocadoo</span>
+    <span>Theme Designed By <a target="_blank" href="https://zheli.design/one-paper">這Li</a></span>
+</div>
+
+
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

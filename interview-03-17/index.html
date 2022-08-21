@@ -17,7 +17,7 @@
     
 <link rel="stylesheet" href="/css/fonts.css">
 
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
     <body>
         <div class="paper">
             <div class="paper-main">
@@ -251,9 +251,9 @@ module.exports = app;
 <h3 id="三层组件传值问题"><a href="#三层组件传值问题" class="headerlink" title="三层组件传值问题"></a>三层组件传值问题</h3><p>回答：就统统传到父组件去转发，不晓得对不对，查一查记录一下。</p>
 <p>哎呀妈，不查不知道，这也回答的稀烂，组件传值方式这么花哨…</p>
 <h4 id="props-x2F-emit"><a href="#props-x2F-emit" class="headerlink" title="props&#x2F;emit"></a>props&#x2F;emit</h4><p>父组件传入属性，子组件通过 props 接收，就可以在内部 this.XXX 的方式使用 子组件$emit(事件名，传递的参数)向外弹出一个自定义事件, 在父组件中的属性监听事件，同时也能获取子组件传出来的参数</p>
-<pre><code class="js">//    父组件
+<pre><code class="js">//	父组件
 &lt;hello-world msg=&quot;hello world!&quot; @confirm=&quot;handleConfirm&quot;&gt;&lt;hello-world&gt;
-//    子组件
+//	子组件
  props: &#123;
     msg: &#123;
       type: String,

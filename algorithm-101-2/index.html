@@ -17,7 +17,7 @@
     
 <link rel="stylesheet" href="/css/fonts.css">
 
-<meta name="generator" content="Hexo 6.1.0"></head>
+<meta name="generator" content="Hexo 6.2.0"></head>
     <body>
         <div class="paper">
             <div class="paper-main">
@@ -56,9 +56,9 @@
 <h4 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h4><p>0 &lt;&#x3D; n &lt;&#x3D; 1000，-1000 &lt;&#x3D; 节点值 &lt;&#x3D; 1000</p>
 <h4 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h4><p>空间复杂度 O(1)，时间复杂度 O(n)</p>
 <p>如输入{1,3,5},{2,4,6}时，合并后的链表为{1,2,3,4,5,6}，所以对应的输出为{1,2,3,4,5,6}，转换过程如下图所示：</p>
-<p><img src="/algorithm-101-/lbhb1.png" alt="合并链表"></p>
+<p><img src="/algorithm-101-2/lbhb1.png" alt="合并链表"></p>
 <p>或输入{-1,2,4},{1,3,4}时，合并后的链表为{-1,1,2,3,4,4}，所以对应的输出为{-1,1,2,3,4,4}，转换过程如下图所示：</p>
-<p><img src="/algorithm-101-/lbhb2.png" alt="合并链表"></p>
+<p><img src="/algorithm-101-2/lbhb2.png" alt="合并链表"></p>
 <h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>检查两个链表当前节点值，会有两种情况：</p>
 <ol>
 <li><p>如果链表 1 的当前节点值小于等于链表 2 的当前节点值</p>
@@ -163,7 +163,7 @@ function Merge(pHead1, pHead2) &#123;
 &#125;
 </code></pre>
 <p>相比较而言，递归加分治的方法可能不如暴力那么直观，但是要更巧妙一点。</p>
-<p><img src="/algorithm-101-/recurse.jpg" alt="recurse"></p>
+<p><img src="/algorithm-101-2/recurse.jpg" alt="recurse"></p>
 <p>递归这个它没法很直观的去了解，拿起笔和纸跟着走一遍是最直观的了。毕竟：<strong>你想理解递归那么首先你得理解递归</strong>。</p>
 
     </div>
